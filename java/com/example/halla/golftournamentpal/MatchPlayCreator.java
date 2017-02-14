@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,15 +37,19 @@ public class MatchPlayCreator extends AppCompatActivity {
         CheckBox areBrackets = (CheckBox) findViewById(R.id.bracketCheckBox);
         TextView textView = (TextView) findViewById(R.id.bracketPickerText);
 
-        if(areBrackets.isChecked()) {
+        if (areBrackets.isChecked()) {
             bracketP.setVisibility(View.VISIBLE);
             bracketS.setVisibility(View.VISIBLE);
             textView.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             bracketP.setVisibility(View.GONE);
             bracketS.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
         }
+    }
+
+    public void addParticipant(View view){
+        Intent intent = new Intent(this, addParticipant.class);
+        startActivity(intent);
     }
 }

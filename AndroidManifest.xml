@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MatchPlayCreator" />
-        <activity android:name=".ScoreboardCreator"></activity>
+        <activity android:name=".ScoreboardCreator" />
+        <activity android:name=".addParticipant"></activity>
     </application>
 
 </manifest>

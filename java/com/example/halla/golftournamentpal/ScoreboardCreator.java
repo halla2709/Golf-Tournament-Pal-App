@@ -1,7 +1,9 @@
 package com.example.halla.golftournamentpal;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 
@@ -19,7 +21,10 @@ public class ScoreboardCreator extends AppCompatActivity {
 
         numberOfRounds.setMinValue(1);
         numberOfRounds.setMaxValue(10);
+    }
 
-
+    public void addParticipant(View view){
+        Intent intent = new Intent(this, addParticipant.class);
+        startActivity(intent);
     }
 }
