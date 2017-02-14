@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:gravity="top"
     tools:context="com.example.halla.golftournamentpal.MatchPlayCreator">
 
     <TextView
@@ -18,8 +19,6 @@
         android:id="@+id/matchPlayCreate"
         android:textColor="@color/mainTextColor"
         android:textSize="20sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -29,46 +28,71 @@
         android:layout_marginTop="17dp"
         android:id="@+id/matchPlayFill"
         android:textColor="@color/secondaryTextColor"
-        android:layout_below="@+id/matchPlayCreate"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:layout_marginBottom="20dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/nameInput"
         android:ems="10"
         android:id="@+id/nameInput"
-        android:layout_gravity="left" />
+        android:layout_gravity="start"
+        android:hint="@string/nameInput"
+        android:linksClickable="true" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/courseName"
         android:ems="10"
         android:id="@+id/courseName"
-        android:layout_gravity="left" />
+        android:layout_gravity="start"
+        android:hint="@string/courseName" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dateInput"
         android:inputType="date"
         android:ems="10"
         android:id="@+id/dateInput"
-        android:layout_gravity="left" />
+        android:layout_gravity="start"
+        android:hint="@string/dateInput" />
+
+    <CheckBox
+        android:id="@+id/bracketCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/areBrackets"
+        android:onClick="displayOptions" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bracketSpinner"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/bracketPickerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/numberInBrackets"
+        android:visibility="gone" />
+
+    <NumberPicker
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/bracketPicker"
+        android:visibility="gone" />
 
     <Button
         android:text="@string/nextStepButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/nextStep"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/buttonTextColor"
-        android:layout_gravity="right" />
+        android:layout_gravity="end"
+        android:layout_marginTop="80dp" />
 
 </LinearLayout>

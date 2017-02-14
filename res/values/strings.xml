@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Golf Tournament Pal</string>
     <string name="homeText">Welcome to Golf Tournament Pal</string>
-    <string name="selectTournament">Please select the tournament type of your
+    <string name="selectTournament">Please select the type of your
                                         new tournament</string>
     <string name="matchPlayTournament">Match Play Tournament</string>
     <string name="scoreboardTournament">Scoreboard Tournament</string>
@@ -13,4 +13,12 @@
     <string name="courseName">Course</string>
     <string name="dateInput">Date</string>
     <string name="nextStepButton">Next step</string>
+    <string name="areBrackets">Are brackets?</string>
+
+    <string name="numberInBrackets">How many players are in each bracket?</string>
+
+    <string-array name="bracketNumbers">
+        <item>1 participant</item>
+        <item>2 participants</item>
+    </string-array>
 </resources>
