@@ -48,5 +48,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/createScoreboardTournament"
         android:background="@color/colorPrimaryDark"
-        android:textColor="@color/buttonTextColor" />
+        android:textColor="@color/buttonTextColor"
+        android:onClick="createScoreboardTournament" />
 </LinearLayout>

@@ -17,4 +17,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MatchPlayCreator.class);
         startActivity(intent);
     }
+
+    public void createScoreboardTournament(View view){
+        Intent intent = new Intent(this, ScoreboardCreator.class);
+        startActivity(intent);
+    }
 }

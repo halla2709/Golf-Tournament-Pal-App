@@ -7,7 +7,8 @@
     <string name="scoreboardTournament">Scoreboard Tournament</string>
 
     <string name="matchPlayCreate">Create a Match Play Tournament</string>
-    <string name="matchPlayFill">Please fill out information about the tournament:</string>
+    <string name="TournamentFill">Please fill out information about the tournament:</string>
+    <string name="scoreboardCreate">Create a Scoreboard Tournament</string>
 
     <string name="nameInput">Name</string>
     <string name="courseName">Course</string>
@@ -16,6 +17,7 @@
     <string name="areBrackets">Are brackets?</string>
 
     <string name="numberInBrackets">How many players are in each bracket?</string>
+    <string name="numberOfRounds">How many rounds would you like to play?</string>
 
     <string-array name="bracketNumbers">
         <item>1 participant</item>
