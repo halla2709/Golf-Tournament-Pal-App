@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Golf Tournament Pal</string>
+    <string name="homeText">Welcome to Golf Tournament Pal</string>
+    <string name="selectTournament">Please select the tournament type of your
+                                        new tournament</string>
+    <string name="matchPlayTournament">Match Play Tournament</string>
+    <string name="scoreboardTournament">Scoreboard Tournament</string>
+</resources>
