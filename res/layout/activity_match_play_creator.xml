@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_match_play_creator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.example.halla.golftournamentpal.MatchPlayCreator">
+
+    <TextView
+        android:text="@string/matchPlayCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/matchPlayCreate"
+        android:textColor="@color/mainTextColor"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:text="@string/matchPlayFill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:id="@+id/matchPlayFill"
+        android:textColor="@color/secondaryTextColor"
+        android:layout_below="@+id/matchPlayCreate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="left"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/nameInput"
+        android:ems="10"
+        android:id="@+id/nameInput"
+        android:layout_gravity="left" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/courseName"
+        android:ems="10"
+        android:id="@+id/courseName"
+        android:layout_gravity="left" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dateInput"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/dateInput"
+        android:layout_gravity="left" />
+
+    <Button
+        android:text="@string/nextStepButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nextStep"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/buttonTextColor"
+        android:layout_gravity="right" />
+
+</LinearLayout>

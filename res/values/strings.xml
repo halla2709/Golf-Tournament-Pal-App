@@ -5,4 +5,12 @@
                                         new tournament</string>
     <string name="matchPlayTournament">Match Play Tournament</string>
     <string name="scoreboardTournament">Scoreboard Tournament</string>
+
+    <string name="matchPlayCreate">Create a Match Play Tournament</string>
+    <string name="matchPlayFill">Please fill out information about the tournament:</string>
+
+    <string name="nameInput">Name</string>
+    <string name="courseName">Course</string>
+    <string name="dateInput">Date</string>
+    <string name="nextStepButton">Next step</string>
 </resources>

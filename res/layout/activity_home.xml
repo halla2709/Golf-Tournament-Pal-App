@@ -41,7 +41,7 @@
         android:background="@color/colorPrimaryDark"
         android:layout_marginBottom="20dp"
         android:textColor="@color/buttonTextColor"
-        />
+        android:onClick="createMatchPlayTournament" />
 
     <Button
         android:text="@string/scoreboardTournament"
