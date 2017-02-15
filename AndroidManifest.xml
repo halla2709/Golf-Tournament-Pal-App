@@ -17,7 +17,6 @@
         </activity>
         <activity android:name=".MatchPlayCreator" />
         <activity android:name=".ScoreboardCreator" />
-        <activity android:name=".AddParticipant" />
         <activity android:name=".ParticipantAdder"></activity>
     </application>
 
