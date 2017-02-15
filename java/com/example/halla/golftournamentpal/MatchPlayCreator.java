@@ -3,34 +3,53 @@ package com.example.halla.golftournamentpal;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import static android.view.View.*;
+
 public class MatchPlayCreator extends AppCompatActivity {
 
-    Spinner bracketS;
-    NumberPicker bracketP;
+    Spinner mBracketS;
+    NumberPicker mBracketP;
+    private Button mCreateButton;
+    private EditText mName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_play_creator);
 
-        bracketS = (Spinner) findViewById(R.id.bracketSpinner);
+        // Spinner and NumberPicker
+        mBracketS = (Spinner) findViewById(R.id.bracketSpinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.bracketNumbers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bracketS.setAdapter(adapter);
+        mBracketS.setAdapter(adapter);
 
-        bracketP = (NumberPicker) findViewById(R.id.bracketPicker);
+        mBracketP = (NumberPicker) findViewById(R.id.bracketPicker);
 
-        bracketP.setMinValue(2);
-        bracketP.setMaxValue(6);
+        mBracketP.setMinValue(2);
+        mBracketP.setMaxValue(6);
+
+        // Button Listener
+        mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
+        mName   = (EditText) findViewById(R.id.matchPlayTourName);
+        mCreateButton.setOnClickListener(new OnClickListener(){
+            public void onClick(View v) {
+                
+                //Prenta út nafn á móti.
+                Log.v("EditText", mName.getText().toString());
+            }
+        });
     }
 
     public void displayOptions(View view) {
@@ -38,13 +57,13 @@ public class MatchPlayCreator extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.bracketPickerText);
 
         if (areBrackets.isChecked()) {
-            bracketP.setVisibility(View.VISIBLE);
-            bracketS.setVisibility(View.VISIBLE);
-            textView.setVisibility(View.VISIBLE);
+            mBracketP.setVisibility(VISIBLE);
+            mBracketS.setVisibility(VISIBLE);
+            textView.setVisibility(VISIBLE);
         } else {
-            bracketP.setVisibility(View.GONE);
-            bracketS.setVisibility(View.GONE);
-            textView.setVisibility(View.GONE);
+            mBracketP.setVisibility(GONE);
+            mBracketS.setVisibility(GONE);
+            textView.setVisibility(GONE);
         }
     }
 

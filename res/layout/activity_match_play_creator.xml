@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/nameInput"
+        android:id="@+id/matchPlayTourName"
         android:layout_gravity="start"
         android:hint="@string/nameInput"
         android:linksClickable="true" />
@@ -89,7 +89,7 @@
         android:text="@string/nextStepButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nextStep"
+        android:id="@+id/nextStepMatchPlay"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/buttonTextColor"
         android:layout_gravity="end"

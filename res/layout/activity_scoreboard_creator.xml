@@ -76,7 +76,7 @@
         android:text="@string/nextStepButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nextStep"
+        android:id="@+id/nextStepScoreBoard"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/buttonTextColor"
         android:layout_gravity="end"
