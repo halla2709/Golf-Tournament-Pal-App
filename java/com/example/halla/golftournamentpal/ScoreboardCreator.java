@@ -23,7 +23,7 @@ public class ScoreboardCreator extends AppCompatActivity {
     }
 
     public void addParticipant(View view){
-        Intent intent = new Intent(this, AddParticipant.class);
+        Intent intent = new Intent(this, ParticipantAdder.class);
         startActivity(intent);
     }
 }
