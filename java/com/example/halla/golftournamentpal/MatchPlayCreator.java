@@ -20,7 +20,8 @@ public class MatchPlayCreator extends AppCompatActivity {
     Spinner mBracketS;
     NumberPicker mBracketP;
     private Button mCreateButton;
-    private EditText mName;
+    private EditText mTourName;
+    private EditText mCourseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +43,13 @@ public class MatchPlayCreator extends AppCompatActivity {
 
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
-        mName   = (EditText) findViewById(R.id.matchPlayTourName);
+        mTourName   = (EditText) findViewById(R.id.tournamentNameMP);
+        mCourseName = (EditText) findViewById(R.id.courseNameMP);
         mCreateButton.setOnClickListener(new OnClickListener(){
             public void onClick(View v) {
-                
                 //Prenta út nafn á móti.
-                Log.v("EditText", mName.getText().toString());
+                Log.v("EditText", mTourName.getText().toString());
+                Log.v("EditText", mCourseName.getText().toString());
             }
         });
     }

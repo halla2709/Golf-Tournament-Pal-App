@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/matchPlayTourName"
+        android:id="@+id/tournamentNameMP"
         android:layout_gravity="start"
         android:hint="@string/nameInput"
         android:linksClickable="true" />
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/courseName"
+        android:id="@+id/courseNameMP"
         android:layout_gravity="start"
         android:hint="@string/courseName" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
-        android:id="@+id/dateInput"
+        android:id="@+id/dateInputMP"
         android:layout_gravity="start"
         android:hint="@string/dateInput" />
 
