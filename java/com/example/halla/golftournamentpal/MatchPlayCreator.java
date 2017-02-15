@@ -57,11 +57,13 @@ public class MatchPlayCreator extends AppCompatActivity {
     public void displayOptions(View view) {
         CheckBox areBrackets = (CheckBox) findViewById(R.id.bracketCheckBox);
         TextView textView = (TextView) findViewById(R.id.bracketPickerText);
+        TextView textViewer = (TextView) findViewById(R.id.bracketPickerText2);
 
         if (areBrackets.isChecked()) {
             mBracketP.setVisibility(VISIBLE);
             mBracketS.setVisibility(VISIBLE);
             textView.setVisibility(VISIBLE);
+            textViewer.setVisibility(VISIBLE);
         } else {
             mBracketP.setVisibility(GONE);
             mBracketS.setVisibility(GONE);

@@ -1,26 +1,29 @@
 <resources>
 
-    <!--- Home activity -->
     <string name="app_name">Golf Tournament Pal</string>
-    <string name="homeText">Welcome to Golf Tournament Pal</string>
-    <string name="selectTournament">Please select the type of your
-                                        new tournament</string>
+
+    <!-- Main activity -->
+    <string name="homeTexts">Welcome to Golf Tournament Pal</string>
+    <string name="homeText2">Select what you want to do:</string>
+
+    <!--- Home activity -->
+    <string name="tournament">Create a tournament</string>
+    <string name="selectTournament">Select the type of your new tournament:</string>
     <string name="matchPlayTournament">Match Play Tournament</string>
     <string name="scoreboardTournament">Scoreboard Tournament</string>
 
-
     <!--- MatchPlayCreator and ScoreboardCreator -->
-    <string name="matchPlayCreate">Create a Match Play Tournament</string>
+    <string name="matchPlayCreate">Match Play Tournament</string>
     <string name="TournamentFill">Please fill out information about the tournament:</string>
-    <string name="scoreboardCreate">Create a Scoreboard Tournament</string>
-
-    <string name="nameInput">Name</string>
+    <string name="scoreboardCreate">Scoreboard Tournament</string>
+    <string name="nameInput">Tournament Name</string>
     <string name="courseName">Course</string>
     <string name="dateInput">Date</string>
     <string name="nextStepButton">Next step</string>
     <string name="areBrackets">Are brackets?</string>
 
-    <string name="numberInBrackets">How many players are in each bracket?</string>
+    <string name="numberInBrackets">How many partipants exit the bracket?</string>
+    <string name="numberInBrackets2">How many participants in bracket?</string>
     <string name="numberOfRounds">How many rounds would you like to play?</string>
 
     <string-array name="bracketNumbers">
@@ -30,13 +33,33 @@
 
 
     <!--- AddParticipant -->
+    <string name="addparticipant">Add Participants to the Tournament</string>
     <string name="participantFill">Please fill out information about the participant:</string>
     <string name="addParticipantText">Add participants to the tournament</string>
     <string name="handicapText">Handicap</string>
     <string name="socialText">Social-number</string>
-    <string name="participantNameInput">Name</string>
+    <string name="participantNameInput">Tournament Name</string>
     <string name="participantMail">E-mail</string>
     <string name="addParticipantButton">Add participant</string>
+
+
+    <!-- Results -->
+    <string name="results">Results</string>
+    <string name="searchresults">Search for a tournament:</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 
 
 </resources>
