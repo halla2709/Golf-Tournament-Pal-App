@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.NumberPicker;
-import android.widget.Spinner;
 
 public class ScoreboardCreator extends AppCompatActivity {
 
@@ -24,7 +23,7 @@ public class ScoreboardCreator extends AppCompatActivity {
     }
 
     public void addParticipant(View view){
-        Intent intent = new Intent(this, addParticipant.class);
+        Intent intent = new Intent(this, AddParticipant.class);
         startActivity(intent);
     }
 }

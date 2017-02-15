@@ -29,7 +29,7 @@
     </string-array>
 
 
-    <!--- addParticipant -->
+    <!--- AddParticipant -->
     <string name="participantFill">Please fill out information about the participant:</string>
     <string name="addParticipantText">Add participants to the tournament</string>
     <string name="handicapText">Handicap</string>

@@ -49,7 +49,7 @@ public class MatchPlayCreator extends AppCompatActivity {
     }
 
     public void addParticipant(View view){
-        Intent intent = new Intent(this, addParticipant.class);
+        Intent intent = new Intent(this, AddParticipant.class);
         startActivity(intent);
     }
 }

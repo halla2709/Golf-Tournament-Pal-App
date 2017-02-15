@@ -3,7 +3,7 @@ package com.example.halla.golftournamentpal;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class addParticipant extends AppCompatActivity {
+public class AddParticipant extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
