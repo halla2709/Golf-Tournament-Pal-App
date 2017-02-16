@@ -1,13 +1,19 @@
 <resources>
 
     <string name="app_name">Golf Tournament Pal</string>
+    
+    <!-- Menu -->
+    <string name="mypage">My Page</string>
+    <string name="myfriends">My Friends</string>
+    <string name="viewTournament">View Tournaments</string>
+    <string name="login">Login</string>
 
     <!-- Main activity -->
     <string name="homeTexts">Welcome to Golf Tournament Pal</string>
     <string name="homeText2">Select what you want to do:</string>
     <string name="createTournamentbutton">Create a Tournament</string>
     <string name="mypagebutton">My Page</string>
-    <string name="resultsbutton">Results</string>
+    <string name="resultsbutton">Tournaments</string>
 
     <!--- Home activity -->
     <string name="tournament">Create a tournament</string>
@@ -32,6 +38,16 @@
         <item>1 participant</item>
         <item>2 participants</item>
     </string-array>
+
+    <!-- BracketActivity   -->
+    <string name="bracketText">Brackets</string>
+    <string name="bracketsText2">Brackets Information:</string>
+    <string name="goBackBracketButton">Go Back</string>
+
+    <!-- PlayOffTreeActivity   -->
+    <string name="playOffTreeText">Play Off Tree</string>
+    <string name="playOffTreeText2">Play Off Tree Information:</string>
+    <string name="goBackPlayOffTreeButton">Go Back</string>
 
     <!-- Tables -->
     <string name="tournamenttable">Tournament</string>

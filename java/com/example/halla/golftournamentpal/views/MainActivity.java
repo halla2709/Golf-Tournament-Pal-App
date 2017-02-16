@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void mypage(View view){
         // Button Listener
-        mCreateButton = (Button) findViewById(R.id.mypage);
+        //mCreateButton = (Button) findViewById(R.id.mypage);
 
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, MyPageActivity.class);
+       // startActivity(intent);
     }
 }

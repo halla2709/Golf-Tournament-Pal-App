@@ -3,13 +3,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_createTournament"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="@string/createTournamentbutton" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_viewTournaments"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="@string/viewTournament" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
@@ -18,19 +18,26 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
+
+        <item
+            android:id="@+id/nav_login"
+            android:title="@string/login"
+            android:icon="@android:drawable/ic_menu_save"/>
+
     </group>
 
-    <item android:title="Communicate">
+    <group android:checkableBehavior="single">
+    <item>
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_mypage"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/mypage" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_myfriends"
+                android:icon="@drawable/ic_menu_allfriends"
+                android:title="@string/myfriends" />
         </menu>
     </item>
-
+    </group>
 </menu>

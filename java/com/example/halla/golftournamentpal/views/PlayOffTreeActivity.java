@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,11 +13,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
 
 public class PlayOffTreeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+        private Button mCreateButton;
+
+        public void goBack (View view){
+            // Button Listener
+            mCreateButton = (Button) findViewById(R.id.backPlayOffTreeButton);
+
+            Intent intent = new Intent(this, MatchPlayInfoActivity.class);
+            startActivity(intent);
+        }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,17 +94,19 @@ public class PlayOffTreeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_createTournament) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_viewTournaments) {
 
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_mypage) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_myfriends) {
+
+        } else if (id == R.id.nav_login) {
 
         }
 
