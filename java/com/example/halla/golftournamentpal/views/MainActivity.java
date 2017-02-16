@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.resultsactivity);
 
-        Intent intent = new Intent(this, Results.class);
+        Intent intent = new Intent(this, ResultsActivity.class);
         startActivity(intent);
     }
 

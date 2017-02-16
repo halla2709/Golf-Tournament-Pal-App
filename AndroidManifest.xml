@@ -20,16 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.MatchPlayCreator" />
-        <activity android:name=".views.ScoreboardCreator" />
-        <activity android:name=".views.ParticipantAdder" />
-        <activity android:name=".views.Results" />
+        <activity android:name=".views.MatchPlayCreatorActivity" />
+        <activity android:name=".views.ScoreboardCreatorActivity" />
+        <activity android:name=".views.ParticipantAdderActivity" />
+        <activity android:name=".views.ResultsActivity" />
         <activity android:name=".views.HomeActivity" />
-        <activity android:name=".views.MatchPlayInfo" />
-        <activity android:name=".views.ScoreboardInfo" />
-        <activity android:name=".views.Brackets" />
+        <activity android:name=".views.MatchPlayInfoActivity" />
+        <activity android:name=".views.ScoreboardInfoActivity" />
+        <activity android:name=".views.BracketsActivity" />
         <activity
-            android:name=".views.PlayOffTree"
+            android:name=".views.PlayOffTreeActivity"
             android:label="@string/title_activity_play_off_tree"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".views.LogInActivity" />

@@ -17,7 +17,7 @@ import com.example.halla.golftournamentpal.R;
 
 import static android.view.View.*;
 
-public class MatchPlayCreator extends AppCompatActivity {
+public class MatchPlayCreatorActivity extends AppCompatActivity {
 
     private Spinner mBracketS;
     private NumberPicker mBracketP;
@@ -71,7 +71,7 @@ public class MatchPlayCreator extends AppCompatActivity {
         Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
 
-        Intent intent = new Intent(this, ParticipantAdder.class);
+        Intent intent = new Intent(this, ParticipantAdderActivity.class);
         startActivity(intent);
     }
 }

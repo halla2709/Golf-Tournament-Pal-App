@@ -16,12 +16,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void createMatchPlayTournament(View view){
-        Intent intent = new Intent(this, MatchPlayCreator.class);
+        Intent intent = new Intent(this, MatchPlayCreatorActivity.class);
         startActivity(intent);
     }
 
     public void createScoreboardTournament(View view){
-        Intent intent = new Intent(this, ScoreboardCreator.class);
+        Intent intent = new Intent(this, ScoreboardCreatorActivity.class);
         startActivity(intent);
     }
 }

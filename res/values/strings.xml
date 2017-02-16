@@ -15,7 +15,7 @@
     <string name="matchPlayTournament">Match Play Tournament</string>
     <string name="scoreboardTournament">Scoreboard Tournament</string>
 
-    <!--- MatchPlayCreator and ScoreboardCreator -->
+    <!--- MatchPlayCreatorActivity and ScoreboardCreatorActivity -->
     <string name="matchPlayCreate">Match Play Tournament</string>
     <string name="TournamentFill">Please fill out information about the tournament:</string>
     <string name="scoreboardCreate">Scoreboard Tournament</string>
@@ -46,7 +46,7 @@
     <string name="roundstable">Round</string>
 
 
-    <!-- MatchPlayInfo and ScoreboardInfo -->
+    <!-- MatchPlayInfoActivity and ScoreboardInfoActivity -->
     <string name="matchPlayInfo">MatchPlay Tournament Information</string>
     <string name="scoreboardInfo">Scoreboard Tournament Information</string>
     <string name="matchPlaytournamentInfo">Tournament Information:</string>
@@ -70,7 +70,7 @@
     <string name="addParticipantButton">Add participant</string>
 
 
-    <!-- Results -->
+    <!-- ResultsActivity -->
     <string name="results">Results</string>
     <string name="searchresults">Search for a tournament:</string>
     <string name="title_activity_login">Sign in</string>

@@ -12,7 +12,7 @@ import android.widget.NumberPicker;
 
 import com.example.halla.golftournamentpal.R;
 
-public class ScoreboardCreator extends AppCompatActivity {
+public class ScoreboardCreatorActivity extends AppCompatActivity {
 
     private NumberPicker mNumberOfRounds;
     private Button mCreateButton;
@@ -42,7 +42,7 @@ public class ScoreboardCreator extends AppCompatActivity {
         Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
 
-        Intent intent = new Intent(this, ParticipantAdder.class);
+        Intent intent = new Intent(this, ParticipantAdderActivity.class);
         startActivity(intent);
     }
 }
