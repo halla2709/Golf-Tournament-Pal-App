@@ -17,8 +17,8 @@ import static android.view.View.*;
 
 public class MatchPlayCreator extends AppCompatActivity {
 
-    Spinner mBracketS;
-    NumberPicker mBracketP;
+    private Spinner mBracketS;
+    private NumberPicker mBracketP;
     private Button mCreateButton;
     private EditText mTourName;
     private EditText mCourseName;
@@ -41,11 +41,6 @@ public class MatchPlayCreator extends AppCompatActivity {
         mBracketP.setMinValue(2);
         mBracketP.setMaxValue(6);
 
-        // Button Listener
-        mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
-        mTourName   = (EditText) findViewById(R.id.tournamentNameMP);
-        mCourseName = (EditText) findViewById(R.id.courseNameMP);
-
     }
 
     public void displayOptions(View view) {
@@ -66,6 +61,11 @@ public class MatchPlayCreator extends AppCompatActivity {
     }
 
     public void addParticipant(View view){
+
+        // Button Listener
+        mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
+        mTourName   = (EditText) findViewById(R.id.tournamentNameMP);
+        mCourseName = (EditText) findViewById(R.id.courseNameMP);
 
         Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
