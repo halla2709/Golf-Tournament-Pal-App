@@ -21,12 +21,12 @@
     <string name="scoreboardCreate">Scoreboard Tournament</string>
     <string name="nameInput">Tournament Name</string>
     <string name="courseName">Course</string>
-    <string name="dateInput">Date</string>
     <string name="nextStepButton">Next step</string>
     <string name="areBrackets">Are brackets?</string>
     <string name="numberInBrackets">How many partipants exit the bracket?</string>
     <string name="numberInBrackets2">How many participants in bracket?</string>
     <string name="numberOfRounds">How many rounds would you like to play?</string>
+    <string name="dateName">Pick a date:</string>
 
     <string-array name="bracketNumbers">
         <item>1 participant</item>

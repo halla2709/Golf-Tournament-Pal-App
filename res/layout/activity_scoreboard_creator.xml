@@ -40,39 +40,51 @@
         android:textAlignment="center"
         android:textSize="20sp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/tournamentNameSB"
-        android:layout_gravity="start"
-        android:hint="@string/nameInput"
-        android:linksClickable="true"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/tournamentNameSB"
+            android:layout_gravity="start"
+            android:hint="@string/nameInput"
+            android:linksClickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textSize="20dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/courseNameSB"
-        android:layout_gravity="start"
-        android:hint="@string/courseName"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/courseNameSB"
+            android:layout_gravity="start"
+            android:hint="@string/courseName"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textSize="20dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/dateInputSB"
-        android:layout_gravity="start"
-        android:hint="@string/dateInput"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateName"
+            android:layout_gravity="start"
+            android:text="@string/dateName"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textSize="20dp"
+            android:padding="5dp"/>
+
+        <DatePicker
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/datePickerScoreboard"
+            android:layout_gravity="top"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
 
         <TextView
             android:id="@+id/numberOfRounds"

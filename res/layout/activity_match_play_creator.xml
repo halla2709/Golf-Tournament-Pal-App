@@ -27,7 +27,8 @@
             android:gravity="center|top"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:calendarViewShown="false"/>
 
         <TextView
             android:text="@string/TournamentFill"
@@ -51,7 +52,8 @@
             android:linksClickable="true"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            tools:focusableInTouchMode="false" />
+            tools:focusableInTouchMode="false"
+            android:textSize="20dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -62,18 +64,29 @@
             android:layout_gravity="start"
             android:hint="@string/courseName"
             android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"
+            android:textSize="20dp"/>
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            android:ems="10"
-            android:id="@+id/dateInputMP"
+            android:id="@+id/dateName"
             android:layout_gravity="start"
-            android:hint="@string/dateInput"
+            android:text="@string/dateName"
             android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"
+            android:textSize="20dp"
+            android:padding="5dp"/>
+
+        <DatePicker
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/datePicker"
+            android:layout_gravity="top"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
 
         <CheckBox
             android:id="@+id/bracketCheckBox"
@@ -98,6 +111,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/bracketSpinner"
             android:visibility="gone"/>
+
 
         <TextView
             android:id="@+id/bracketPickerText2"
@@ -135,6 +149,8 @@
                 android:layout_gravity="end"
                 android:onClick="addParticipant"
                 tools:layout_gravity="bottom|end" />
+
+
 
         </LinearLayout>
     </LinearLayout>
