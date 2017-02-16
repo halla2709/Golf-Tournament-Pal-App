@@ -5,5 +5,6 @@
     <color name="colorAccent">#565454</color>
     <color name="mainTextColor">#000000</color>
     <color name="secondaryTextColor">#565454</color>
+    <color name="navigationBarColor">#303F9F</color>
     <color name="buttonTextColor">#ffffff</color>
 </resources>

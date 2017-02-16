@@ -100,7 +100,8 @@
             android:id="@+id/addParticipantButton"
             android:background="@color/colorPrimaryDark"
             android:textColor="@color/buttonTextColor"
-            android:layout_gravity="end" />
+            android:layout_gravity="end"
+            android:onClick="add" />
 
 </LinearLayout>
 </LinearLayout>

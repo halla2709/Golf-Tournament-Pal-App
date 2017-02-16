@@ -25,6 +25,12 @@
             android:paddingBottom="20dp"
             android:paddingTop="20dp" />
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/golfer"
+            android:id="@+id/imageView" />
+
         <TextView
             android:text="@string/homeText2"
             android:layout_width="fill_parent"
@@ -35,21 +41,39 @@
             android:textColor="@color/secondaryTextColor"
             android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:gravity="center|bottom"
-            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/golfer"
-                android:id="@+id/imageView" />
-        </LinearLayout>
+        <Button
+        android:text="@string/createTournamentbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/createtournamentbutton"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/buttonTextColor"
+        android:layout_gravity="end"
+        android:onClick="createtournament" />
+
+        <Button
+            android:text="@string/mypagebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mypage"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/buttonTextColor"
+            android:layout_gravity="end"
+            android:onClick="mypage"
+            android:paddingTop="10dp"/>
+
     </LinearLayout>
+
+
+        </LinearLayout>

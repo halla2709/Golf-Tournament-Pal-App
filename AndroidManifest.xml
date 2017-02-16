@@ -9,11 +9,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/golfer"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.HomeActivity">
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +24,7 @@
         <activity android:name=".views.ScoreboardCreator" />
         <activity android:name=".views.ParticipantAdder" />
         <activity android:name=".views.Results" />
-        <activity android:name=".views.MainActivity" />
+        <activity android:name=".views.HomeActivity" />
         <activity android:name=".views.MatchPlayInfo" />
         <activity android:name=".views.ScoreboardInfo" />
         <activity android:name=".views.Brackets" />

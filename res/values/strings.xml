@@ -5,6 +5,8 @@
     <!-- Main activity -->
     <string name="homeTexts">Welcome to Golf Tournament Pal</string>
     <string name="homeText2">Select what you want to do:</string>
+    <string name="createTournamentbutton">Create a Tournament</string>
+    <string name="mypagebutton">My Page</string>
 
     <!--- Home activity -->
     <string name="tournament">Create a tournament</string>
