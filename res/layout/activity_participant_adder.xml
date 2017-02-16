@@ -17,7 +17,6 @@
             tools:context="com.example.halla.golftournamentpal.views.ParticipantAdderActivity">
 
 
-
     <TextView
         android:text="@string/addParticipantText"
         android:layout_width="fill_parent"
@@ -53,7 +52,9 @@
         android:id="@+id/participantNameInput"
         android:layout_gravity="start"
         android:hint="@string/participantNameInput"
-        android:linksClickable="true" />
+        android:linksClickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <EditText
         android:layout_width="match_parent"
@@ -61,7 +62,9 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/handicap"
-        android:hint="@string/handicapText" />
+        android:hint="@string/handicapText"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <EditText
         android:layout_width="match_parent"
@@ -70,7 +73,9 @@
         android:ems="10"
         android:id="@+id/socialNumber"
         android:hint="@string/socialText"
-        android:maxLength="10"/>
+        android:maxLength="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
 
     <EditText
@@ -79,7 +84,9 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/participantMail"
-        android:hint="@string/participantMail" />
+        android:hint="@string/participantMail"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
 
     <LinearLayout
@@ -95,14 +102,63 @@
 
         <Button
             android:text="@string/addParticipantButton"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/addParticipantButton"
             android:background="@color/colorPrimaryDark"
             android:textColor="@color/buttonTextColor"
             android:layout_gravity="end"
-            android:onClick="add" />
+            android:onClick="addparticipant"
+            android:layout_marginBottom="20dp"/>
 
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/buttonTextColor">
+
+                <TextView
+                    android:padding="3dip"
+                    android:text="@string/nametable"
+                    android:textColor="@color/buttonTextColor" />
+
+                <TextView
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/ssntable"
+                    android:textColor="@color/buttonTextColor" />
+
+                <TextView
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/emailtable"
+                    android:textColor="@color/buttonTextColor" />
+
+                <TextView
+                    android:gravity="end"
+                    android:padding="3dip"
+                    android:text="@string/handicaptable"
+                    android:textColor="@color/buttonTextColor" />
+            </TableRow>
+        </TableLayout>
+
+            <Button
+                android:text="@string/nextStepButton"
+                android:layout_marginTop="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nextStepParticipant"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/buttonTextColor"
+                android:layout_gravity="end"
+                android:onClick="gotonext"
+                android:layout_marginBottom="20dp" />
+
+
+       </LinearLayout>
 </LinearLayout>
-</LinearLayout>
+
 </ScrollView>
