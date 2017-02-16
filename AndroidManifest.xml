@@ -27,7 +27,11 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".MatchPlayInfo" />
         <activity android:name=".ScoreboardInfo" />
-        <activity android:name=".Brackets"></activity>
+        <activity android:name=".Brackets" />
+        <activity
+            android:name=".PlayOffTree"
+            android:label="@string/title_activity_play_off_tree"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

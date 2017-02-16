@@ -37,7 +37,6 @@ public class MatchPlayCreator extends AppCompatActivity {
         mBracketS.setAdapter(adapter);
 
         mBracketP = (NumberPicker) findViewById(R.id.bracketPicker);
-
         mBracketP.setMinValue(2);
         mBracketP.setMaxValue(6);
 
