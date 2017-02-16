@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
@@ -18,6 +19,7 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
     private Button mCreateButton;
     private EditText mTourName;
     private EditText mCourseName;
+    private DatePicker mDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +37,24 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
     }
 
     public void addParticipant(View view){
+        // Button Listener
+        // Getting values from input
         mCreateButton = (Button) findViewById(R.id.nextStepScoreBoard);
         mTourName   = (EditText) findViewById(R.id.tournamentNameSB);
         mCourseName = (EditText) findViewById(R.id.courseNameSB);
+        mDatePicker = (DatePicker) findViewById(R.id.datePickerScoreboard);
 
+        int day = mDatePicker.getDayOfMonth();
+        int month = mDatePicker.getMonth() + 1;
+        int year = mDatePicker.getYear();
+
+        // Testing!
         Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
+        Log.v("EditText", mCourseName.getText().toString());
+        Log.v("EditText", mCourseName.getText().toString());
+        Log.d("Dagur", "value = " + day);
+        Log.d("Rounds", ""+mNumberOfRounds.getValue());
 
         Intent intent = new Intent(this, ParticipantAdderScoreboardActivity.class);
         startActivity(intent);
