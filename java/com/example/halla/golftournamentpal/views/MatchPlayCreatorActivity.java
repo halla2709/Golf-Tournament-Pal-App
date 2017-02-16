@@ -71,7 +71,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
 
-        Intent intent = new Intent(this, ParticipantAdderActivity.class);
+        Intent intent = new Intent(this, ParticipantAdderMatchPlayActivity.class);
         startActivity(intent);
     }
 }

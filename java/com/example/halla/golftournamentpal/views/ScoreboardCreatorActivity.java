@@ -42,7 +42,7 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
 
-        Intent intent = new Intent(this, ParticipantAdderActivity.class);
+        Intent intent = new Intent(this, ParticipantAdderScoreboardActivity.class);
         startActivity(intent);
     }
 }

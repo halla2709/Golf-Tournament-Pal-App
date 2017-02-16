@@ -8,8 +8,8 @@ import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
 
-public class ParticipantAdder extends AppCompatActivity {
-    
+public class ParticipantAdderMatchPlayActivity extends AppCompatActivity {
+
     private Button mCreateButton;
 
     @Override
@@ -24,7 +24,7 @@ public class ParticipantAdder extends AppCompatActivity {
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.nextStepParticipant);
 
-        Intent intent = new Intent(this, MatchPlayInfo.class);
+        Intent intent = new Intent(this, MatchPlayInfoActivity.class);
         startActivity(intent);
     }
 

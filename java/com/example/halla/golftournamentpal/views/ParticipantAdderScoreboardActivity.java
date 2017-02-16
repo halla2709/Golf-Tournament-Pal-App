@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
-import com.example.halla.golftournamentpal.views.MatchPlayInfo;
-import com.example.halla.golftournamentpal.views.ScoreboardInfo;
+import com.example.halla.golftournamentpal.views.MatchPlayInfoActivity;
+import com.example.halla.golftournamentpal.views.ScoreboardInfoActivity;
 
-public class ParticipantAdderScoreboard extends AppCompatActivity {
+public class ParticipantAdderScoreboardActivity extends AppCompatActivity {
 
     private Button mCreateButton;
 
@@ -25,7 +25,7 @@ public class ParticipantAdderScoreboard extends AppCompatActivity {
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.nextStepParticipantScoreboard);
 
-        Intent intent = new Intent(this, ScoreboardInfo.class);
+        Intent intent = new Intent(this, ScoreboardInfoActivity.class);
         startActivity(intent);
     }
 }
