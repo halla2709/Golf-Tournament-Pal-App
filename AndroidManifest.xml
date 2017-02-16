@@ -31,7 +31,8 @@
         <activity
             android:name=".views.PlayOffTree"
             android:label="@string/title_activity_play_off_tree"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".views.LogInActivity"></activity>
     </application>
 
 </manifest>
