@@ -8,7 +8,7 @@
 
     <!--- Home activity -->
     <string name="tournament">Create a tournament</string>
-    <string name="selectTournament">Select the type of your new tournament:</string>
+    <string name="selectTournament">Please select the format of your new tournament:</string>
     <string name="matchPlayTournament">Match Play Tournament</string>
     <string name="scoreboardTournament">Scoreboard Tournament</string>
 
@@ -40,17 +40,21 @@
     <string name="handicaptable">Handicap</string>
     <string name="matchplayer">Participant</string>
     <string name="matchdate">Date</string>
+    <string name="roundstable">Round</string>
 
 
     <!-- MatchPlayInfo and ScoreboardInfo -->
-    <string name="matchPlayInfo">You have successfully created a Tournament</string>
-    <string name="scoreboardInfo">Your Tournament Information</string>
+    <string name="matchPlayInfo">MatchPlay Tournament Information</string>
+    <string name="scoreboardInfo">Scoreboard Tournament Information</string>
     <string name="matchPlaytournamentInfo">Tournament Information:</string>
     <string name="scoreboardtournamentInfo">Tournament Information:</string>
     <string name="matchplayparticipantInfo">Participant Information:</string>
     <string name="scoreboardparticipantInfo">Participant Information:</string>
     <string name="seeresultsbutton">See Results</string>
     <string name="matchplayMatchInfo">Match Information:</string>
+    <string name="viewbrackets">View Brackets</string>
+    <string name="viewplayofftree">View Play Off Tree</string>
+    <string name="scoreboardname">Match Information:</string>
 
     <!--- AddParticipant -->
     <string name="addparticipant">Add Participants to the Tournament</string>

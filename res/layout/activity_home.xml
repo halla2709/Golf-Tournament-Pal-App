@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/createMatchPlayTournament"
             android:background="@color/colorPrimaryDark"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/buttonTextColor"
             android:onClick="createMatchPlayTournament" />
 

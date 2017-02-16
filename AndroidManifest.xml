@@ -29,7 +29,8 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".MatchPlayInfo" />
-        <activity android:name=".ScoreboardInfo"></activity>
+        <activity android:name=".ScoreboardInfo" />
+        <activity android:name=".Brackets"></activity>
     </application>
 
 </manifest>

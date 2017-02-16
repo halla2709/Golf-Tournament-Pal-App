@@ -45,13 +45,7 @@ public class MatchPlayCreator extends AppCompatActivity {
         mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
         mTourName   = (EditText) findViewById(R.id.tournamentNameMP);
         mCourseName = (EditText) findViewById(R.id.courseNameMP);
-        mCreateButton.setOnClickListener(new OnClickListener(){
-            public void onClick(View v) {
-                //Prenta út nafn á móti.
-                Log.v("EditText", mTourName.getText().toString());
-                Log.v("EditText", mCourseName.getText().toString());
-            }
-        });
+
     }
 
     public void displayOptions(View view) {
@@ -72,6 +66,10 @@ public class MatchPlayCreator extends AppCompatActivity {
     }
 
     public void addParticipant(View view){
+
+        Log.v("EditText", mTourName.getText().toString());
+        Log.v("EditText", mCourseName.getText().toString());
+
         Intent intent = new Intent(this, ParticipantAdder.class);
         startActivity(intent);
     }
