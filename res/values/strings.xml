@@ -21,7 +21,6 @@
     <string name="dateInput">Date</string>
     <string name="nextStepButton">Next step</string>
     <string name="areBrackets">Are brackets?</string>
-
     <string name="numberInBrackets">How many partipants exit the bracket?</string>
     <string name="numberInBrackets2">How many participants in bracket?</string>
     <string name="numberOfRounds">How many rounds would you like to play?</string>
@@ -31,6 +30,27 @@
         <item>2 participants</item>
     </string-array>
 
+    <!-- Tables -->
+    <string name="tournamenttable">Tournament</string>
+    <string name="datetable">Date</string>
+    <string name="coursetable">Course</string>
+    <string name="nametable">Name</string>
+    <string name="ssntable">SSN</string>
+    <string name="emailtable">Email</string>
+    <string name="handicaptable">Handicap</string>
+    <string name="matchplayer">Participant</string>
+    <string name="matchdate">Date</string>
+
+
+    <!-- MatchPlayInfo and ScoreboardInfo -->
+    <string name="matchPlayInfo">You have successfully created a Tournament</string>
+    <string name="scoreboardInfo">Your Tournament Information</string>
+    <string name="matchPlaytournamentInfo">Tournament Information:</string>
+    <string name="scoreboardtournamentInfo">Tournament Information:</string>
+    <string name="matchplayparticipantInfo">Participant Information:</string>
+    <string name="scoreboardparticipantInfo">Participant Information:</string>
+    <string name="seeresultsbutton">See Results</string>
+    <string name="matchplayMatchInfo">Match Information:</string>
 
     <!--- AddParticipant -->
     <string name="addparticipant">Add Participants to the Tournament</string>
