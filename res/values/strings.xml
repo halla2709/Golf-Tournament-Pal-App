@@ -95,6 +95,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_prufa">prufa</string>
     <string name="title_activity_prufa2nav">prufa2nav</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 
 </resources>

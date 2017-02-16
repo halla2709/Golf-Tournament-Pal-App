@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.halla.golftournamentpal">
+          package="com.example.halla.golftournamentpal">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:allowBackup="true"
@@ -15,32 +15,32 @@
         android:theme="@style/AppTheme">
         <activity android:name=".views.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".views.MatchPlayCreatorActivity" />
-        <activity android:name=".views.ScoreboardCreatorActivity" />
-        <activity android:name=".views.ParticipantAdderActivity" />
-        <activity android:name=".views.ResultsActivity" />
-        <activity android:name=".views.HomeActivity" />
-        <activity android:name=".views.MatchPlayInfoActivity" />
-        <activity android:name=".views.ScoreboardInfoActivity" />
-        <activity android:name=".views.BracketsActivity" />
+        <activity android:name=".views.MatchPlayCreatorActivity"/>
+        <activity android:name=".views.ScoreboardCreatorActivity"/>
+        <activity android:name=".views.ParticipantAdderActivity"/>
+        <activity android:name=".views.ResultsActivity"/>
+        <activity android:name=".views.HomeActivity"/>
+        <activity android:name=".views.MatchPlayInfoActivity"/>
+        <activity android:name=".views.ScoreboardInfoActivity"/>
+        <activity android:name=".views.BracketsActivity"/>
         <activity
             android:name=".views.PlayOffTreeActivity"
             android:label="@string/title_activity_play_off_tree"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".views.LogInActivity" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".views.LogInActivity"/>
         <activity
             android:name=".prufa"
             android:label="@string/title_activity_prufa"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".prufa2nav"
             android:label="@string/title_activity_prufa2nav"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
