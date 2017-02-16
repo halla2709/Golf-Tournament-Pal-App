@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
 import com.example.halla.golftournamentpal.R;
@@ -22,6 +23,9 @@ public class ScoreboardCreator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard_creator);
+
+        LinearLayout myLayout = (LinearLayout) findViewById(R.id.my_layout);
+        myLayout.requestFocus();
 
 
         mNumberOfRounds = (NumberPicker) findViewById(R.id.numberOfRoundsPicker);
@@ -42,3 +46,5 @@ public class ScoreboardCreator extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+

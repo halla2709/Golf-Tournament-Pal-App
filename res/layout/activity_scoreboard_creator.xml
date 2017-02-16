@@ -5,7 +5,7 @@
     android:fillViewport="true">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_match_play_creator"
+        android:id="@+id/my_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -48,7 +48,9 @@
         android:id="@+id/tournamentNameSB"
         android:layout_gravity="start"
         android:hint="@string/nameInput"
-        android:linksClickable="true" />
+        android:linksClickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <EditText
         android:layout_width="match_parent"
@@ -57,7 +59,9 @@
         android:ems="10"
         android:id="@+id/courseNameSB"
         android:layout_gravity="start"
-        android:hint="@string/courseName" />
+        android:hint="@string/courseName"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <EditText
         android:layout_width="match_parent"
@@ -66,21 +70,25 @@
         android:ems="10"
         android:id="@+id/dateInputSB"
         android:layout_gravity="start"
-        android:hint="@string/dateInput" />
+        android:hint="@string/dateInput"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
-    <TextView
-        android:id="@+id/numberOfRounds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:gravity="bottom"
-        android:textSize="18sp"
-        android:text="@string/numberOfRounds" />
+        <TextView
+            android:id="@+id/numberOfRounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:gravity="bottom"
+            android:textSize="18sp"
+            android:text="@string/numberOfRounds" />
 
-    <NumberPicker
+        <NumberPicker
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/numberOfRoundsPicker" />
+        android:id="@+id/numberOfRoundsPicker"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
