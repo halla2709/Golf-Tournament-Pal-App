@@ -1,4 +1,4 @@
-package com.example.halla.golftournamentpal;
+package com.example.halla.golftournamentpal.views;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.halla.golftournamentpal.R;
 
 import static android.view.View.*;
 

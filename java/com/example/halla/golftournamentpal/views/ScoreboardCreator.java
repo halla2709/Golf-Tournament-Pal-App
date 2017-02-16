@@ -1,4 +1,4 @@
-package com.example.halla.golftournamentpal;
+package com.example.halla.golftournamentpal.views;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+
+import com.example.halla.golftournamentpal.R;
 
 public class ScoreboardCreator extends AppCompatActivity {
 

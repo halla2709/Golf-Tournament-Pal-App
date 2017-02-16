@@ -1,13 +1,15 @@
-package com.example.halla.golftournamentpal;
+package com.example.halla.golftournamentpal.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ScoreboardInfo extends AppCompatActivity {
+import com.example.halla.golftournamentpal.R;
+
+public class Results extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scoreboard_info);
+        setContentView(R.layout.activity_results);
     }
 }

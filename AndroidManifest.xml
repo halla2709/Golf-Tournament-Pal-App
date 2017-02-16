@@ -13,23 +13,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
+        <activity android:name=".views.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MatchPlayCreator" />
-        <activity android:name=".ScoreboardCreator" />
-        <activity android:name=".ParticipantAdder" />
-        <activity android:name=".Results" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MatchPlayInfo" />
-        <activity android:name=".ScoreboardInfo" />
-        <activity android:name=".Brackets" />
+        <activity android:name=".views.MatchPlayCreator" />
+        <activity android:name=".views.ScoreboardCreator" />
+        <activity android:name=".views.ParticipantAdder" />
+        <activity android:name=".views.Results" />
+        <activity android:name=".views.MainActivity" />
+        <activity android:name=".views.MatchPlayInfo" />
+        <activity android:name=".views.ScoreboardInfo" />
+        <activity android:name=".views.Brackets" />
         <activity
-            android:name=".PlayOffTree"
+            android:name=".views.PlayOffTree"
             android:label="@string/title_activity_play_off_tree"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
