@@ -81,7 +81,7 @@
         <DatePicker
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:id="@+id/datePicker"
+            android:id="@+id/datePickerMatchPlay"
             android:layout_gravity="top"
             android:scaleX="0.9"
             android:scaleY="0.9"

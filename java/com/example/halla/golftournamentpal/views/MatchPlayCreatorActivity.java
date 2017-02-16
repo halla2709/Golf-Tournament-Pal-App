@@ -1,13 +1,13 @@
 package com.example.halla.golftournamentpal.views;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -15,7 +15,8 @@ import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
 
-import static android.view.View.*;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class MatchPlayCreatorActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
     private Button mCreateButton;
     private EditText mTourName;
     private EditText mCourseName;
+    private DatePicker mDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +69,20 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
         mTourName   = (EditText) findViewById(R.id.tournamentNameMP);
         mCourseName = (EditText) findViewById(R.id.courseNameMP);
+        mDatePicker = (DatePicker) findViewById(R.id.datePickerMatchPlay);
+        mBracketP = (NumberPicker) findViewById(R.id.bracketPicker);
+        mBracketS = (Spinner) findViewById(R.id.bracketSpinner);
 
-        Log.v("EditText", mTourName.getText().toString());
+        int day = mDatePicker.getDayOfMonth();
+        int month = mDatePicker.getMonth() + 1;
+        int year = mDatePicker.getYear();
+
+        //Toast toast = Toast.makeText(getApplicationContext(), mBracketP.getValue(),Toast.LENGTH_LONG);
+       // toast.show();
+        /*Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
+        Log.v("EditText", mCourseName.getText().toString());
+        Log.v("EditText", mCourseName.getText().toString());*/
 
         Intent intent = new Intent(this, ParticipantAdderMatchPlayActivity.class);
         startActivity(intent);
