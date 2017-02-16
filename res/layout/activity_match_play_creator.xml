@@ -95,23 +95,22 @@
             android:text="@string/areBrackets"
             android:layout_margin="10dp"
             android:onClick="displayOptions"
-            android:focusable="false" />
+            android:focusable="false"/>
 
         <TextView
             android:id="@+id/bracketPickerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/numberInBrackets"
-            android:visibility="gone"
             android:textSize="18sp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:visibility="gone" />
 
-        <Spinner
+        <NumberPicker
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bracketSpinner"
-            android:visibility="gone"/>
-
+            android:layout_height="75dp"
+            android:id="@+id/bracketParticipantsExit"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/bracketPickerText2"
@@ -124,8 +123,8 @@
 
         <NumberPicker
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/bracketPicker"
+            android:layout_height="75dp"
+            android:id="@+id/bracketParticipants"
             android:visibility="gone" />
 
         <LinearLayout
