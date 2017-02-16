@@ -33,6 +33,14 @@
             android:label="@string/title_activity_play_off_tree"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".views.LogInActivity" />
+        <activity
+            android:name=".prufa"
+            android:label="@string/title_activity_prufa"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".prufa2nav"
+            android:label="@string/title_activity_prufa2nav"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
