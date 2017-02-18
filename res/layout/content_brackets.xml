@@ -17,7 +17,7 @@
                   android:paddingRight="@dimen/activity_horizontal_margin"
                   android:paddingTop="@dimen/activity_vertical_margin"
                   android:layout_marginTop="50dp"
-                  tools:context="com.example.halla.golftournamentpal.views.PlayOffTreeActivity">
+                  tools:context="com.example.halla.golftournamentpal.views.BracketsActivity">
 
         <TextView
             android:id="@+id/homeText"
@@ -27,7 +27,7 @@
             android:gravity="center"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:text="@string/playOffTreeText"
+            android:text="@string/bracketText"
             android:textColor="@color/mainTextColor"
             android:textSize="30sp"/>
 
@@ -37,7 +37,7 @@
             android:gravity="center"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="@string/playOffTreeText2"
+            android:text="@string/bracketsText2"
             android:textColor="@color/secondaryTextColor"
             android:textSize="20sp"/>
 
@@ -52,7 +52,7 @@
 
                 <TextView
                     android:padding="3dip"
-                    android:text="Match"
+                    android:text="Bracket"
                     android:textColor="@color/buttonTextColor"/>
 
                 <TextView
@@ -62,6 +62,11 @@
                     android:text="Name"
                     android:textColor="@color/buttonTextColor"/>
 
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="Points"
+                    android:textColor="@color/buttonTextColor"/>
             </TableRow>
         </TableLayout>
 
@@ -77,13 +82,13 @@
             android:paddingTop="@dimen/activity_vertical_margin">
 
             <Button
-                android:id="@+id/backPlayOffTreeButton"
+                android:id="@+id/backBracketButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:background="@color/colorPrimaryDark"
                 android:onClick="goBack"
-                android:text="@string/goBackPlayOffTreeButton"
+                android:text="@string/goBackBracketButton"
                 android:textColor="@color/buttonTextColor"/>
 
         </LinearLayout>

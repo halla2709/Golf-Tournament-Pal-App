@@ -94,19 +94,7 @@
                     android:textColor="@color/buttonTextColor"/>
 
                 <TextView
-                    android:gravity="center"
-                    android:padding="3dip"
-                    android:text="@string/ssntable"
-                    android:textColor="@color/buttonTextColor"/>
-
-                <TextView
-                    android:gravity="center"
-                    android:padding="3dip"
-                    android:text="@string/emailtable"
-                    android:textColor="@color/buttonTextColor"/>
-
-                <TextView
-                    android:gravity="end"
+                    android:gravity="start"
                     android:padding="3dip"
                     android:text="@string/handicaptable"
                     android:textColor="@color/buttonTextColor"/>

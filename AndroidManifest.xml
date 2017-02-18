@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/golfer"
+        android:icon="@drawable/golfball"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -31,9 +31,14 @@
         <activity android:name=".views.ParticipantAdderScoreboardActivity"/>
         <activity
             android:name=".views.PlayOffTreeActivity"
-            android:label="@string/title_activity_play_off_tree"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".views.LogInActivity"/>
+        <activity
+            android:name=".views.BracketsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
