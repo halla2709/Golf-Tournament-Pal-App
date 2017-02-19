@@ -23,7 +23,6 @@ public class PlayOffTreeActivity extends AppCompatActivity
         private Button mCreateButton;
 
         public void goBack (View view){
-            // Button Listener
             mCreateButton = (Button) findViewById(R.id.backPlayOffTreeButton);
 
             Intent intent = new Intent(this, MatchPlayInfoActivity.class);
