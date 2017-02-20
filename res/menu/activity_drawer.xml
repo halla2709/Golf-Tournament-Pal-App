@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
     <group>
+
         <item
             android:id="@+id/nav_createTournament"
-            android:icon="@drawable/ic_menu_btn_add"
+            android:icon="@drawable/add"
             android:title="@string/createTournamentbutton"/>
-        <item
-            android:id="@+id/nav_viewTournaments"
-            android:icon="@drawable/ic_menu_copy_holo_light"
-            android:title="@string/viewTournament"/>
     </group>
     <group>
-            <item
-                android:id="@+id/nav_mypage"
-                android:icon="@drawable/ic_menu_myplaces"
-                android:title="@string/mypage"/>
-            <item
-                android:id="@+id/nav_myfriends"
-                android:icon="@drawable/ic_menu_allfriends"
-                android:title="@string/myfriends"/>
+        <item
+            android:id="@+id/nav_myprofile"
+            android:icon="@drawable/user"
+            android:title="@string/mypage"/>
+        <item
+            android:id="@+id/nav_mytournaments"
+            android:icon="@drawable/tournament"
+            android:title="@string/mytournaments"/>
+        <item
+            android:id="@+id/nav_myfriends"
+            android:icon="@drawable/friends"
+            android:title="@string/myfriends"/>
     </group>
     <group
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/ic_menu_login"
-            android:title="@string/login"/>
-        <item
-            android:id="@+id/app_bar_search"
+            android:id="@+id/nav_search"
             android:actionViewClass="android.support.v7.widget.SearchView"
-            android:icon="@drawable/ic_search_black_24dp"
-            android:title="Search"/>
+            android:icon="@drawable/search"
+            android:title="@string/search"/>
     </group>
 </menu>
 

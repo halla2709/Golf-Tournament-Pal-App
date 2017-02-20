@@ -4,151 +4,141 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:tools="http://schemas.android.com/tools"
                   android:id="@+id/activity_match_play_creator"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
+                  android:focusable="true"
+                  android:focusableInTouchMode="true"
+                  android:gravity="top|center"
+                  android:orientation="vertical"
                   android:paddingBottom="@dimen/activity_vertical_margin"
                   android:paddingLeft="@dimen/activity_horizontal_margin"
                   android:paddingRight="@dimen/activity_horizontal_margin"
                   android:paddingTop="@dimen/activity_vertical_margin"
-                  android:orientation="vertical"
-                  android:gravity="top|center"
                   tools:context="com.example.halla.golftournamentpal.views.MatchPlayCreatorActivity">
 
         <TextView
-            android:text="@string/matchPlayCreate"
+            android:id="@+id/matchPlayCreate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/matchPlayCreate"
-            android:textColor="@color/mainTextColor"
-            android:textSize="30sp"
+            android:layout_weight="0"
+            android:calendarViewShown="false"
             android:gravity="center|top"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:layout_weight="0"
-            android:calendarViewShown="false"/>
+            android:text="@string/matchPlayCreate"
+            android:textColor="@color/mainTextColor"
+            android:textSize="30sp"/>
 
         <TextView
-            android:text="@string/TournamentFill"
+            android:id="@+id/tournamentFill"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:id="@+id/tournamentFill"
-            android:textColor="@color/secondaryTextColor"
+            android:text="@string/TournamentFill"
             android:textAlignment="center"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="20sp"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
             android:id="@+id/tournamentNameMP"
-            android:layout_gravity="start"
-            android:hint="@string/nameInput"
-            android:linksClickable="true"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            tools:focusableInTouchMode="false"
-            android:textSize="20sp"/>
-
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/courseNameMP"
             android:layout_gravity="start"
+            android:ems="10"
+            android:hint="@string/nameInput"
+            android:inputType="textPersonName"
+            android:linksClickable="true"/>
+
+        <EditText
+            android:id="@+id/courseNameMP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:ems="10"
             android:hint="@string/courseName"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:textSize="20sp"/>
+            android:inputType="textPersonName"/>
 
         <TextView
+            android:id="@+id/dateName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dateName"
             android:layout_gravity="start"
+            android:padding="5dp"
             android:text="@string/dateName"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:textSize="20sp"
-            android:padding="5dp"/>
+            android:textSize="18dp"/>
 
         <DatePicker
+            android:id="@+id/datePickerMatchPlay"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:id="@+id/datePickerMatchPlay"
-            android:layout_gravity="top"
-            android:scaleX="0.9"
-            android:scaleY="0.9"
+            android:calendarViewShown="false"
             android:datePickerMode="spinner"
-            android:calendarViewShown="false"/>
+            android:scaleX="0.8"
+            android:scaleY="0.8"/>
 
         <CheckBox
             android:id="@+id/bracketCheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/areBrackets"
-            android:layout_margin="10dp"
             android:onClick="displayOptions"
-            android:focusable="false"/>
+            android:text="@string/areBrackets"/>
 
         <TextView
             android:id="@+id/bracketPickerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
             android:text="@string/numberInBrackets"
             android:textSize="18sp"
-            android:paddingTop="10dp"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <NumberPicker
+            android:id="@+id/bracketParticipantsExit"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:id="@+id/bracketParticipantsExit"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/bracketPickerText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:paddingTop="10dp"
             android:text="@string/numberInBrackets2"
-            android:visibility="gone" />
+            android:textSize="18sp"
+            android:visibility="gone"/>
 
         <NumberPicker
+            android:id="@+id/bracketParticipants"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:id="@+id/bracketParticipants"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:orientation="vertical"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:gravity="center|bottom"
-            android:orientation="vertical">
+            android:paddingTop="@dimen/activity_vertical_margin">
 
             <Button
-                android:text="@string/nextStepButton"
+                android:id="@+id/nextStepMatchPlay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/nextStepMatchPlay"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/buttonTextColor"
                 android:layout_gravity="end"
+                android:background="@color/colorPrimaryDark"
                 android:onClick="addParticipant"
-                tools:layout_gravity="bottom|end" />
-
+                android:text="@string/nextStepButton"
+                android:textColor="@color/buttonTextColor"
+                tools:layout_gravity="bottom|end"/>
 
 
         </LinearLayout>

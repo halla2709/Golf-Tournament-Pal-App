@@ -13,27 +13,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
 
-public class HomeActivity extends AppCompatActivity
+public class MyTournamentsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Button mCreateButton;
 
-    public void createMatchPlayTournament(View view){
-        Intent intent = new Intent(this, MatchPlayCreatorActivity.class);
-        startActivity(intent);
-    }
+    public void goBack (View view){
+        // Button Listener
+        mCreateButton = (Button) findViewById(R.id.backBracketButton);
 
-    public void createScoreboardTournament(View view){
-        Intent intent = new Intent(this, ScoreboardCreatorActivity.class);
+        Intent intent = new Intent(this, MatchPlayInfoActivity.class);
         startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_my_tournaments);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -82,6 +82,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
             Intent intent = new Intent(this, ResultsActivity.class);
             startActivity(intent);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

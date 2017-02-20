@@ -1,19 +1,39 @@
 <resources>
 
     <string name="app_name">Golf Tournament Pal</string>
+    <string name="app_name_shortcut">Golf Pal</string>
 
     <!-- Menu -->
-    <string name="mypage">My Page</string>
+    <string name="mypage">My Profile</string>
     <string name="myfriends">My Friends</string>
-    <string name="viewTournament">View Tournaments</string>
+    <string name="mytournaments">My Tournaments</string>
     <string name="login">Login</string>
+    <string name="search">Search</string>
+    <string name="myprofile">My Profile</string>
+    <string name="gkremail">gkr@gkr.is</string>
+    <string name="golfclub">Golfklúbbur Reykjavíkur</string>
+
+    <!-- Login Activity -->
+    <string name="loginapp">Welcome to Golf Tournament Pal</string>
+    <string name="pleaselogin">Please Log In:</string>
+    <string name="loginbutton">Log In</string>
+    <string name="enterSSN">Social Security Number</string>
+    <string name="enterPW">Password</string>
+    <string name="register">Sign Up</string>
+    <string name="noaccount">Need an account?</string>
+
+    <!-- Register Activity -->
+    <string name="registerinputs">Please fill out all information:</string>
 
     <!-- Main activity -->
     <string name="homeTexts">Welcome to Golf Tournament Pal</string>
     <string name="homeText2">Select what you want to do:</string>
     <string name="createTournamentbutton">Create a Tournament</string>
-    <string name="mypagebutton">My Page</string>
+    <string name="mypagebutton">My Profile</string>
     <string name="resultsbutton">Tournaments</string>
+    <string name="username">Username</string>
+    <string name="loggedinas">Welcome USERNAME,</string>
+    <string name="chooseaction">please select what you want to do:</string>
 
     <!--- Home activity -->
     <string name="tournament">Create a tournament</string>
@@ -29,10 +49,11 @@
     <string name="courseName">Course</string>
     <string name="nextStepButton">Next step</string>
     <string name="areBrackets">Are brackets?</string>
-    <string name="numberInBrackets">How many partipants exit the bracket?</string>
+    <string name="numberInBrackets">How many participants exit the bracket?</string>
     <string name="numberInBrackets2">How many participants in bracket?</string>
     <string name="numberOfRounds">How many rounds would you like to play?</string>
-    <string name="dateName">Pick a date:</string>
+    <string name="dateName">Start date:</string>
+    <string name="participantadder">Added Participants:</string>
 
     <string-array name="bracketNumbers">
         <item>1 participant</item>
@@ -61,7 +82,6 @@
     <string name="matchdate">Date</string>
     <string name="roundstable">Round</string>
 
-
     <!-- MatchPlayInfoActivity and ScoreboardInfoActivity -->
     <string name="matchPlayInfo">MatchPlay Tournament Information</string>
     <string name="scoreboardInfo">Scoreboard Tournament Information</string>
@@ -74,6 +94,7 @@
     <string name="viewbrackets">View Brackets</string>
     <string name="viewplayofftree">View Play Off Tree</string>
     <string name="scoreboardname">Match Information:</string>
+    <string name="viewscoreboard">View Scoreboard</string>
 
     <!--- AddParticipant -->
     <string name="addparticipant">Add Participants to the Tournament</string>
@@ -81,15 +102,30 @@
     <string name="addParticipantText">Add participants to the tournament</string>
     <string name="handicapText">Handicap</string>
     <string name="socialText">Social-number</string>
-    <string name="participantNameInput">Tournament Name</string>
+    <string name="participantNameInput">Name</string>
     <string name="participantMail">E-mail</string>
     <string name="addParticipantButton">Add participant</string>
-
 
     <!-- ResultsActivity -->
     <string name="results">Results</string>
     <string name="searchresults">Search for a tournament:</string>
-    <string name="title_activity_login">Sign in</string>
+
+    <!-- MyProfileActivity -->
+    <!-- MyProfileActivity -->
+    <string name="seefriends">View My Friends</string>
+    <string name="seetournament">View My Tournaments</string>
+
+    <!-- MyTournamentsActivity -->
+
+    <!-- MyFriendsActivity -->
+
+    <!-- Scoreboard Activity -->
+    <string name="scoreboard">Scoreboard</string>
+    <string name="rounds">Round:</string>
+    <string name="total">Total:</string>
+
+    <string name="scoreboardinput">Input Scores</string>
+    <string name="savebutton">Save</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -113,6 +149,17 @@
     <string name="title_activity_prufa2nav">prufa2nav</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_brackets2">BracketsActivity2</string>
+    <string name="title_activity_my_tournaments">MyTournaments</string>
+    <string name="title_activity_my_profile">MyProfileActivity</string>
+    <string name="title_activity_my_friends">MyFriendsActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_home2">HomeActivity2</string>
+    <string name="title_activity_results2">ResultsActivity2</string>
+    <string name="title_activity_scoreboard_info2">ScoreboardInfoActivity2</string>
+    <string name="title_activity_match_play_info2">MatchPlayInfoActivity2</string>
+    <string name="title_activity_scoreboard">ScoreboardActivity</string>
+    <string name="title_activity_score_input_view">ScoreInputViewActivity</string>
+    <string name="title_activity_should_be_main2">ShouldBeMain2</string>
 
 
 </resources>

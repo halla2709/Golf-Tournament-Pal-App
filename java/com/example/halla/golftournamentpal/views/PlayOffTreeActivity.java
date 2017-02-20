@@ -20,14 +20,14 @@ import com.example.halla.golftournamentpal.R;
 public class PlayOffTreeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-        private Button mCreateButton;
+    private Button mCreateButton;
 
-        public void goBack (View view){
-            mCreateButton = (Button) findViewById(R.id.backPlayOffTreeButton);
+    public void goBack(View view) {
+        mCreateButton = (Button) findViewById(R.id.backPlayOffTreeButton);
 
-            Intent intent = new Intent(this, MatchPlayInfoActivity.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(this, MatchPlayInfoActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,23 +64,23 @@ public class PlayOffTreeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_createTournament) {
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
-
-        } else if (id == R.id.nav_viewTournaments) {
-            Intent intent = new Intent(this, ResultsActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_mypage) {
-            Intent intent = new Intent(this, ResultsActivity.class);
+        } else if (id == R.id.nav_myprofile) {
+            Intent intent = new Intent(this, MyProfileActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_mytournaments) {
+            Intent intent = new Intent(this, MyTournamentsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_myfriends) {
-            Intent intent = new Intent(this, ResultsActivity.class);
+            Intent intent = new Intent(this, MyFriendsActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_login) {
-            Intent intent = new Intent(this, LogInActivity.class);
+        } else if (id == R.id.nav_search) {
+            Intent intent = new Intent(this, ResultsActivity.class);
             startActivity(intent);
 
         }
