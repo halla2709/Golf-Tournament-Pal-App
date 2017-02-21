@@ -10,11 +10,9 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/golfball"
-        android:label="@string/app_name"
         android:label="@string/app_name_shortcut"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.MainActivity">
         <activity
             android:name=".views.LogInActivity"
             android:label="@string/app_name_shortcut">
@@ -24,22 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".views.MatchPlayCreatorActivity"/>
-        <activity android:name=".views.ScoreboardCreatorActivity"/>
-        <activity android:name=".views.ResultsActivity"/>
-        <activity android:name=".views.HomeActivity"/>
-        <activity android:name=".views.MatchPlayInfoActivity"/>
-        <activity android:name=".views.ScoreboardInfoActivity"/>
-        <activity android:name=".views.BracketsActivity"/>
-        <activity android:name=".views.ParticipantAdderMatchPlayActivity"/>
-        <activity android:name=".views.ParticipantAdderScoreboardActivity"/>
 
         <!-- Do not have a Navigation Drawer -->
-
-
-
-
-
 
         <activity
             android:name=".views.MatchPlayCreatorActivity"
@@ -94,14 +78,11 @@
             android:name=".views.PlayOffTreeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".views.LogInActivity"/>
         <activity
-            android:name=".views.BracketsActivity"
             android:name=".views.ResultsActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".views.ScoreboardActivity"
             android:label="@string/app_name"
