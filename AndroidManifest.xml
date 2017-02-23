@@ -23,7 +23,6 @@
         </activity>
 
         <!-- Do not have a Navigation Drawer -->
-
         <activity
             android:name=".views.MatchPlayCreatorActivity"
             android:label="@string/app_name"/>
