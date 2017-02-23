@@ -17,7 +17,7 @@ public class LogInActivity extends AppCompatActivity {
     private EditText mUserSocial;
     private EditText mUserPassword;
 
-    private User halla = new User(2709942619L, "blabla");
+    private User halla = new User(12345L, "blabla");
 
 
     public void login (View view){
@@ -26,15 +26,19 @@ public class LogInActivity extends AppCompatActivity {
         mUserPassword = (EditText) findViewById(R.id.loginPW);
 
 
+        if(mUserSocial.getText().length() == 0 || mUserPassword.getText().length() == 0){
+            Toast.makeText(getApplicationContext(), "Please enter credentials", Toast.LENGTH_SHORT)
+                    .show();
+        }
 
-        if(Long.parseLong(mUserSocial.getText().toString()) == halla.getSocial()
+        else if(Long.parseLong(mUserSocial.getText().toString()) == halla.getSocial()
                 && mUserPassword.getText().toString().equals(halla.getPassword())) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
         else {
 
-            Toast.makeText(getApplicationContext(), "Not correct credientials", Toast.LENGTH_SHORT)
+            Toast.makeText(getApplicationContext(), "Incorrect credientials, try again", Toast.LENGTH_SHORT)
                     .show();
         }
 
