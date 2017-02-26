@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.User;
 
 public class LogInActivity extends AppCompatActivity {
@@ -16,6 +17,7 @@ public class LogInActivity extends AppCompatActivity {
     private Button mCreateButton;
     private EditText mUserSocial;
     private EditText mUserPassword;
+    private SessionManager session;
 
     private User halla = new User(12345L, "blabla");
 
@@ -33,6 +35,8 @@ public class LogInActivity extends AppCompatActivity {
 
         else if(Long.parseLong(mUserSocial.getText().toString()) == halla.getSocial()
                 && mUserPassword.getText().toString().equals(halla.getPassword())) {
+            session.startSession(Long.parseLong(mUserSocial.getText().toString()),
+                    mUserPassword.getText().toString());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -56,5 +60,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+
+        session = new SessionManager(getApplicationContext());
     }
 }
