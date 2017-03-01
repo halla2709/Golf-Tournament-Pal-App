@@ -7,15 +7,23 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 
 public class ParticipantAdderMatchPlayActivity extends AppCompatActivity {
 
     private Button mCreateButton;
+    private SessionManager mSessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participant_adder_match_play);
+
+        mSessionManager = new SessionManager(getApplicationContext());
+        if(mSessionManager.getSessionUserSocial() == 0) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
     }
 
 

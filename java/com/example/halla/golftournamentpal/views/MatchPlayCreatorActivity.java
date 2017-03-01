@@ -13,6 +13,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -25,6 +26,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
     private EditText mTourName;
     private EditText mCourseName;
     private DatePicker mDatePicker;
+    private SessionManager mSessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,12 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
 
         mBracketPartExit.setMinValue(2);
         mBracketPartExit.setMaxValue(6);
+
+        mSessionManager = new SessionManager(getApplicationContext());
+        if(mSessionManager.getSessionUserSocial() == 0) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
 
     }
 

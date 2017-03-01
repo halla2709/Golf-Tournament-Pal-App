@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 
 public class ScoreInputViewActivity extends AppCompatActivity {
 
     private Button mCreateButton;
+    private SessionManager mSessionManager;
 
     public void save (View view){
         mCreateButton = (Button) findViewById(R.id.savebutton);
@@ -23,5 +25,11 @@ public class ScoreInputViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_input_view);
+
+        mSessionManager = new SessionManager(getApplicationContext());
+        if(mSessionManager.getSessionUserSocial() == 0) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
     }
 }

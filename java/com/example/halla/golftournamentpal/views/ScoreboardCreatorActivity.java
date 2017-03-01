@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 
 public class ScoreboardCreatorActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
     private EditText mTourName;
     private EditText mCourseName;
     private DatePicker mDatePicker;
+    private SessionManager mSessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,12 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
 
         mNumberOfRounds.setMinValue(1);
         mNumberOfRounds.setMaxValue(10);
+
+        mSessionManager = new SessionManager(getApplicationContext());
+        if(mSessionManager.getSessionUserSocial() == 0) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void addParticipant(View view){
