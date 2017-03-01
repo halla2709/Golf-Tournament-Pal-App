@@ -7,4 +7,5 @@
     <color name="secondaryTextColor">#565454</color>
     <color name="navigationBarColor">#303F9F</color>
     <color name="buttonTextColor">#ffffff</color>
+    <color name="logOutButtonColor">#e71515</color>
 </resources>

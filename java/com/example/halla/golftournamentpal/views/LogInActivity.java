@@ -17,7 +17,7 @@ public class LogInActivity extends AppCompatActivity {
     private Button mCreateButton;
     private EditText mUserSocial;
     private EditText mUserPassword;
-    private SessionManager session;
+    private SessionManager mSessionManager;
 
     private User halla = new User(12345L, "blabla");
 
@@ -35,7 +35,7 @@ public class LogInActivity extends AppCompatActivity {
 
         else if(Long.parseLong(mUserSocial.getText().toString()) == halla.getSocial()
                 && mUserPassword.getText().toString().equals(halla.getPassword())) {
-            session.startSession(Long.parseLong(mUserSocial.getText().toString()),
+            mSessionManager.startSession(Long.parseLong(mUserSocial.getText().toString()),
                     mUserPassword.getText().toString());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -61,6 +61,10 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        session = new SessionManager(getApplicationContext());
+        mSessionManager = new SessionManager(getApplicationContext());
+        if(mSessionManager.getSessionUserSocial() != 0) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 }

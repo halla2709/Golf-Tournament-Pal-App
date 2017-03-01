@@ -13,11 +13,13 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button mCreateButton;
+    private SessionManager mSessionManager;
 
     public void myfriends (View view){
         mCreateButton = (Button) findViewById(R.id.myfriendsbutton);
@@ -55,6 +57,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mSessionManager = new SessionManager(getApplicationContext());
+        if(mSessionManager.getSessionUserSocial() == 0) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     @Override

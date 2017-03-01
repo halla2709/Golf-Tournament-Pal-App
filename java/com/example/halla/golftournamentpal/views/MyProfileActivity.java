@@ -16,11 +16,13 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 
 public class MyProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button mCreateButton;
+    private SessionManager mSessionManager;
 
     public void seefriends (View view){
         mCreateButton = (Button) findViewById(R.id.seefriendsbutton);
@@ -33,6 +35,14 @@ public class MyProfileActivity extends AppCompatActivity
         mCreateButton = (Button) findViewById(R.id.seetournamentsbutton);
 
         Intent intent = new Intent(this, MyTournamentsActivity.class);
+        startActivity(intent);
+    }
+
+    public void logOut(View view) {
+        mSessionManager = new SessionManager(getApplicationContext());
+        mSessionManager.endSession();
+
+        Intent intent = new Intent(this, LogInActivity.class);
         startActivity(intent);
     }
 

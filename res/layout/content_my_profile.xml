@@ -42,8 +42,7 @@
             android:paddingTop="10dp"
             android:text="@string/nametable"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="20sp"
-            android:id="@+id/textView4"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -104,7 +103,18 @@
                 android:background="@color/colorPrimaryDark"
                 android:onClick="seetournaments"
                 android:text="@string/seetournament"
-                android:textColor="@color/buttonTextColor"/>
+                android:textColor="@color/buttonTextColor"
+                android:layout_marginBottom="10dp"/>
+            <Button
+                android:id="@+id/logOutButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@color/logOutButtonColor"
+                android:onClick="logOut"
+                android:text="@string/logout"
+                android:textColor="@color/buttonTextColor"
+                android:layout_marginBottom="10dp"/>
 
         </LinearLayout>
     </LinearLayout>
