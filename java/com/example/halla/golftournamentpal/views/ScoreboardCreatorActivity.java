@@ -64,7 +64,7 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         Log.d("Dagur", "value = " + day);
         Log.d("Rounds", ""+mNumberOfRounds.getValue());
 
-        Intent intent = new Intent(this, ParticipantAdderScoreboardActivity.class);
+        Intent intent = new Intent(this, ParticipantAdderActivity.class);
         startActivity(intent);
     }
 }

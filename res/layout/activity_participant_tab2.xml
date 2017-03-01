@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:id="@+id/activity_match_play_creator"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:focusable="true"
+                  android:focusableInTouchMode="true"
+                  android:gravity="top|center"
+                  android:orientation="vertical"
+                  android:paddingBottom="@dimen/activity_vertical_margin"
+                  android:paddingLeft="@dimen/activity_horizontal_margin"
+                  android:paddingRight="@dimen/activity_horizontal_margin"
+                  android:paddingTop="@dimen/activity_vertical_margin"
+                  tools:context="com.example.halla.golftournamentpal.views.ParticipantTab2Activity">
+
+
+        <TextView
+            android:id="@+id/addParticipantText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0"
+            android:gravity="center|top"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="@string/addParticipantText"
+            android:textColor="@color/mainTextColor"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/participantFill"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="17dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/participantFill"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/participantNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:ems="10"
+            android:hint="@string/participantNameInput"
+            android:inputType="textPersonName"
+            android:linksClickable="true"/>
+
+        <EditText
+            android:id="@+id/handicap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/handicapText"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/socialNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterSSN"
+            android:inputType="numberDecimal"
+            android:maxLength="10"/>
+
+        <EditText
+            android:id="@+id/participantMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/participantMail"
+            android:inputType="textEmailAddress"/>
+
+        <Button
+            android:id="@+id/addParticipantButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="addparticipant"
+            android:text="@string/addParticipantButton"
+            android:textColor="@color/buttonTextColor"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/participantadder"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="20sp"/>
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:stretchColumns="*">
+
+            <TableRow
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/buttonTextColor">
+
+                <TextView
+                    android:padding="3dip"
+                    android:text="@string/nametable"
+                    android:textColor="@color/buttonTextColor"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/ssntable"
+                    android:textColor="@color/buttonTextColor"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/emailtable"
+                    android:textColor="@color/buttonTextColor"/>
+
+                <TextView
+                    android:gravity="end"
+                    android:padding="3dip"
+                    android:text="@string/handicaptable"
+                    android:textColor="@color/buttonTextColor"/>
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/nextStepParticipant"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="gotonext"
+            android:text="@string/nextStepButton"
+            android:textColor="@color/buttonTextColor"/>
+
+    </LinearLayout>
+</ScrollView>

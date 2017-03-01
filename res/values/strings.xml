@@ -162,6 +162,9 @@
     <string name="title_activity_should_be_main2">ShouldBeMain2</string>
 
     <string name="logout">Log Out</string>
+    <string name="title_activity_participant_adder_mp">ParticipantAdderMPActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_bla">blaActivity</string>
 
 
 </resources>
