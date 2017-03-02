@@ -86,7 +86,7 @@ public class Networker {
 
             tournament.setCourse(tournamentJsonObject.getString("course"));
             tournament.setName(tournamentJsonObject.getString("name"));
-            tournament.setStartDate(new Date(tournamentJsonObject.getInt("startDate")));
+            tournament.setStartDate(new Date(tournamentJsonObject.getLong("startDate")));
 
             JSONArray playersJsonArray = tournamentJsonObject.getJSONArray("players");
             for (int j = 0; j < playersJsonArray.length(); j++) {

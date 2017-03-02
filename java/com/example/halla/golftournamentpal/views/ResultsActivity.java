@@ -11,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.TournamentArrayAdapter;
 import com.example.halla.golftournamentpal.models.Tournament;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class ResultsActivity extends AppCompatActivity
 
     private SessionManager mSessionManager;
     private List<Tournament> mTournamentList = new ArrayList<>();
+    private ListView mListView;
+    private TournamentArrayAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,9 @@ public class ResultsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mListView = (ListView) findViewById(R.id.tournaments_list);
+        mAdapter = new TournamentArrayAdapter(getApplicationContext());
 
         FetchTournamentsTask task = new FetchTournamentsTask();
         task.execute();
@@ -113,6 +120,8 @@ public class ResultsActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(List<Tournament> tournaments) {
             mTournamentList = tournaments;
+            mAdapter.setData(mTournamentList);
+            mListView.setAdapter(mAdapter);
             Log.i("TAGG", tournaments.get(0).getStartDate().toString());
 
         }
