@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -16,7 +17,6 @@
                   android:paddingLeft="@dimen/activity_horizontal_margin"
                   android:paddingRight="@dimen/activity_horizontal_margin"
                   android:paddingTop="@dimen/activity_vertical_margin"
-                  android:layout_marginTop="50dp"
                   tools:context="com.example.halla.golftournamentpal.views.MyProfileActivityActivity">
 
         <TextView
@@ -36,7 +36,7 @@
             app:srcCompat="@drawable/userprofilepicture"/>
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="213dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -45,7 +45,7 @@
             android:textSize="20sp"/>
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="277dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -55,24 +55,35 @@
             android:id="@+id/textView4"/>
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="256dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
             android:text="@string/emailtable"
             android:textColor="@color/secondaryTextColor"
             android:textSize="20sp"
-            android:id="@+id/textView4"/>
+            android:id="@+id/textView5"/>
 
-        <TextView
-            android:layout_width="fill_parent"
+        <EditText
+            android:layout_width="203dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:paddingTop="10dp"
-            android:text="@string/handicaptable"
-            android:textColor="@color/secondaryTextColor"
+            android:gravity="center"
+            android:hint="@string/handicaptable"
+            android:textColorHint="@color/secondaryTextColor"
             android:textSize="20sp"
-            android:id="@+id/textView4"/>
+            android:id="@+id/myHandicap"
+            android:background="@android:color/transparent"
+            android:cursorVisible="false"
+            android:inputType="number"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            android:id="@+id/imageView2"
+            android:layout_weight="0"/>
 
         <LinearLayout
             android:layout_width="match_parent"

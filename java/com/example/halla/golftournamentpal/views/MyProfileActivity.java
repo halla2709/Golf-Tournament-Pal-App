@@ -8,9 +8,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
@@ -20,6 +24,7 @@ public class MyProfileActivity extends AppCompatActivity
 
     private Button mCreateButton;
     private SessionManager mSessionManager;
+    private EditText mHandicap;
 
     public void seefriends (View view){
         mCreateButton = (Button) findViewById(R.id.seefriendsbutton);
@@ -43,6 +48,7 @@ public class MyProfileActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +66,29 @@ public class MyProfileActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mSessionManager = new SessionManager(getApplicationContext());
-        if(mSessionManager.getSessionUserSocial() == 0) {
+        if (mSessionManager.getSessionUserSocial() == 0) {
             Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         }
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        mHandicap = (EditText) findViewById(R.id.myHandicap);
+        mHandicap.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    // Here we have to insert updated hadicap into database
+                    Log.v("EditText", mHandicap.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
     }
+
 
     @Override
     public void onBackPressed() {
