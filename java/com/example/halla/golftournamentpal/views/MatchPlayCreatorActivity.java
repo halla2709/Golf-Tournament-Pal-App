@@ -88,8 +88,6 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         // Testing!
         Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
-        Log.v("EditText", mCourseName.getText().toString());
-        Log.v("EditText", mCourseName.getText().toString());
         Log.d("Dagur", "value = " + day);
         Log.d("Bracket Part", ""+mBracketPartNum);
         Log.d("Bracket Exit", ""+mBracketPartExitNum);

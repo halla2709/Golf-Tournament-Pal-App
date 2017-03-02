@@ -1,5 +1,8 @@
 package com.example.halla.golftournamentpal.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Halla on 16-Feb-17.
  */
@@ -10,12 +13,18 @@ public class Golfer {
     private long mSocial;
     private double mHandicap;
     private String mEmail;
+    private List<Golfer> mFriends;
 
-    public Golfer(String name, long social, double handicap, String email) {
+    public Golfer() {
+        mFriends = new ArrayList<>();
+    }
+
+    public Golfer(String name, long social, double handicap, String email, List<Golfer> friends) {
         mName = name;
         mSocial = social;
         mHandicap = handicap;
         mEmail = email;
+        mFriends = friends;
     }
 
     public String getName() {
@@ -48,5 +57,13 @@ public class Golfer {
 
     public void setEmail(String email) {
         mEmail = email;
+    }
+
+    public List<Golfer> getFriends() {
+        return mFriends;
+    }
+
+    public void setFriends(List<Golfer> friends) {
+        mFriends = friends;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,11 @@ public class Tournament {
     private String mName;
     private List<Golfer> mPlayers;
     private Date mStartDate;
+
+    public Tournament() {
+        mPlayers = new ArrayList<>();
+        mStartDate = new Date();
+    }
 
     public Tournament(String course, String name, List<Golfer> players, Date startDate) {
         mCourse = course;
@@ -51,5 +57,9 @@ public class Tournament {
 
     public void setStartDate(Date startDate) {
         mStartDate = startDate;
+    }
+
+    public  void addPlayer(Golfer golfer) {
+        mPlayers.add(golfer);
     }
 }

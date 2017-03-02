@@ -1,6 +1,7 @@
 package com.example.halla.golftournamentpal.views;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,15 +9,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.Tournament;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResultsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SessionManager mSessionManager;
+    private List<Tournament> mTournamentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +42,15 @@ public class ResultsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        FetchTournamentsTask task = new FetchTournamentsTask();
+        task.execute();
+
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
             Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         }
+
     }
 
     @Override
@@ -79,9 +91,30 @@ public class ResultsActivity extends AppCompatActivity
 
         }
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private class FetchTournamentsTask extends AsyncTask<Void, Void, List<Tournament>> {
+
+        @Override
+        protected List<Tournament> doInBackground(Void... params) {
+            Log.i("TAGG", "Fetching...");
+            return new Networker().fetchTournaments();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("TAGG", "Going to fetch...");
+        }
+
+        @Override
+        protected void onPostExecute(List<Tournament> tournaments) {
+            mTournamentList = tournaments;
+            Log.i("TAGG", tournaments.get(0).getStartDate().toString());
+
+        }
     }
 }

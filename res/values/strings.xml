@@ -166,5 +166,10 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_bla">blaActivity</string>
 
+    <string name="addFriendsParticipants">Add Friend</string>
+    <string name="addNewParticipants">Add New</string>
+
+    <string name="baseURL">localhost:8080</string>
+
 
 </resources>
