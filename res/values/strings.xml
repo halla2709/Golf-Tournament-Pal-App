@@ -114,6 +114,8 @@
     <!-- MyProfileActivity -->
     <string name="seefriends">View My Friends</string>
     <string name="seetournament">View My Tournaments</string>
+    <string name="editPen">editPen</string>
+    <string name="myProfilePic">myProfilePic</string>
 
     <!-- MyTournamentsActivity -->
 
