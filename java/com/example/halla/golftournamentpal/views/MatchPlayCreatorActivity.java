@@ -92,7 +92,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         Log.d("Bracket Part", ""+mBracketPartNum);
         Log.d("Bracket Exit", ""+mBracketPartExitNum);
 
-        Intent intent = new Intent(this, ParticipantAdderActivity.class);
+        Intent intent = new Intent(this, ParticipantAdderMainActivity.class);
         startActivity(intent);
     }
 }

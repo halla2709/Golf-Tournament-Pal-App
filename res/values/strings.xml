@@ -97,7 +97,9 @@
     <string name="viewscoreboard">View Scoreboard</string>
 
     <!--- AddParticipant -->
-    <string name="addparticipant">Add Participants to the Tournament</string>
+    <string name="addparticipant">Add unregistered friends to the tournament</string>
+    <string name="addfriends">Add friends to the tournament</string>
+    <string name="searchfriend">Search for friends:</string>
     <string name="participantFill">Please fill out information about the participant:</string>
     <string name="addParticipantText">Add participants to the tournament</string>
     <string name="handicapText">Handicap</string>
@@ -172,6 +174,9 @@
     <string name="addNewParticipants">Add New</string>
 
     <string name="baseURL">localhost:8080</string>
+    <string name="title_activity_participants_adder">ParticipantsAdderActivity</string>
+    <string name="title_activity_participant_adder_main">ParticipantAdderMainActivity</string>
+    <string name="title_activity_hjalp">HjalpActivity</string>
 
 
 </resources>

@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_PROFILE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -27,12 +27,6 @@
         <!-- Do not have a Navigation Drawer -->
         <activity
             android:name=".views.MatchPlayCreatorActivity"
-            android:label="@string/app_name"/>
-        <activity
-            android:name=".views.ParticipantAdderMatchPlayActivity"
-            android:label="@string/app_name"/>
-        <activity
-            android:name=".views.ParticipantAdderScoreboardActivity"
             android:label="@string/app_name"/>
         <activity
             android:name=".views.RegisterActivity"
@@ -89,6 +83,11 @@
             android:name=".views.ScoreboardInfoActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".views.ParticipantAdderMainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
