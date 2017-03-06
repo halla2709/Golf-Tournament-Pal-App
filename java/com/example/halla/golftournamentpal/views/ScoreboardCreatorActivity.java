@@ -44,10 +44,10 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         }
     }
 
-    public void addParticipant(View view){
+    public void addParticipants(View view){
         // Button Listener
         // Getting values from input
-        mCreateButton = (Button) findViewById(R.id.nextStepScoreBoard);
+        mCreateButton = (Button) findViewById(R.id.nextStepScoreboard);
         mTourName   = (EditText) findViewById(R.id.tournamentNameSB);
         mCourseName = (EditText) findViewById(R.id.courseNameSB);
         mDatePicker = (DatePicker) findViewById(R.id.datePickerScoreboard);
@@ -64,7 +64,7 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         Log.d("Dagur", "value = " + day);
         Log.d("Rounds", ""+mNumberOfRounds.getValue());
 
-        Intent intent = new Intent(this, ParticipantAdderMainActivity.class);
+        Intent intent = new Intent(this, ParticipantAdderMainScoreboardActivity.class);
         startActivity(intent);
     }
 }

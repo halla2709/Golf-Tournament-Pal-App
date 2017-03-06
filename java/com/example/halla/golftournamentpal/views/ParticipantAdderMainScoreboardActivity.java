@@ -1,17 +1,20 @@
 package com.example.halla.golftournamentpal.views;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+
 import com.example.halla.golftournamentpal.R;
 
-public class ParticipantAdderActivity extends AppCompatActivity {
+public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -27,11 +30,24 @@ public class ParticipantAdderActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private Button mCreateButton;
+    public void gotonext (View view){
+        mCreateButton = (Button) findViewById(R.id.nextStepParticipant);
+
+        Intent intent = new Intent(this, ScoreboardInfoActivity.class);
+        startActivity(intent);
+    }
+
+    public void addparticipant (View view){
+        mCreateButton = (Button) findViewById(R.id.addParticipantButton);
+
+        //Hér kemur virkni fyrir að bæta við participant
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_participant);
+        setContentView(R.layout.activity_participant_adder_main_fragment_scoreboard);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,13 +59,9 @@ public class ParticipantAdderActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-    }
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_participant, menu);
-        return true;
     }
 
 
@@ -67,28 +79,27 @@ public class ParticipantAdderActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    ParticipantTab1Activity tab1 = new ParticipantTab1Activity();
-                    return tab1;
+                    ParticipantTab1ScoreboardActivity part1 = new ParticipantTab1ScoreboardActivity();
+                    return part1;
                 case 1:
-                    ParticipantTab2Activity tab2 = new ParticipantTab2Activity();
-                    return tab2;
-                default:
-                    return null;
+                    ParticipantTab2ScoreboardActivity part2 = new ParticipantTab2ScoreboardActivity();
+                    return part2;
             }
+            return null;
+
         }
 
         @Override
         public int getCount() {
+            // Show 2 total pages.
             return 2;
         }
-
-
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Add Friend";
+                    return "Add Friends";
                 case 1:
                     return "Add New";
             }

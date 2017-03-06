@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 
-public class ParticipantAdderMatchPlayActivity extends AppCompatActivity {
+public class GamaltParticipantAdderMatchPlayActivity extends AppCompatActivity {
 
     private Button mCreateButton;
     private SessionManager mSessionManager;

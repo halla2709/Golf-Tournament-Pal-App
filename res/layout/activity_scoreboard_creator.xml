@@ -105,12 +105,12 @@
             android:paddingTop="@dimen/activity_vertical_margin">
 
             <Button
-                android:id="@+id/nextStepScoreBoard"
+                android:id="@+id/nextStepScoreboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:background="@color/colorPrimaryDark"
-                android:onClick="addParticipant"
+                android:onClick="addParticipants"
                 android:text="@string/nextStepButton"
                 android:textColor="@color/buttonTextColor"/>
         </LinearLayout>

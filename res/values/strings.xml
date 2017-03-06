@@ -97,10 +97,12 @@
     <string name="viewscoreboard">View Scoreboard</string>
 
     <!--- AddParticipant -->
-    <string name="addparticipant">Add unregistered friends to the tournament</string>
-    <string name="addfriends">Add friends to the tournament</string>
+    <string name="addparticipant">Add New Friends</string>
+    <string name="addfriends">Add Friends</string>
+    <string name="toscoreboard">To the Scoreboard Tournament</string>
+    <string name="tomatchplay">To the Match Play Tournament</string>
     <string name="searchfriend">Search for friends:</string>
-    <string name="participantFill">Please fill out information about the participant:</string>
+    <string name="participantFill">Participant Information:</string>
     <string name="addParticipantText">Add participants to the tournament</string>
     <string name="handicapText">Handicap</string>
     <string name="socialText">Social-number</string>

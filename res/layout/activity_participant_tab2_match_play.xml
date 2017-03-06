@@ -17,11 +17,10 @@
                   android:paddingLeft="@dimen/activity_horizontal_margin"
                   android:paddingRight="@dimen/activity_horizontal_margin"
                   android:paddingTop="@dimen/activity_vertical_margin"
-                  tools:context="com.example.halla.golftournamentpal.views.ParticipantAdderMainActivity1">
+                  tools:context="com.example.halla.golftournamentpal.views.ParticipantTab2MatchPlayActivity">
 
 
         <TextView
-            android:id="@+id/addParticipantText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -29,55 +28,86 @@
             android:gravity="center|top"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:text="@string/addfriends"
+            android:text="@string/addparticipant"
             android:textColor="@color/mainTextColor"
             android:textSize="30sp"/>
 
         <TextView
-            android:id="@+id/participantFill"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="17dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="@string/searchfriend"
+            android:text="@string/tomatchplay"
             android:textAlignment="center"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/textView6"
+            android:layout_marginBottom="20dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/participant"
+            android:padding="10dp"
+            android:gravity="center">
 
-        <SearchView
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/participantFill"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"
+                android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/participantNameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/searchView"
-            android:background="@drawable/background"
-            android:layout_marginBottom="20dp"/>
+            android:layout_gravity="start"
+            android:ems="10"
+            android:hint="@string/participantNameInput"
+            android:inputType="textPersonName"
+            android:linksClickable="true"/>
+
+        <EditText
+            android:id="@+id/handicap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/handicapText"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/socialNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterSSN"
+            android:inputType="numberDecimal"
+            android:maxLength="10"/>
+
+        <EditText
+            android:id="@+id/participantMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/participantMail"
+            android:inputType="textEmailAddress"/>
 
         <Button
             android:id="@+id/addParticipantButton"
             android:layout_width="150dp"
-            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimaryLight"
-            android:onClick="addparticipant"
             android:text="@string/addParticipantButton"
             android:textColor="@color/buttonTextColor"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center|bottom"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
-
-    <TextView
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -122,7 +152,6 @@
             android:onClick="gotonext"
             android:text="@string/nextStepButton"
             android:textColor="@color/buttonTextColor"/>
-    </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

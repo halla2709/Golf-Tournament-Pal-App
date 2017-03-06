@@ -1,18 +1,17 @@
 package com.example.halla.golftournamentpal.views;
 
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.example.halla.golftournamentpal.R;
 
-public class ParticipantAdderMainActivity extends AppCompatActivity {
+public class GamaltParticipantAdderActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -32,7 +31,7 @@ public class ParticipantAdderMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_participant_adder_main_fragment);
+        setContentView(R.layout.activity_participant);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,9 +42,6 @@ public class ParticipantAdderMainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
 
     }
 
@@ -64,27 +60,28 @@ public class ParticipantAdderMainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    ParticipantAdderMainActivity1 part1 = new ParticipantAdderMainActivity1();
-                    return part1;
+                    ParticipantTab1MatchPlayActivity tab1 = new ParticipantTab1MatchPlayActivity();
+                    return tab1;
                 case 1:
-                    ParticipantAdderMainActivity2 part2 = new ParticipantAdderMainActivity2();
-                    return part2;
+                    ParticipantTab2MatchPlayActivity tab2 = new ParticipantTab2MatchPlayActivity();
+                    return tab2;
+                default:
+                    return null;
             }
-            return null;
-
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 2;
         }
+
+
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Add Friends";
+                    return "Add Friend";
                 case 1:
                     return "Add New";
             }

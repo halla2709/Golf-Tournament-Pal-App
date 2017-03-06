@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:id="@+id/activity_match_play_creator"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:focusable="true"
+                  android:focusableInTouchMode="true"
+                  android:gravity="top|center"
+                  android:orientation="vertical"
+                  android:paddingBottom="@dimen/activity_vertical_margin"
+                  android:paddingLeft="@dimen/activity_horizontal_margin"
+                  android:paddingRight="@dimen/activity_horizontal_margin"
+                  android:paddingTop="@dimen/activity_vertical_margin"
+                  tools:context="com.example.halla.golftournamentpal.views.ParticipantTab1ScoreboardActivity">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0"
+            android:gravity="center|top"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="@string/addfriends"
+            android:textColor="@color/mainTextColor"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/toscoreboard"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/participant"
+            android:padding="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/searchfriend"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"
+                android:gravity="center"/>
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background"/>
+
+            <Button
+                android:id="@+id/addParticipantButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimaryLight"
+                android:text="@string/addParticipantButton"
+                android:textColor="@color/buttonTextColor"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/participantadder"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"/>
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:stretchColumns="*">
+
+                <TableRow
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/buttonTextColor">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/nametable"
+                        android:textColor="@color/buttonTextColor"/>
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/handicaptable"
+                        android:textColor="@color/buttonTextColor"/>
+                </TableRow>
+            </TableLayout>
+
+            <Button
+                android:id="@+id/nextStepParticipant"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimaryDark"
+                android:onClick="gotonext"
+                android:text="@string/nextStepButton"
+                android:textColor="@color/buttonTextColor"
+                android:layout_marginBottom="50dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

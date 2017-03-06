@@ -16,7 +16,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".views.LogInActivity"
-            android:label="@string/app_name_shortcut">
+            android:label="@string/app_name_shortcut"
+            android:theme="@style/AppTheme.NoDrawer"
+            android:icon="@drawable/golfball">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,21 +26,28 @@
             </intent-filter>
         </activity>
 
-        <!-- Do not have a Navigation Drawer -->
         <activity
             android:name=".views.MatchPlayCreatorActivity"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoDrawer"/>
         <activity
             android:name=".views.RegisterActivity"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoDrawer"/>
         <activity
             android:name=".views.ScoreboardCreatorActivity"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoDrawer"/>
         <activity
             android:name=".views.ScoreInputViewActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoDrawer"/>
+        <activity
+            android:name=".views.ParticipantAdderMainScoreboardActivity"
             android:label="@string/app_name"/>
-
-        <!-- Have a Navigation Drawer -->
+        <activity
+            android:name=".views.ParticipantAdderMainMatchPlayActivity"
+            android:label="@string/app_name"/>
         <activity
             android:name=".views.BracketsActivity"
             android:label="@string/app_name"
@@ -83,12 +92,5 @@
             android:name=".views.ScoreboardInfoActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".views.ParticipantAdderMainActivity"
-            android:label="@string/app_name"
-
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
     </application>
-
 </manifest>
