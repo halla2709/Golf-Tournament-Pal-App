@@ -167,7 +167,8 @@
                 android:onClick="goToPlayOfftree"
                 android:text="@string/viewplayofftree"
                 android:textColor="@color/buttonTextColor"
-                tools:layout_gravity="bottom|end"/>
+                tools:layout_gravity="bottom|end"
+                android:layout_marginBottom="50dp"/>
 
         </LinearLayout>
     </LinearLayout>
