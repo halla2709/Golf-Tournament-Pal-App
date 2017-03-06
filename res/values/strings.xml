@@ -2,7 +2,7 @@
 
     <string name="app_name">Golf Tournament Pal</string>
     <string name="app_name_shortcut">Golf Pal</string>
-
+    <string name="search_hint">Search Tournaments</string>
     <!-- Menu -->
     <string name="mypage">My Profile</string>
     <string name="myfriends">My Friends</string>
@@ -179,6 +179,7 @@
     <string name="title_activity_participants_adder">ParticipantsAdderActivity</string>
     <string name="title_activity_participant_adder_main">ParticipantAdderMainActivity</string>
     <string name="title_activity_hjalp">HjalpActivity</string>
+    <string name="title_activity_friend_profile">FriendProfileActivity</string>
 
 
 </resources>
