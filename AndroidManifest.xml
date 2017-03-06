@@ -86,6 +86,7 @@
         <activity
             android:name=".views.ParticipantAdderMainActivity"
             android:label="@string/app_name"
+
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
