@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.Tournament;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,7 @@ public class Networker {
     public byte[] getUrlBytes(String urlSpec) throws IOException {
         URL url = new URL(urlSpec);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             InputStream in = conn.getInputStream();
@@ -60,7 +62,7 @@ public class Networker {
     public List<Tournament> fetchTournaments() {
         List<Tournament> tournaments = new ArrayList<>();
         try {
-            String url = BASE_URL + "/results";
+            String url = BASE_URL + "/json/results";
             Log.i(TAG, url);
             String jsonString = getUrlString(url);
             Log.i(TAG, "Received JSON: " + jsonString);
@@ -104,5 +106,34 @@ public class Networker {
             tournaments.add(tournament);
         }
 
+    }
+
+    public void sendUserDetails() {
+        Tournament testtourn = new Tournament("GRABBI", "HALLA", null, new Date());
+        Gson gson = new Gson();
+        String jsontestString = gson.toJson(testtourn);
+
+        Log.e("logloglog", jsontestString);
+
+
+        String testurl = Uri.parse(BASE_URL+"/json/sendayfir")
+                .buildUpon()
+                .appendQueryParameter("nafn", "Halla")
+                .build()
+                .toString();
+        Log.e("logloglog", testurl);
+
+        try {
+            String url = Uri.parse(BASE_URL+"/json/sendayfir")
+                    .buildUpon()
+                    .appendQueryParameter("nafn", "Halla")
+                    .build()
+                    .toString();
+            Log.i(TAG, url);
+            String jsonString = getUrlString(url);
+        }
+        catch (IOException ioe){
+            Log.e(TAG, "Failed to fetch items ", ioe);
+        }
     }
 }
