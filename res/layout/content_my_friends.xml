@@ -51,19 +51,41 @@
 
                 <TableRow
                     android:background="@color/colorPrimaryDark"
-                    android:textColor="@color/buttonTextColor">
+                    android:textColor="@color/buttonTextColor"
+                    android:layout_marginBottom="5dp">
 
                     <TextView
                         android:padding="3dip"
                         android:text="@string/nametable"
                         android:textColor="@color/buttonTextColor"/>
-
                     <TextView
                         android:id="@+id/textView"
                         android:gravity="center"
                         android:padding="3dip"
                         android:text="@string/handicaptable"
                         android:textColor="@color/buttonTextColor"/>
+                    <TextView
+                        android:padding="3dip"
+                        android:textColor="@color/buttonTextColor"
+                        android:gravity="center"/>
+                </TableRow>
+                <TableRow
+                    android:background="@drawable/participant">
+                    <TextView
+                        android:padding="3dip"
+                        android:text="Jón Jónsson"/>
+                    <TextView
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="1.2"/>
+                    <Button
+                        android:id="@+id/viewbutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="viewfriend"
+                        android:text="@string/view"
+                        android:textColor="@color/buttonTextColor"
+                        android:background="@color/grey"/>
                 </TableRow>
             </TableLayout>
         </ScrollView>

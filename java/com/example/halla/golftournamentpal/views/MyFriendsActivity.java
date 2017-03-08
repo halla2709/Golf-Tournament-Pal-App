@@ -29,6 +29,13 @@ public class MyFriendsActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void viewfriend (View view){
+        mCreateButton = (Button) findViewById(R.id.viewbutton);
+
+        Intent intent = new Intent(this,FriendProfileActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -75,7 +75,6 @@
             android:text="@string/loginbutton"
             android:textColor="@color/buttonTextColor"/>
 
-
         <TextView
             android:id="@+id/textView3"
             android:layout_width="fill_parent"

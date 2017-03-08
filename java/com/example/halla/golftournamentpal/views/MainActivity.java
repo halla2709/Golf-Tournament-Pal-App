@@ -18,8 +18,8 @@ import com.example.halla.golftournamentpal.SessionManager;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button mCreateButton;
     private SessionManager mSessionManager;
+    private Button mCreateButton;
 
     public void myfriends (View view){
         mCreateButton = (Button) findViewById(R.id.myfriendsbutton);

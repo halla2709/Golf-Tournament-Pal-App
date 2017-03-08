@@ -10,4 +10,5 @@
     <color name="buttonTextColor">#ffffff</color>
     <color name="logOutButtonColor">#e71515</color>
     <color name="colorPrimaryLight">#303FBB</color>
+    <color name="grey">#8CA5EA</color>
 </resources>
