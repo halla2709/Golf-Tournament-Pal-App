@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,23 +10,28 @@ import java.util.List;
 
 public class ScoreboardTournament extends Tournament {
 
-    private int[][] mSores;
+    private int[][] mScores;
     private int mNumberOfRounds;
     private List<Scorecard> mScorecards;
 
-    public ScoreboardTournament(String course, String name, List<Golfer> players, Date startDate, int[][] sores, int numberOfRounds, List<Scorecard> scorecards) {
+    public ScoreboardTournament(String course, String name, List<Golfer> players, Date startDate, int[][] scores, int numberOfRounds, List<Scorecard> scorecards) {
         super(course, name, players, startDate);
-        mSores = sores;
+        mScores = scores;
         mNumberOfRounds = numberOfRounds;
         mScorecards = scorecards;
     }
 
-    public int[][] getSores() {
-        return mSores;
+    public ScoreboardTournament() {
+        super();
+        mScorecards = new ArrayList<>();
     }
 
-    public void setSores(int[][] sores) {
-        mSores = sores;
+    public int[][] getSores() {
+        return mScores;
+    }
+
+    public void setSores(int[][] scores) {
+        mScores = scores;
     }
 
     public int getNumberOfRounds() {

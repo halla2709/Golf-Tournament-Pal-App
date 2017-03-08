@@ -66,4 +66,8 @@ public class Golfer {
     public void setFriends(List<Golfer> friends) {
         mFriends = friends;
     }
+
+    public void addFriend(Golfer friend){
+        mFriends.add(friend);
+    }
 }
