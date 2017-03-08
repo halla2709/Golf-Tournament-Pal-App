@@ -78,6 +78,25 @@ public class Networker {
         return tournaments;
     }
 
+    public Golfer fetchGolfer() {
+        Golfer golfer = new Golfer();
+        try{
+            String url = BASE_URL + "/json/golfer";
+            Log.i(TAG, url);
+            String jsonString = getUrlString(url);
+            Log.i(TAG, "Received JSON: " + jsonString);
+            JSONObject jsonBody = new JSONObject(jsonString);
+            JsonParser.parseGolfer(jsonBody);
+        }
+        catch (IOException ioe){
+            Log.e(TAG, "Failed to fetch items ", ioe);
+        }
+        catch (JSONException je){
+            Log.e(TAG, "Failed to parse JSON", je);
+        }
+        return golfer;
+    }
+
     private void parseItems(List<Tournament> tournaments, JSONArray jsonArray)
             throws  IOException, JSONException {
 
@@ -88,8 +107,8 @@ public class Networker {
 
             tournaments.add(tournament);
         }
-
     }
+
 
     public void sendUserDetails() {
         Tournament testtourn = new Tournament("GRABBI", "HALLA", null, new Date());

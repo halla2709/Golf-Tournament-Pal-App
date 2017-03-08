@@ -1,6 +1,7 @@
 package com.example.halla.golftournamentpal.views;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,15 +16,22 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.Golfer;
+import com.example.halla.golftournamentpal.models.Tournament;
+
+import java.util.List;
 
 public class MyProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button mCreateButton;
+    private TextView mGolferName;
     private SessionManager mSessionManager;
     private EditText mHandicap;
 
@@ -47,6 +55,31 @@ public class MyProfileActivity extends AppCompatActivity
 
         Intent intent = new Intent(this, LogInActivity.class);
         startActivity(intent);
+    }
+
+    private class FetchProfile extends AsyncTask<Void, Void, Golfer> {
+
+        @Override
+        protected Golfer doInBackground(Void... params) {
+            Log.i("TAGG", "Fetching...");
+            new Networker().fetchGolfer();
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("TAGG", "Going to fetch...");
+        }
+
+        @Override
+        protected void onPostExecute(Golfer golfer) {
+            Log.i("TAGG", golfer.getName().toString());
+            mGolferName = (TextView) findViewById(R.id.golferName);
+            mGolferName.setText(golfer.getName().toString());
+
+
+        }
     }
 
 
@@ -134,4 +167,6 @@ public class MyProfileActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

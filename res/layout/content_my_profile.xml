@@ -38,6 +38,7 @@
             android:contentDescription="@string/myProfilePic"/>
 
         <TextView
+            android:id="@+id/golferName"
             android:layout_width="213dp"
             android:layout_height="wrap_content"
             android:gravity="center"
