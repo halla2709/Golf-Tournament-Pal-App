@@ -84,24 +84,7 @@ public class Networker {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject tournamentJsonObject = jsonArray.getJSONObject(i);
 
-            Tournament tournament = new Tournament();
-
-            tournament.setCourse(tournamentJsonObject.getString("course"));
-            tournament.setName(tournamentJsonObject.getString("name"));
-            tournament.setStartDate(new Date(tournamentJsonObject.getLong("startDate")));
-
-            JSONArray playersJsonArray = tournamentJsonObject.getJSONArray("players");
-            for (int j = 0; j < playersJsonArray.length(); j++) {
-                JSONObject playerJsonObject = playersJsonArray.getJSONObject(j);
-                Golfer golfer = new Golfer();
-
-                golfer.setName(playerJsonObject.getString("name"));
-                golfer.setEmail(playerJsonObject.getString("email"));
-                golfer.setSocial(playerJsonObject.getLong("social"));
-                golfer.setHandicap(playerJsonObject.getDouble("handicap"));
-
-                tournament.addPlayer(golfer);
-            }
+            Tournament tournament = JsonParser.parseTournament(tournamentJsonObject);
 
             tournaments.add(tournament);
         }
