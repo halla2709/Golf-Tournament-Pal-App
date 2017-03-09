@@ -77,14 +77,6 @@ public class MyProfileActivity extends AppCompatActivity
         }
 
 
-    //if(mGolferSocial.length() !=10) {
-    //    mGolferSocial.setText("0" + Long.toString(mSessionManager.getSessionUserSocial()));
-    //}
-    //else {
-    //   mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
-    //}
-
-
     this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
@@ -98,6 +90,7 @@ public class MyProfileActivity extends AppCompatActivity
                 Log.v("EditText", mHandicap.getText().toString());
                 Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
                 return true;
+                //Þurfum að bæta við að það sé hægt að ýta á edit pennann líka til að breyta. Jafnvel töluna líka!!!!
             }
             return false;
         }
