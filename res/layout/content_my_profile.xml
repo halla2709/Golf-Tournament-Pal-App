@@ -55,7 +55,7 @@
             android:text="@string/enterSSN"
             android:textColor="@color/secondaryTextColor"
             android:textSize="20sp"
-            android:id="@+id/textView4"/>
+            android:id="@+id/golferSSN"/>
 
         <TextView
             android:layout_width="256dp"
@@ -65,7 +65,7 @@
             android:text="@string/emailtable"
             android:textColor="@color/secondaryTextColor"
             android:textSize="20sp"
-            android:id="@+id/textView5"/>
+            android:id="@+id/golferEmail"/>
 
         <LinearLayout
             android:layout_width="match_parent"

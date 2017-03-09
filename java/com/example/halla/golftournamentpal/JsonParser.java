@@ -1,5 +1,7 @@
 package com.example.halla.golftournamentpal;
 
+import android.util.Log;
+
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 import com.example.halla.golftournamentpal.models.Round;
@@ -48,15 +50,18 @@ public class JsonParser {
         golfer.setSocial(playerJsonObject.getLong("social"));
         golfer.setHandicap(playerJsonObject.getDouble("handicap"));
 
+        Log.i("PARSEJSON", "parsing golfer" + golfer.getName());
         JSONArray friendsJsonArray = playerJsonObject.getJSONArray("friends");
         for(int i = 0; i < friendsJsonArray.length(); i++) {
             JSONObject friendJsonObject = friendsJsonArray.getJSONObject(i);
             Golfer friend = new Golfer();
-            friend.setName(playerJsonObject.getString("name"));
-            friend.setEmail(playerJsonObject.getString("email"));
-            friend.setSocial(playerJsonObject.getLong("social"));
-            friend.setHandicap(playerJsonObject.getDouble("handicap"));
 
+            friend.setName(friendJsonObject.getString("name"));
+            friend.setEmail(friendJsonObject.getString("email"));
+            friend.setSocial(friendJsonObject.getLong("social"));
+            friend.setHandicap(friendJsonObject.getDouble("handicap"));
+
+            Log.i("PARSEJSON", "parsing golfer" + friend.getName());
             golfer.addFriend(friend);
         }
 
@@ -121,8 +126,29 @@ public class JsonParser {
     }
 
     public static Round parseRound(JSONObject roundsJsonObject) throws JSONException {
-        //TODO parsa alla helv**** h inta
-        return null;
+        int h1 = roundsJsonObject.getInt("h1");
+        int h2 = roundsJsonObject.getInt("h2");
+        int h3 = roundsJsonObject.getInt("h3");
+        int h4 = roundsJsonObject.getInt("h4");
+        int h5 = roundsJsonObject.getInt("h5");
+        int h6 = roundsJsonObject.getInt("h6");
+        int h7 = roundsJsonObject.getInt("h7");
+        int h8 = roundsJsonObject.getInt("h8");
+        int h9 = roundsJsonObject.getInt("h9");
+        int h10 = roundsJsonObject.getInt("h10");
+        int h11 = roundsJsonObject.getInt("h11");
+        int h12 = roundsJsonObject.getInt("h12");
+        int h13 = roundsJsonObject.getInt("h13");
+        int h14 = roundsJsonObject.getInt("h14");
+        int h15 = roundsJsonObject.getInt("h15");
+        int h16 = roundsJsonObject.getInt("h16");
+        int h17 = roundsJsonObject.getInt("h17");
+        int h18 = roundsJsonObject.getInt("h18");
+        int total = roundsJsonObject.getInt("total");
+        int[] myscores = {h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11,
+                h12, h13, h14, h15, h16, h17, h18};
+        return new Round(myscores, total, h18, h17, h16, h15, h14, h13,
+                h12, h11, h10, h9, h8, h7, h6, h5, h4, h3, h2, h1);
     }
 
     public static int[] parseArray(JSONArray totalJsonArray) throws JSONException {
@@ -132,5 +158,9 @@ public class JsonParser {
         }
 
         return array;
+    }
+
+    public static double doubleRounder(double toRound) {
+        return (double) Math.round(toRound*10)/10;
     }
 }

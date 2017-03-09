@@ -78,15 +78,19 @@ public class Networker {
         return tournaments;
     }
 
-    public Golfer fetchGolfer() {
+    public Golfer fetchGolfer(Long social) {
         Golfer golfer = new Golfer();
         try{
-            String url = BASE_URL + "/json/golfer";
+            String url = Uri.parse(BASE_URL+"/json/golfer")
+                    .buildUpon()
+                    .appendQueryParameter("social", social.toString())
+                    .build()
+                    .toString();
             Log.i(TAG, url);
             String jsonString = getUrlString(url);
             Log.i(TAG, "Received JSON: " + jsonString);
             JSONObject jsonBody = new JSONObject(jsonString);
-            JsonParser.parseGolfer(jsonBody);
+            golfer = JsonParser.parseGolfer(jsonBody);
         }
         catch (IOException ioe){
             Log.e(TAG, "Failed to fetch items ", ioe);
@@ -109,6 +113,36 @@ public class Networker {
         }
     }
 
+    public Golfer logInGolfer(Long social, String password) {
+        Golfer golfer = new Golfer();
+        try{
+
+            String url = Uri.parse(BASE_URL+"/json/loginuser")
+                    .buildUpon()
+                    .appendQueryParameter("social", social.toString())
+                    .appendQueryParameter("password", password)
+                    .build()
+                    .toString();
+            Log.i(TAG, url);
+            String jsonString = getUrlString(url);
+            Log.i(TAG, "Received JSON: " + jsonString);
+            JSONObject jsonBody = new JSONObject(jsonString);
+            golfer = JsonParser.parseGolfer(jsonBody);
+            Log.i(TAG, "Done parsing JSON");
+
+        }
+        catch (IOException ioe){
+            Log.e(TAG, "Failed to fetch items ", ioe);
+        }
+        catch (JSONException je){
+            Log.e(TAG, "Failed to parse JSON", je);
+        }
+
+        return golfer;
+
+
+    }
+
 
     public void sendUserDetails() {
         Tournament testtourn = new Tournament("GRABBI", "HALLA", null, new Date());
@@ -118,7 +152,7 @@ public class Networker {
         Log.e("logloglog", jsontestString);
 
 
-        String testurl = Uri.parse(BASE_URL+"/json/sendayfir")
+        String testurl = Uri.parse(BASE_URL+"/json/tournament/2")
                 .buildUpon()
                 .appendQueryParameter("nafn", "Halla")
                 .build()

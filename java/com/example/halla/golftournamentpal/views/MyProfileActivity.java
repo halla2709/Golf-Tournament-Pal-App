@@ -32,8 +32,62 @@ public class MyProfileActivity extends AppCompatActivity
 
     private Button mCreateButton;
     private TextView mGolferName;
+    private TextView mGolferSocial;
+    private TextView mGolferEmail;
     private SessionManager mSessionManager;
     private EditText mHandicap;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_profile);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        mGolferName = (TextView) findViewById(R.id.golferName);
+        mGolferSocial = (TextView) findViewById(R.id.golferSSN);
+        mGolferEmail = (TextView) findViewById(R.id.golferEmail);
+        mHandicap = (EditText) findViewById(R.id.myHandicap);
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        mSessionManager = new SessionManager(getApplicationContext());
+        if (mSessionManager.getSessionUserSocial() == 0) {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
+
+        mGolferName.setText(mSessionManager.getSessionUserName());
+        mHandicap.setText(Double.toString(mSessionManager.getSessionUserHandicap()));
+        mGolferEmail.setText(mSessionManager.getSessionUserEmail());
+        mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
+
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
+        mHandicap.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    // Here we have to insert updated hadicap into database
+                    Log.v("EditText", mHandicap.getText().toString());
+                    Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
     public void seefriends (View view){
         mCreateButton = (Button) findViewById(R.id.seefriendsbutton);
@@ -56,74 +110,6 @@ public class MyProfileActivity extends AppCompatActivity
         Intent intent = new Intent(this, LogInActivity.class);
         startActivity(intent);
     }
-
-    private class FetchProfile extends AsyncTask<Void, Void, Golfer> {
-
-        @Override
-        protected Golfer doInBackground(Void... params) {
-            Log.i("TAGG", "Fetching...");
-            new Networker().fetchGolfer();
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Log.i("TAGG", "Going to fetch...");
-        }
-
-        @Override
-        protected void onPostExecute(Golfer golfer) {
-            Log.i("TAGG", golfer.getName().toString());
-            mGolferName = (TextView) findViewById(R.id.golferName);
-            mGolferName.setText(golfer.getName().toString());
-
-
-        }
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        mSessionManager = new SessionManager(getApplicationContext());
-        if (mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
-        }
-
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        mHandicap = (EditText) findViewById(R.id.myHandicap);
-        mHandicap.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-                    // Here we have to insert updated hadicap into database
-                    Log.v("EditText", mHandicap.getText().toString());
-                    Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
 
     @Override
     public void onBackPressed() {

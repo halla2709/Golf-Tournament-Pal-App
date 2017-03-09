@@ -11,36 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SessionManager mSessionManager;
     private Button mCreateButton;
+    private TextView mWelcomeText;
 
-    public void myfriends (View view){
-        mCreateButton = (Button) findViewById(R.id.myfriendsbutton);
-
-        Intent intent = new Intent(this,MyFriendsActivity.class);
-        startActivity(intent);
-    }
-
-    public void mytournaments (View view){
-        mCreateButton = (Button) findViewById(R.id.mytournamentsbutton);
-
-        Intent intent = new Intent(this, MyTournamentsActivity.class);
-        startActivity(intent);
-    }
-
-    public void myprofile (View view){
-        mCreateButton = (Button) findViewById(R.id.myprofilebutton);
-
-        Intent intent = new Intent(this, MyProfileActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +47,32 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         }
+
+        mWelcomeText = (TextView) findViewById(R.id.welcome);
+        mWelcomeText.setText("Welcome " + mSessionManager.getSessionUserName());
     }
+    public void myfriends (View view){
+        mCreateButton = (Button) findViewById(R.id.myfriendsbutton);
+
+        Intent intent = new Intent(this,MyFriendsActivity.class);
+        startActivity(intent);
+    }
+
+    public void mytournaments (View view){
+        mCreateButton = (Button) findViewById(R.id.mytournamentsbutton);
+
+        Intent intent = new Intent(this, MyTournamentsActivity.class);
+        startActivity(intent);
+    }
+
+    public void myprofile (View view){
+        mCreateButton = (Button) findViewById(R.id.myprofilebutton);
+
+        Intent intent = new Intent(this, MyProfileActivity.class);
+        startActivity(intent);
+    }
+
+
 
     @Override
     public void onBackPressed() {
