@@ -39,7 +39,7 @@
 
         <TextView
             android:id="@+id/golferName"
-            android:layout_width="213dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -48,7 +48,7 @@
             android:textSize="20sp"/>
 
         <TextView
-            android:layout_width="277dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -58,7 +58,7 @@
             android:id="@+id/golferSSN"/>
 
         <TextView
-            android:layout_width="256dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -68,17 +68,27 @@
             android:id="@+id/golferEmail"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center|bottom"
             android:orientation="horizontal"
             android:weightSum="1">
 
-            <EditText
-                android:layout_width="118dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
-                android:hint="@string/handicaptable"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="@string/handicapdot"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"
+                android:id="@+id/golferEmail"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/number"
                 android:paddingTop="10dp"
                 android:textColorHint="@color/secondaryTextColor"
                 android:textSize="20sp"
@@ -91,7 +101,6 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
                 app:srcCompat="@android:drawable/ic_menu_edit"
                 android:id="@+id/imageView2"
                 android:contentDescription="@string/editPen"
