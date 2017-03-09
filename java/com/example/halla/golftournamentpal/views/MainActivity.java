@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         mWelcomeText = (TextView) findViewById(R.id.welcome);
-        mWelcomeText.setText("Welcome " + mSessionManager.getSessionUserName());
+        mWelcomeText.setText("Hello " + mSessionManager.getSessionUserName() + ",");
     }
     public void myfriends (View view){
         mCreateButton = (Button) findViewById(R.id.myfriendsbutton);

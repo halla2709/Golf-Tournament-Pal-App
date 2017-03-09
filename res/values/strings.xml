@@ -35,7 +35,7 @@
     <string name="resultsbutton">Tournaments</string>
     <string name="username">Username</string>
     <string name="loggedinas">Welcome USERNAME,</string>
-    <string name="chooseaction">please select what you want to do:</string>
+    <string name="chooseaction">Please select what you want to do:</string>
 
     <!--- Home activity -->
     <string name="tournament">Create a tournament</string>

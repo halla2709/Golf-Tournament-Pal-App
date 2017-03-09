@@ -67,27 +67,42 @@ public class MyProfileActivity extends AppCompatActivity
         mGolferName.setText(mSessionManager.getSessionUserName());
         mHandicap.setText(Double.toString(mSessionManager.getSessionUserHandicap()));
         mGolferEmail.setText(mSessionManager.getSessionUserEmail());
-        mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
+
+        String mGolferString = mSessionManager.getSessionUserSocial().toString();
+        if (mGolferString.length() != 10) {
+            mGolferSocial.setText("0" + Long.toString(mSessionManager.getSessionUserSocial()));
+        }
+        else {
+            mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
+        }
 
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    //if(mGolferSocial.length() !=10) {
+    //    mGolferSocial.setText("0" + Long.toString(mSessionManager.getSessionUserSocial()));
+    //}
+    //else {
+    //   mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
+    //}
 
 
-        mHandicap.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-                    // Here we have to insert updated hadicap into database
-                    Log.v("EditText", mHandicap.getText().toString());
-                    Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
+    this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
+    mHandicap.setOnKeyListener(new View.OnKeyListener() {
+        public boolean onKey(View view, int keyCode, KeyEvent event) {
+            // If the event is a key-down event on the "enter" button
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                // Perform action on key press
+                // Here we have to insert updated hadicap into database
+                Log.v("EditText", mHandicap.getText().toString());
+                Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
+                return true;
             }
-        });
-    }
+            return false;
+        }
+    });
+}
 
     public void seefriends (View view){
         mCreateButton = (Button) findViewById(R.id.seefriendsbutton);
