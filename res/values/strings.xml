@@ -24,6 +24,8 @@
 
     <!-- Register Activity -->
     <string name="registerinputs">Please fill out all information:</string>
+    <string name="newUserPassword1">Password</string>
+    <string name="newUserPassword2">re-enter Password</string>
 
     <!-- Main activity -->
     <string name="homeTexts">Welcome to Golf Tournament Pal</string>

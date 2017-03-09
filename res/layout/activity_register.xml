@@ -43,7 +43,7 @@
             android:id="@+id/textView3"/>
 
         <EditText
-            android:id="@+id/participantNameInput"
+            android:id="@+id/newUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -52,16 +52,9 @@
             android:inputType="textPersonName"
             android:linksClickable="true"/>
 
-        <EditText
-            android:id="@+id/handicap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/handicapText"
-            android:inputType="numberDecimal"/>
 
         <EditText
-            android:id="@+id/socialNumber"
+            android:id="@+id/newUserSSN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -69,14 +62,37 @@
             android:inputType="numberDecimal"
             android:maxLength="10"/>
 
+        <EditText
+            android:id="@+id/newUserHandicap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/handicapText"
+            android:inputType="numberDecimal"/>
 
         <EditText
-            android:id="@+id/participantMail"
+            android:id="@+id/newUserEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/participantMail"
             android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/newUserPassword1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/newUserPassword1"
+            android:inputType="textVisiblePassword"/>
+
+        <EditText
+            android:id="@+id/newUserPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/newUserPassword2"
+            android:inputType="textVisiblePassword"/>
 
     <LinearLayout
         android:layout_width="match_parent"

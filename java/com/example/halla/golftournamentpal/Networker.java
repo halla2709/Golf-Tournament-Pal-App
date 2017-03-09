@@ -5,20 +5,18 @@ import android.util.Log;
 
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.Tournament;
-import com.google.gson.Gson;
+import com.example.halla.golftournamentpal.models.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -144,8 +142,8 @@ public class Networker {
     }
 
 
-    public void sendUserDetails() {
-        Tournament testtourn = new Tournament("GRABBI", "HALLA", null, new Date());
+    public Golfer registerGolfer(User userinfo, Golfer golfer) {
+        /*Tournament testtourn = new Tournament("GRABBI", "HALLA", null, new Date());
         Gson gson = new Gson();
         String jsontestString = gson.toJson(testtourn);
 
@@ -157,19 +155,28 @@ public class Networker {
                 .appendQueryParameter("nafn", "Halla")
                 .build()
                 .toString();
-        Log.e("logloglog", testurl);
-
+        Log.e("logloglog", testurl);*/
+        Golfer newgolfer = new Golfer();
         try {
-            String url = Uri.parse(BASE_URL+"/json/sendayfir")
+            String url = Uri.parse(BASE_URL+"/json/registerUser")
                     .buildUpon()
-                    .appendQueryParameter("nafn", "Halla")
+                    .appendQueryParameter("social", Long.toString(userinfo.getSocial()))
+                    .appendQueryParameter("name", golfer.getName())
+                    .appendQueryParameter("email", golfer.getEmail())
+                    .appendQueryParameter("handicap", Double.toString(golfer.getHandicap()))
+                    .appendQueryParameter("password", userinfo.getPassword())
                     .build()
                     .toString();
             Log.i(TAG, url);
             String jsonString = getUrlString(url);
+            JSONObject jsonBody = new JSONObject(jsonString);
+            newgolfer = JsonParser.parseGolfer(jsonBody);
         }
         catch (IOException ioe){
             Log.e(TAG, "Failed to fetch items ", ioe);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return newgolfer;
     }
 }

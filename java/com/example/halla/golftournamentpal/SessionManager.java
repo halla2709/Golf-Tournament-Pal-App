@@ -8,8 +8,6 @@ import android.util.Log;
 import com.example.halla.golftournamentpal.models.Golfer;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Halla on 26-Feb-17.
@@ -65,6 +63,14 @@ public class SessionManager {
         return false;
     }
 
+    public void startRegisterSession(Golfer golfer){
+
+        editor.putLong(SOCIAL, golfer.getSocial());
+        editor.putString(NAME, golfer.getName());
+        editor.putFloat(HANDICAP, (float) golfer.getHandicap());
+        editor.putString(EMAIL, golfer.getEmail());
+        editor.commit();
+    }
 
 
     public Long getSessionUserSocial() {

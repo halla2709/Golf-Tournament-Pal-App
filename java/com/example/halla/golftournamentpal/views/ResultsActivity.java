@@ -118,7 +118,7 @@ public class ResultsActivity extends AppCompatActivity
         @Override
         protected List<Tournament> doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            new Networker().sendUserDetails();
+            new Networker().fetchTournaments();
             return null;
         }
 
@@ -130,10 +130,10 @@ public class ResultsActivity extends AppCompatActivity
 
         @Override
         protected void onPostExecute(List<Tournament> tournaments) {
-            /*mTournamentList = tournaments;
+            mTournamentList = tournaments;
             mAdapter.setData(mTournamentList);
             mListView.setAdapter(mAdapter);
-            Log.i("TAGG", tournaments.get(0).getStartDate().toString());*/
+            Log.i("TAGG", tournaments.get(0).getStartDate().toString());
 
         }
     }
