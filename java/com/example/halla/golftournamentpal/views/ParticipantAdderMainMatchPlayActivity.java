@@ -1,6 +1,7 @@
 package com.example.halla.golftournamentpal.views;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,11 +11,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.Golfer;
+
+import java.util.List;
 
 public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity {
 
@@ -34,20 +40,9 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private Button mCreateButton;
-    public void gotonext (View view){
-        mCreateButton = (Button) findViewById(R.id.nextStepParticipant);
-
-        Intent intent = new Intent(this, MatchPlayInfoActivity.class);
-        startActivity(intent);
-    }
-
-    public void addparticipant (View view){
-        mCreateButton = (Button) findViewById(R.id.addParticipantButton);
-
-        //Hér kemur virkni fyrir að bæta við participant
-    }
-
     private SessionManager mSessionManager;
+
+    private List<Golfer> friends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +68,20 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         }
+
+    }
+
+    public void gotonext (View view){
+        mCreateButton = (Button) findViewById(R.id.nextStepParticipant);
+
+        Intent intent = new Intent(this, MatchPlayInfoActivity.class);
+        startActivity(intent);
+    }
+
+    public void addparticipant (View view){
+        mCreateButton = (Button) findViewById(R.id.addParticipantButton);
+
+        //Hér kemur virkni fyrir að bæta við participant
 
     }
 
@@ -116,6 +125,29 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity {
                     return "Add New";
             }
             return null;
+        }
+    }
+
+    private class GetFriendsTask extends AsyncTask<Void, Void, Golfer> {
+
+        @Override
+        protected Golfer doInBackground(Void... params) {
+            Log.i("TAGG", "Fetching...");
+            return new Networker().fetchGolfer(mSessionManager.getSessionUserSocial());
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("TAGG", "Going to fetch...");
+        }
+
+        @Override
+        protected void onPostExecute(Golfer golfer) {
+            super.onPostExecute(golfer);
+            friends = golfer.getFriends();
+            Log.i("TAGG", "Done");
+
         }
     }
 }

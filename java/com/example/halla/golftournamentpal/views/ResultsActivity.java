@@ -118,8 +118,8 @@ public class ResultsActivity extends AppCompatActivity
         @Override
         protected List<Tournament> doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            new Networker().fetchTournaments();
-            return null;
+            return new Networker().fetchTournaments();
+
         }
 
         @Override

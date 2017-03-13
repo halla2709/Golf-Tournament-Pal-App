@@ -119,10 +119,6 @@ public class SessionManager {
         @Override
         protected void onPostExecute(Golfer golfer) {
             super.onPostExecute(golfer);
-
-
-
-
             Log.i("TAGG", "Done");
 
         }

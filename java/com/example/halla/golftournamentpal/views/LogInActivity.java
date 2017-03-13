@@ -18,9 +18,6 @@ public class LogInActivity extends AppCompatActivity {
     private EditText mUserPassword;
     private SessionManager mSessionManager;
 
-    private User halla = new User(2709942619L, "blabla");
-
-
     public void login (View view){
         mCreateButton = (Button) findViewById(R.id.loginbutton);
         mUserSocial = (EditText) findViewById(R.id.loginSSN);
@@ -44,11 +41,8 @@ public class LogInActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Incorrect credientials, try again", Toast.LENGTH_SHORT)
                         .show();
             }
-
         }
-
     }
-
 
     public void register (View view){
         mCreateButton = (Button) findViewById(R.id.registerbutton);

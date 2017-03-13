@@ -14,6 +14,11 @@ import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -27,6 +32,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
     private EditText mCourseName;
     private DatePicker mDatePicker;
     private SessionManager mSessionManager;
+    private CheckBox areBrackets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         // NumberPickers
         mBracketPart = (NumberPicker) findViewById(R.id.bracketParticipants);
         mBracketPartExit = (NumberPicker) findViewById(R.id.bracketParticipantsExit);
+        areBrackets = (CheckBox) findViewById(R.id.bracketCheckBox);
 
         mBracketPart.setMinValue(1);
         mBracketPart.setMaxValue(2);
@@ -52,7 +59,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
     }
 
     public void displayOptions(View view) {
-        CheckBox areBrackets = (CheckBox) findViewById(R.id.bracketCheckBox);
+
         TextView textView = (TextView) findViewById(R.id.bracketPickerText);
         TextView textViewer = (TextView) findViewById(R.id.bracketPickerText2);
 
@@ -78,12 +85,29 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         mCourseName = (EditText) findViewById(R.id.courseNameMP);
         mDatePicker = (DatePicker) findViewById(R.id.datePickerMatchPlay);
 
-        int mBracketPartNum = mBracketPart.getValue();
-        int mBracketPartExitNum = mBracketPartExit.getValue();
+        int mBracketPartNum = 0;
+        int mBracketPartExitNum = 0;
 
         int day = mDatePicker.getDayOfMonth();
         int month = mDatePicker.getMonth() + 1;
         int year = mDatePicker.getYear();
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(year+1900, month, day);
+        Date tournamentDate = cal.getTime();
+
+        if(areBrackets.isChecked()) {
+            mBracketPartNum = mBracketPart.getValue();
+            mBracketPartExitNum = mBracketPartExit.getValue();
+        }
+
+        Intent intent = new Intent(this, ParticipantAdderMainMatchPlayActivity.class);
+        intent.putExtra("tournamentName", mTourName.getText().toString());
+        intent.putExtra("tournamentCourse", mCourseName.getText().toString());
+        intent.putExtra("tournamentDate", tournamentDate);
+        intent.putExtra("areBrackets", areBrackets.isChecked());
+        intent.putExtra("bracketParticipants", mBracketPartNum);
+        intent.putExtra("bracketExits", mBracketPartExitNum);
 
         // Testing!
         Log.v("EditText", mTourName.getText().toString());
@@ -92,7 +116,6 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         Log.d("Bracket Part", ""+mBracketPartNum);
         Log.d("Bracket Exit", ""+mBracketPartExitNum);
 
-        Intent intent = new Intent(this, ParticipantAdderMainMatchPlayActivity.class);
         startActivity(intent);
     }
 }

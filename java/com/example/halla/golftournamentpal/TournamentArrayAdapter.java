@@ -1,10 +1,12 @@
 package com.example.halla.golftournamentpal;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.models.Tournament;
@@ -48,7 +50,13 @@ public class TournamentArrayAdapter extends ArrayAdapter<Tournament> {
         ((TextView)view.findViewById(R.id.tournament_name)).setText(tournament.getName());
         ((TextView)view.findViewById(R.id.tournament_course)).setText(tournament.getCourse());
         ((TextView)view.findViewById(R.id.tournament_date)).setText(tournament.getStartDate().toString());
-
+        view.findViewById(R.id.tournament_list_layout)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("logging from list", ((TextView)view.findViewById(R.id.tournament_name)).getText().toString());
+                    }
+                });
         return view;
     }
 }
