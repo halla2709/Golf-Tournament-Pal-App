@@ -85,6 +85,8 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         mCourseName = (EditText) findViewById(R.id.courseNameMP);
         mDatePicker = (DatePicker) findViewById(R.id.datePickerMatchPlay);
 
+        Log.i("LOGGEr", "loglolgo");
+
         int mBracketPartNum = 0;
         int mBracketPartExitNum = 0;
 
@@ -95,19 +97,12 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.set(year+1900, month, day);
         Date tournamentDate = cal.getTime();
+        String tournamentDateString = "" + day + " " + month + " " + year;
 
         if(areBrackets.isChecked()) {
             mBracketPartNum = mBracketPart.getValue();
             mBracketPartExitNum = mBracketPartExit.getValue();
         }
-
-        Intent intent = new Intent(this, ParticipantAdderMainMatchPlayActivity.class);
-        intent.putExtra("tournamentName", mTourName.getText().toString());
-        intent.putExtra("tournamentCourse", mCourseName.getText().toString());
-        intent.putExtra("tournamentDate", tournamentDate);
-        intent.putExtra("areBrackets", areBrackets.isChecked());
-        intent.putExtra("bracketParticipants", mBracketPartNum);
-        intent.putExtra("bracketExits", mBracketPartExitNum);
 
         // Testing!
         Log.v("EditText", mTourName.getText().toString());
@@ -115,7 +110,17 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         Log.d("Dagur", "value = " + day);
         Log.d("Bracket Part", ""+mBracketPartNum);
         Log.d("Bracket Exit", ""+mBracketPartExitNum);
+        Log.d("Date String", tournamentDateString);
 
-        startActivity(intent);
+        MatchPlayTournament tour = new MatchPlayTournament(mCourseName.getText().toString(),
+                mTourName.getText().toString(),
+                null,
+                tournamentDate,
+                areBrackets.isChecked(),
+                null, null);
+
+        Intent i = ParticipantAdderMainMatchPlayActivity.newIntent(MatchPlayCreatorActivity.this,
+                tour, mBracketPartNum, mBracketPartExitNum, tournamentDateString);
+        startActivity(i);
     }
 }
