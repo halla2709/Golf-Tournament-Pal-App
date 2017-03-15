@@ -25,7 +25,7 @@ import java.util.List;
 
 public class Networker {
 
-    String BASE_URL = "http://10.0.2.2:8080";
+    String BASE_URL = "http://192.168.0.106:8080";
     String TAG = "networker";
 
 

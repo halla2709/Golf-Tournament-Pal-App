@@ -108,7 +108,7 @@
     <string name="addParticipantText">Add participants to the tournament</string>
     <string name="handicapText">Handicap</string>
     <string name="handicapdot">Handicap:</string>
-    <string name="number">15.7</string>
+    <string name="number">0.0</string>
     <string name="socialText">Social-number</string>
     <string name="participantNameInput">Name</string>
     <string name="participantMail">E-mail</string>

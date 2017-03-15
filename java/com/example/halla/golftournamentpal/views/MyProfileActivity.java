@@ -1,6 +1,7 @@
 package com.example.halla.golftournamentpal.views;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -48,7 +49,6 @@ public class MyProfileActivity extends AppCompatActivity
         mGolferEmail = (TextView) findViewById(R.id.golferEmail);
         mHandicap = (EditText) findViewById(R.id.myHandicap);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -71,31 +71,30 @@ public class MyProfileActivity extends AppCompatActivity
         String mGolferString = mSessionManager.getSessionUserSocial().toString();
         if (mGolferString.length() != 10) {
             mGolferSocial.setText("0" + Long.toString(mSessionManager.getSessionUserSocial()));
-        }
-        else {
+        } else {
             mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
         }
 
 
-    this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
-    mHandicap.setOnKeyListener(new View.OnKeyListener() {
-        public boolean onKey(View view, int keyCode, KeyEvent event) {
-            // If the event is a key-down event on the "enter" button
-            if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                // Perform action on key press
-                // Here we have to insert updated hadicap into database
-                Log.v("EditText", mHandicap.getText().toString());
-                Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
-                return true;
-                //Þurfum að bæta við að það sé hægt að ýta á edit pennann líka til að breyta. Jafnvel töluna líka!!!!
+        mHandicap.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    // Here we have to insert updated hadicap into database
+                    Log.v("EditText", mHandicap.getText().toString());
+                    Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
             }
-            return false;
-        }
-    });
-}
+        });
+    }
+
 
     public void seefriends (View view){
         mCreateButton = (Button) findViewById(R.id.seefriendsbutton);

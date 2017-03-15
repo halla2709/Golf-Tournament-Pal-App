@@ -163,4 +163,28 @@ public class JsonParser {
     public static double doubleRounder(double toRound) {
         return (double) Math.round(toRound*10)/10;
     }
+
+    public static MatchPlayTournament parseMatchPlay(JSONObject matchplayJsonObject)
+            throws JSONException {
+        MatchPlayTournament matchPlayTournament = new MatchPlayTournament();
+
+        matchPlayTournament.setCourse(matchplayJsonObject.getString("course"));
+        matchPlayTournament.setName(matchplayJsonObject.getString("name"));
+        matchPlayTournament.setStartDate(new Date(matchplayJsonObject.getLong("startDate")));
+
+        JSONArray playersJsonArray = matchplayJsonObject.getJSONArray("players");
+        for (int j = 0; j < playersJsonArray.length(); j++) {
+            JSONObject playerJsonObject = playersJsonArray.getJSONObject(j);
+            Golfer golfer = JsonParser.parseGolfer(playerJsonObject);
+
+            matchPlayTournament.addPlayer(golfer);
+        }
+
+        matchPlayTournament.setAreBrackets(JsonParser.parseAreBrackets(matchplayJsonObject.getJSONArray("areBrackets")));
+        matchPlayTournament.setBrackets(matchplayJsonObject.parseBrackets("brackets"));
+        matchPlayTournament.setPlayOffs(JsonParser.parsePlayOffs(matchplayJsonObject.getJSONArray("playOffs")));
+        return matchPlayTournament;
+    }
+
+    public static parseBrackets()
 }

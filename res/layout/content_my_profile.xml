@@ -90,6 +90,7 @@
                 android:gravity="center"
                 android:hint="@string/number"
                 android:paddingTop="10dp"
+                android:paddingLeft="5dp"
                 android:textColorHint="@color/secondaryTextColor"
                 android:textSize="20sp"
                 android:id="@+id/myHandicap"
@@ -106,6 +107,7 @@
                 android:contentDescription="@string/editPen"
                 android:background="@drawable/background"
                 android:layout_marginLeft="10dp"
+                android:onClick="changehandicap"
                 />
 
         </LinearLayout>

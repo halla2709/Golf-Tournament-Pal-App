@@ -11,8 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.TournamentArrayAdapter;
+import com.example.halla.golftournamentpal.models.Tournament;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ScoreboardInfoActivity extends AppCompatActivity
@@ -20,6 +29,9 @@ public class ScoreboardInfoActivity extends AppCompatActivity
 
     private Button mCreateButton;
     private SessionManager mSessionManager;
+    private TextView mGolferName;
+    private TextView mGolferSocial;
+    private TextView mGolferHandicap;
 
     public void viewscoreboard (View view){
         // Button Listener
@@ -41,6 +53,11 @@ public class ScoreboardInfoActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        mGolferName = (TextView) findViewById(R.id.friendName);
+        mGolferSocial = (TextView) findViewById(R.id.friendSocial);
+        mGolferHandicap = (TextView) findViewById(R.id.friendHandicap);
+
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
