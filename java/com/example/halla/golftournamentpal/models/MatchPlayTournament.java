@@ -20,6 +20,9 @@ public class MatchPlayTournament extends Tournament {
         mPlayOffs = playOffs;
     }
 
+    public MatchPlayTournament() {
+    }
+
     public boolean isAreBrackets() {
         return mAreBrackets;
     }

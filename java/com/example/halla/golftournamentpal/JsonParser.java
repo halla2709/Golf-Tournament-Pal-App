@@ -2,8 +2,11 @@ package com.example.halla.golftournamentpal;
 
 import android.util.Log;
 
+import com.example.halla.golftournamentpal.models.Bracket;
 import com.example.halla.golftournamentpal.models.Golfer;
+import com.example.halla.golftournamentpal.models.Match;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+import com.example.halla.golftournamentpal.models.PlayOffTree;
 import com.example.halla.golftournamentpal.models.Round;
 import com.example.halla.golftournamentpal.models.ScoreboardTournament;
 import com.example.halla.golftournamentpal.models.Scorecard;
@@ -180,11 +183,62 @@ public class JsonParser {
             matchPlayTournament.addPlayer(golfer);
         }
 
-        matchPlayTournament.setAreBrackets(JsonParser.parseAreBrackets(matchplayJsonObject.getJSONArray("areBrackets")));
-        matchPlayTournament.setBrackets(matchplayJsonObject.parseBrackets("brackets"));
-        matchPlayTournament.setPlayOffs(JsonParser.parsePlayOffs(matchplayJsonObject.getJSONArray("playOffs")));
+        matchPlayTournament.setAreBrackets(matchplayJsonObject.getBoolean("areBrackets"));
+        //Ná í brackets :(
+        // matchPlayTournament.setBrackets();
+        //matchPlayTournament.setPlayOffs(JsonParser.parsePlayOffs(matchplayJsonObject.getJSONArray("playOffs")));
         return matchPlayTournament;
     }
 
-    public static parseBrackets()
+    public static Bracket parseBracket(JSONObject bracketJsonObject) throws JSONException {
+        Bracket bracket = new Bracket(null,null,"");
+
+        bracket.setName(bracketJsonObject.getString("name"));
+
+        Log.i("PARSEJSON", "parsing bracket" + bracket.getName());
+        JSONArray playersJsonArray = bracketJsonObject.getJSONArray("players");
+        for(int i = 0; i < playersJsonArray.length(); i++) {
+            JSONObject playersJsonObject = playersJsonArray.getJSONObject(i);
+            Golfer player = parseGolfer(playersJsonObject);
+
+            Log.i("PARSEJSON", "parsing player" + player.getName());
+        }
+
+        Log.i("PARSEJSON", "parsing bracket" + bracket.getName());
+        JSONArray matchesJsonArray = bracketJsonObject.getJSONArray("match");
+        for(int i = 0; i < matchesJsonArray.length(); i++) {
+            JSONObject matchJsonObject = matchesJsonArray.getJSONObject(i);
+            Match match = parseMatch(matchJsonObject);
+            Log.i("PARSEJSON", "parsing match" + match.getDate());
+        }
+
+        return bracket;
+    }
+
+    public static Match parseMatch(JSONObject matchJsonObject) throws JSONException {
+        Match match = new Match(null, "", null);
+
+        match.setResults(matchJsonObject.getString("results"));
+        match.setDate(new Date(matchJsonObject.getLong("date")));
+
+        Log.i("PARSEJSON", "parsing player in bracket");
+        JSONArray playersJsonArray = matchJsonObject.getJSONArray("players");
+        for(int i = 0; i < playersJsonArray.length(); i++) {
+            JSONObject playerJsonObject = playersJsonArray.getJSONObject(i);
+            Golfer player = parseGolfer(playerJsonObject);
+        }
+
+        return match;
+    }
+
+    /* public static PlayOffTree parsePlayOffs(JSONArray playofftreeJsonObject){
+
+        rounds
+                matches
+                players[]
+        results
+                        date
+                                round int
+
+    }*/
 }
