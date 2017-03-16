@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,11 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
     private DatePicker mDatePicker;
     private SessionManager mSessionManager;
 
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, ScoreboardCreatorActivity.class);
+        return i;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +45,8 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
 
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
+            Intent i = LogInActivity.newIntent(ScoreboardCreatorActivity.this);
+            startActivity(i);
         }
     }
 
@@ -64,8 +70,8 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         Log.d("Dagur", "value = " + day);
         Log.d("Rounds", ""+mNumberOfRounds.getValue());
 
-        Intent intent = new Intent(this, ParticipantAdderMainScoreboardActivity.class);
-        startActivity(intent);
+        Intent i = ParticipantAdderMainScoreboardActivity.newIntent(ScoreboardCreatorActivity.this);
+        startActivity(i);
     }
 }
 

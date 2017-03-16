@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.os.AsyncTask;
@@ -38,6 +39,11 @@ public class MyProfileActivity extends AppCompatActivity
     private SessionManager mSessionManager;
     private EditText mHandicap;
 
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, MyProfileActivity.class);
+        return i;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +66,8 @@ public class MyProfileActivity extends AppCompatActivity
 
         mSessionManager = new SessionManager(getApplicationContext());
         if (mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
+            Intent i = LogInActivity.newIntent(MyProfileActivity.this);
+            startActivity(i);
         }
 
         mGolferName.setText(mSessionManager.getSessionUserName());
@@ -99,23 +105,23 @@ public class MyProfileActivity extends AppCompatActivity
     public void seefriends (View view){
         mCreateButton = (Button) findViewById(R.id.seefriendsbutton);
 
-        Intent intent = new Intent(this, MyFriendsActivity.class);
-        startActivity(intent);
+        Intent i = MyFriendsActivity.newIntent(MyProfileActivity.this);
+        startActivity(i);
     }
 
     public void seetournaments (View view){
         mCreateButton = (Button) findViewById(R.id.seetournamentsbutton);
 
-        Intent intent = new Intent(this, MyTournamentsActivity.class);
-        startActivity(intent);
+        Intent i = MyTournamentsActivity.newIntent(MyProfileActivity.this);
+        startActivity(i);
     }
 
     public void logOut(View view) {
         mSessionManager = new SessionManager(getApplicationContext());
         mSessionManager.endSession();
 
-        Intent intent = new Intent(this, LogInActivity.class);
-        startActivity(intent);
+        Intent i = LogInActivity.newIntent(MyProfileActivity.this);
+        startActivity(i);
     }
 
     @Override
@@ -135,25 +141,24 @@ public class MyProfileActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_createTournament) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+            Intent i = HomeActivity.newIntent(MyProfileActivity.this);
+            startActivity(i);
 
         } else if (id == R.id.nav_myprofile) {
-            Intent intent = new Intent(this, MyProfileActivity.class);
-            startActivity(intent);
+            Intent n = MyProfileActivity.newIntent(MyProfileActivity.this);
+            startActivity(n);
 
         } else if (id == R.id.nav_mytournaments) {
-            Intent intent = new Intent(this, MyTournamentsActivity.class);
-            startActivity(intent);
+            Intent m = MyTournamentsActivity.newIntent(MyProfileActivity.this);
+            startActivity(m);
 
         } else if (id == R.id.nav_myfriends) {
-            Intent intent = new Intent(this, MyFriendsActivity.class);
-            startActivity(intent);
+            Intent s = MyFriendsActivity.newIntent(MyProfileActivity.this);
+            startActivity(s);
 
         } else if (id == R.id.nav_search) {
-            Intent intent = new Intent(this, ResultsActivity.class);
-            startActivity(intent);
-
+            Intent r = ResultsActivity.newIntent(MyProfileActivity.this);
+            startActivity(r);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

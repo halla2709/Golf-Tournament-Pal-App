@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,6 +35,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Golfer mNewGolfer;
     private User mNewUser;
+
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, RegisterActivity.class);
+        return i;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Intent intent = new Intent(this, LogInActivity.class);
-        startActivity(intent);
+        Intent i = LogInActivity.newIntent(RegisterActivity.this);
+        startActivity(i);
     }
 
     private class RegisterTask extends AsyncTask<Void, Void, Golfer> {

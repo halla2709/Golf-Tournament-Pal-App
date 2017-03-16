@@ -1,6 +1,7 @@
 package com.example.halla.golftournamentpal.views;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +32,11 @@ public class ResultsActivity extends AppCompatActivity
     private ListView mListView;
     private TournamentArrayAdapter mAdapter;
 
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, ResultsActivity.class);
+        return i;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +61,8 @@ public class ResultsActivity extends AppCompatActivity
 
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
+            Intent i = LogInActivity.newIntent(ResultsActivity.this);
+            startActivity(i);
         }
 
         //Trying to get Search to work
@@ -87,25 +93,24 @@ public class ResultsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_createTournament) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+            Intent i = HomeActivity.newIntent(ResultsActivity.this);
+            startActivity(i);
 
         } else if (id == R.id.nav_myprofile) {
-            Intent intent = new Intent(this, MyProfileActivity.class);
-            startActivity(intent);
+            Intent n = MyProfileActivity.newIntent(ResultsActivity.this);
+            startActivity(n);
 
         } else if (id == R.id.nav_mytournaments) {
-            Intent intent = new Intent(this, MyTournamentsActivity.class);
-            startActivity(intent);
+            Intent m = MyTournamentsActivity.newIntent(ResultsActivity.this);
+            startActivity(m);
 
         } else if (id == R.id.nav_myfriends) {
-            Intent intent = new Intent(this, MyFriendsActivity.class);
-            startActivity(intent);
+            Intent s = MyFriendsActivity.newIntent(ResultsActivity.this);
+            startActivity(s);
 
         } else if (id == R.id.nav_search) {
-            Intent intent = new Intent(this, ResultsActivity.class);
-            startActivity(intent);
-
+            Intent r = ResultsActivity.newIntent(ResultsActivity.this);
+            startActivity(r);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

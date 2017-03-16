@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -32,11 +33,17 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     private Button mCreateButton;
+
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, ParticipantAdderMainScoreboardActivity.class);
+        return i;
+    }
+
     public void gotonext (View view){
         mCreateButton = (Button) findViewById(R.id.nextStepParticipant);
 
-        Intent intent = new Intent(this, ScoreboardInfoActivity.class);
-        startActivity(intent);
+        Intent i = ScoreboardInfoActivity.newIntent(ParticipantAdderMainScoreboardActivity.this);
+        startActivity(i);
     }
 
     public void addparticipant (View view){
@@ -66,8 +73,8 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity {
 
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
+            Intent i = LogInActivity.newIntent(ParticipantAdderMainScoreboardActivity.this);
+            startActivity(i);
         }
 
     }

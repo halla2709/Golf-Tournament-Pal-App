@@ -17,8 +17,8 @@ public class ScoreInputViewActivity extends AppCompatActivity {
     public void save (View view){
         mCreateButton = (Button) findViewById(R.id.savebutton);
 
-        Intent intent = new Intent(this, ScoreboardActivity.class);
-        startActivity(intent);
+        Intent i = ScoreboardActivity.newIntent(ScoreInputViewActivity.this);
+        startActivity(i);
     }
 
     @Override
@@ -28,8 +28,8 @@ public class ScoreInputViewActivity extends AppCompatActivity {
 
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
+            Intent i = LogInActivity.newIntent(ScoreInputViewActivity.this);
+            startActivity(i);
         }
     }
 }

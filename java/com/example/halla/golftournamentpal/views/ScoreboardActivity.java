@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,11 @@ public class ScoreboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SessionManager mSessionManager;
+
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, ScoreboardActivity.class);
+        return i;
+    }
 
     //When Inputting scores: go to ScoreInputViewActivity
 
@@ -37,9 +43,9 @@ public class ScoreboardActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mSessionManager = new SessionManager(getApplicationContext());
-        if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
+        if (mSessionManager.getSessionUserSocial() == 0) {
+            Intent i = LogInActivity.newIntent(ScoreboardActivity.this);
+            startActivity(i);
         }
     }
 
@@ -60,26 +66,26 @@ public class ScoreboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_createTournament) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+        if(id == R.id.nav_createTournament) {
+            Intent i = HomeActivity.newIntent(ScoreboardActivity.this);
+            startActivity(i);
 
-        } else if (id == R.id.nav_myprofile) {
-            Intent intent = new Intent(this, MyProfileActivity.class);
-            startActivity(intent);
+
+        } else if(id == R.id.nav_myprofile) {
+            Intent n = MyProfileActivity.newIntent(ScoreboardActivity.this);
+            startActivity(n);
 
         } else if (id == R.id.nav_mytournaments) {
-            Intent intent = new Intent(this, MyTournamentsActivity.class);
-            startActivity(intent);
+            Intent m = MyTournamentsActivity.newIntent(ScoreboardActivity.this);
+            startActivity(m);
 
         } else if (id == R.id.nav_myfriends) {
-            Intent intent = new Intent(this, MyFriendsActivity.class);
-            startActivity(intent);
+            Intent s = MyFriendsActivity.newIntent(ScoreboardActivity.this);
+            startActivity(s);
 
         } else if (id == R.id.nav_search) {
-            Intent intent = new Intent(this, ResultsActivity.class);
-            startActivity(intent);
-
+            Intent a = ResultsActivity.newIntent(ScoreboardActivity.this);
+            startActivity(a);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

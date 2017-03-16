@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.Bracket;
 
 public class BracketsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,12 +23,17 @@ public class BracketsActivity extends AppCompatActivity
     private Button mCreateButton;
     private SessionManager mSessionManager;
 
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, BracketsActivity.class);
+        return i;
+    }
+
     public void goBack (View view){
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.backBracketButton);
 
-        Intent intent = new Intent(this, MatchPlayInfoActivity.class);
-        startActivity(intent);
+        //Intent i = MatchPlayInfoActivity.newIntent(BracketsActivity.this);
+        // startActivity(i);
     }
 
     @Override
@@ -46,9 +53,9 @@ public class BracketsActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mSessionManager = new SessionManager(getApplicationContext());
-        if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
+        if (mSessionManager.getSessionUserSocial() == 0) {
+            Intent i = LogInActivity.newIntent(BracketsActivity.this);
+            startActivity(i);
         }
     }
 
@@ -70,24 +77,24 @@ public class BracketsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_createTournament) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+            Intent i = HomeActivity.newIntent(BracketsActivity.this);
+            startActivity(i);
 
         } else if (id == R.id.nav_myprofile) {
-            Intent intent = new Intent(this, MyProfileActivity.class);
-            startActivity(intent);
+            Intent s = MyProfileActivity.newIntent(BracketsActivity.this);
+            startActivity(s);
 
         } else if (id == R.id.nav_mytournaments) {
-            Intent intent = new Intent(this, MyTournamentsActivity.class);
-            startActivity(intent);
+            Intent n = MyTournamentsActivity.newIntent(BracketsActivity.this);
+            startActivity(n);
 
         } else if (id == R.id.nav_myfriends) {
-            Intent intent = new Intent(this, MyFriendsActivity.class);
-            startActivity(intent);
+            Intent m = MyFriendsActivity.newIntent(BracketsActivity.this);
+            startActivity(m);
 
         } else if (id == R.id.nav_search) {
-            Intent intent = new Intent(this, ResultsActivity.class);
-            startActivity(intent);
+            Intent r = ResultsActivity.newIntent(BracketsActivity.this);
+            startActivity(r);
 
         }
 

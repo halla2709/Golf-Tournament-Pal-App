@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -19,14 +20,19 @@ public class HomeActivity extends AppCompatActivity
 
     private SessionManager mSessionManager;
 
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, HomeActivity.class);
+        return i;
+    }
+
     public void createMatchPlayTournament(View view){
-        Intent intent = new Intent(this, MatchPlayCreatorActivity.class);
-        startActivity(intent);
+       // Intent i = MatchPlayCreatorActivity.newIntent(HomeActivity.this);
+        //startActivity(i);
     }
 
     public void createScoreboardTournament(View view){
-        Intent intent = new Intent(this, ScoreboardCreatorActivity.class);
-        startActivity(intent);
+        Intent i = ScoreboardCreatorActivity.newIntent(HomeActivity.this);
+        startActivity(i);
     }
 
     @Override
@@ -47,8 +53,8 @@ public class HomeActivity extends AppCompatActivity
 
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
+            Intent i = LogInActivity.newIntent(HomeActivity.this);
+            startActivity(i);
         }
     }
 
@@ -69,24 +75,24 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_createTournament) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+            Intent i = HomeActivity.newIntent(HomeActivity.this);
+            startActivity(i);
 
         } else if (id == R.id.nav_myprofile) {
-            Intent intent = new Intent(this, MyProfileActivity.class);
-            startActivity(intent);
+            Intent n = MyProfileActivity.newIntent(HomeActivity.this);
+            startActivity(n);
 
         } else if (id == R.id.nav_mytournaments) {
-            Intent intent = new Intent(this, MyTournamentsActivity.class);
-            startActivity(intent);
+            Intent m = MyTournamentsActivity.newIntent(HomeActivity.this);
+            startActivity(m);
 
         } else if (id == R.id.nav_myfriends) {
-            Intent intent = new Intent(this, MyFriendsActivity.class);
-            startActivity(intent);
+            Intent s = MyFriendsActivity.newIntent(HomeActivity.this);
+            startActivity(s);
 
         } else if (id == R.id.nav_search) {
-            Intent intent = new Intent(this, ResultsActivity.class);
-            startActivity(intent);
+            Intent r = ResultsActivity.newIntent(HomeActivity.this);
+            startActivity(r);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
