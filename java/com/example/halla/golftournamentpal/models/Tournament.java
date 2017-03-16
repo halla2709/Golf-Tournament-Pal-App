@@ -23,7 +23,12 @@ public class Tournament {
     public Tournament(String course, String name, List<Golfer> players, Date startDate) {
         mCourse = course;
         mName = name;
-        mPlayers = players;
+        if(players == null) {
+            mPlayers = new ArrayList<>();
+        }
+        else {
+            mPlayers = players;
+        }
         mStartDate = startDate;
     }
 
@@ -59,7 +64,7 @@ public class Tournament {
         mStartDate = startDate;
     }
 
-    public  void addPlayer(Golfer golfer) {
+    public void addPlayer(Golfer golfer) {
         mPlayers.add(golfer);
     }
 }

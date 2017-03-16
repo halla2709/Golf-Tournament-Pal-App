@@ -4,17 +4,23 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.example.halla.golftournamentpal.models.Golfer;
+import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 import com.example.halla.golftournamentpal.models.Tournament;
 import com.example.halla.golftournamentpal.models.User;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +62,50 @@ public class Networker {
     public String getUrlString(String urlSpec) throws IOException {
         return new String(getUrlBytes(urlSpec));
     }
+/*
+    public String postTournament(String urlSpec, String tournamentJSON) {
+        OutputStream os;
+        HttpURLConnection conn;
+        try {
+            //constants
+            URL url = new URL(urlSpec);
 
+            conn = (HttpURLConnection) url.openConnection();
+            //conn.setReadTimeout( 10000 /*milliseconds*/ /*);
+            //conn.setConnectTimeout( 15000 /* milliseconds */ /*);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            conn.setFixedLengthStreamingMode(tournamentJSON.getBytes().length);
+
+            //make some HTTP header nicety
+            conn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
+            conn.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+
+            //open
+            conn.connect();
+
+            //setup send
+            os = new BufferedOutputStream(conn.getOutputStream());
+            os.write(tournamentJSON.getBytes());
+            //clean up
+            os.flush();
+
+            //do somehting with response
+            return os.toString();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //clean up
+            os.close();
+            conn.disconnect();
+        }
+    }
+*/
     public List<Tournament> fetchTournaments() {
         List<Tournament> tournaments = new ArrayList<>();
         try {
@@ -143,19 +192,7 @@ public class Networker {
 
 
     public Golfer registerGolfer(User userinfo, Golfer golfer) {
-        /*Tournament testtourn = new Tournament("GRABBI", "HALLA", null, new Date());
-        Gson gson = new Gson();
-        String jsontestString = gson.toJson(testtourn);
 
-        Log.e("logloglog", jsontestString);
-
-
-        String testurl = Uri.parse(BASE_URL+"/json/tournament/2")
-                .buildUpon()
-                .appendQueryParameter("nafn", "Halla")
-                .build()
-                .toString();
-        Log.e("logloglog", testurl);*/
         Golfer newgolfer = new Golfer();
         try {
             String url = Uri.parse(BASE_URL+"/json/registerUser")
@@ -178,5 +215,13 @@ public class Networker {
             e.printStackTrace();
         }
         return newgolfer;
+    }
+
+    public void sendMatchPlayTournament(MatchPlayTournament tournament) {
+        Gson gson = new Gson();
+        String tournamentJsonString = gson.toJson(tournament);
+
+        String url = BASE_URL + "/json/matchplay";
+
     }
 }

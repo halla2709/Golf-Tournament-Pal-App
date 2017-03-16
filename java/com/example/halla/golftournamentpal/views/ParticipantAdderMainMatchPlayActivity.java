@@ -15,12 +15,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.Golfer;
+import com.example.halla.golftournamentpal.models.Match;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,7 +33,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
-        implements ParticipantTab1MatchPlayActivity.FriendPasser{
+        implements ParticipantTab1MatchPlayActivity.FriendPasser,
+        ParticipantTab2MatchPlayActivity.GolferPasser{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -123,18 +127,32 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
     public void gotonext (View view){
         mCreateButton = (Button) findViewById(R.id.nextStepParticipant);
 
+        SaveTournamentTask task = new SaveTournamentTask();
+        task.execute();
+
         Intent intent = new Intent(this, MatchPlayInfoActivity.class);
         startActivity(intent);
     }
 
-    public void addParticipant (Golfer golfer){
-        //Hér kemur virkni fyrir að bæta við participant
-        return;
+    public void participantAdded (View view){
+
+        String golfername = ((EditText) findViewById(R.id.participantNameInput)).getText().toString();
+        String golfermail = ((EditText) findViewById(R.id.participantMail)).getText().toString();
+        Long golferSocial = (Long.parseLong(((EditText) findViewById(R.id.participantSocialNumber)).getText().toString()));
+        double golferhandicap = (Double.parseDouble(((EditText) findViewById(R.id.participantHandicap)).getText().toString()));
+        if(golfername != null && golfermail != null && golferSocial != 0)
+            newTournament.addPlayer(new Golfer(golfername, golferSocial, golferhandicap, golfermail, null));
+
+        ((EditText) findViewById(R.id.participantNameInput)).setText("");
+        ((EditText) findViewById(R.id.participantMail)).setText("");
+        ((EditText) findViewById(R.id.participantSocialNumber)).setText("");
+        ((EditText) findViewById(R.id.participantHandicap)).setText("");
+
     }
 
     @Override
     public void friendClicked(Golfer golfer) {
-        addParticipant(golfer);
+        newTournament.addPlayer(golfer);
     }
 
     @Override
@@ -149,10 +167,15 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            Log.d("VINARGL", ""+friends.size());
             return friends;
         }
         return friends;
+    }
+
+    @Override
+    public List<Golfer> getParticipants() {
+        Log.i("From main", "Getting participants " + newTournament.getPlayers().size());
+        return newTournament.getPlayers();
     }
 
 
@@ -218,6 +241,30 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(Golfer golfer) {
             super.onPostExecute(golfer);
+            Log.i("TAGG", "Done");
+
+        }
+    }
+
+    private class SaveTournamentTask extends AsyncTask<Void, Void, MatchPlayTournament> {
+
+        @Override
+        protected MatchPlayTournament doInBackground(Void... params) {
+            Log.i("TAGG", "Fetching...");
+            new Networker().sendMatchPlayTournament(newTournament);
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("TAGG", "Going to fetch...");
+        }
+
+        @Override
+        protected void onPostExecute(MatchPlayTournament tournament) {
+            super.onPostExecute(tournament);
             Log.i("TAGG", "Done");
 
         }

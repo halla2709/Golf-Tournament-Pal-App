@@ -3,7 +3,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:tools="http://schemas.android.com/tools"
                   android:id="@+id/activity_match_play_creator"
@@ -70,26 +69,10 @@
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="20sp"/>
 
-            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:stretchColumns="*">
-
-                <TableRow
-                    android:background="@color/colorPrimaryDark"
-                    android:textColor="@color/buttonTextColor">
-
-                    <TextView
-                        android:padding="3dip"
-                        android:text="@string/nametable"
-                        android:textColor="@color/buttonTextColor"/>
-
-                    <TextView
-                        android:padding="3dip"
-                        android:text="@string/handicaptable"
-                        android:textColor="@color/buttonTextColor"/>
-                </TableRow>
-            </TableLayout>
+            <ListView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/participants_list"></ListView>
 
             <Button
                 android:id="@+id/nextStepParticipant"
