@@ -22,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,8 @@ import java.util.List;
 
 public class Networker {
 
-    String BASE_URL = "http://192.168.0.106:8080";
+    //String BASE_URL = "http://192.168.0.106:8080";
+    String BASE_URL = "http://10.0.2.2:8080";
     String TAG = "networker";
 
 
@@ -62,50 +64,50 @@ public class Networker {
     public String getUrlString(String urlSpec) throws IOException {
         return new String(getUrlBytes(urlSpec));
     }
-/*
-    public String postTournament(String urlSpec, String tournamentJSON) {
-        OutputStream os;
-        HttpURLConnection conn;
+
+    public String postTournamentBytes(String urlSpec, String tournamentJSON) throws IOException {
+        URL url = null;
+        String charset = "UTF-8";
         try {
-            //constants
-            URL url = new URL(urlSpec);
-
-            conn = (HttpURLConnection) url.openConnection();
-            //conn.setReadTimeout( 10000 /*milliseconds*/ /*);
-            //conn.setConnectTimeout( 15000 /* milliseconds */ /*);
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            conn.setFixedLengthStreamingMode(tournamentJSON.getBytes().length);
-
-            //make some HTTP header nicety
-            conn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-            conn.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-
-            //open
-            conn.connect();
-
-            //setup send
-            os = new BufferedOutputStream(conn.getOutputStream());
-            os.write(tournamentJSON.getBytes());
-            //clean up
-            os.flush();
-
-            //do somehting with response
-            return os.toString();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
+            url = new URL(urlSpec);
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            //clean up
-            os.close();
-            conn.disconnect();
+        }
+        URLConnection con = url.openConnection();
+        HttpURLConnection http = (HttpURLConnection)con;
+        http.setRequestMethod("POST"); // PUT is another valid option
+        http.setDoOutput(true);
+
+        http.setRequestProperty("Accept-Charset", charset);
+        http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=" + charset);
+
+        try {
+            OutputStream out = http.getOutputStream();
+
+
+            out.write(tournamentJSON.getBytes(charset));
+            InputStream in = http.getInputStream();
+
+            if(http.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new IOException(http.getResponseCode() + ": with " + urlSpec);
+            }
+
+            int bytesRead = 0;
+            byte[] buffer = new byte[1024];
+            while((bytesRead = in.read(buffer)) > 0) {
+                out.write(buffer, 0, bytesRead);
+            }
+            out.close();
+            return out.toString();
+        }   finally {
+            http.disconnect();
         }
     }
-*/
+
+    public String postTournamentString(String urlSpec, String tournamentString) throws IOException {
+        return new String(postTournamentBytes(urlSpec, tournamentString));
+    }
+
     public List<Tournament> fetchTournaments() {
         List<Tournament> tournaments = new ArrayList<>();
         try {
@@ -217,11 +219,23 @@ public class Networker {
         return newgolfer;
     }
 
-    public void sendMatchPlayTournament(MatchPlayTournament tournament) {
+    public MatchPlayTournament sendMatchPlayTournament(MatchPlayTournament tournament) {
         Gson gson = new Gson();
+        MatchPlayTournament createdTournament = null;
         String tournamentJsonString = gson.toJson(tournament);
-
         String url = BASE_URL + "/json/matchplay";
 
+        try {
+            Log.i(TAG, "Sending tournament to " + url);
+            String createdTournamentString = postTournamentString(url, tournamentJsonString);
+            JSONObject tournamentJson = new JSONObject(createdTournamentString);
+            createdTournament = JsonParser.parseMatchPlay(tournamentJson);
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to send item ", e);
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return createdTournament;
     }
 }

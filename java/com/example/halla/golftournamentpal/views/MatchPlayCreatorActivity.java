@@ -1,5 +1,6 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,11 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
     private SessionManager mSessionManager;
     private CheckBox areBrackets;
 
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, MatchPlayCreatorActivity.class);
+        return i;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +58,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
 
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
+            Intent intent = LogInActivity.newIntent(MatchPlayCreatorActivity.this);
             startActivity(intent);
         }
 

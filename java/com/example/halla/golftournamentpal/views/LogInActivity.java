@@ -12,10 +12,11 @@ import android.widget.Toast;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.User;
+/*
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient;*/
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -27,7 +28,7 @@ public class LogInActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+    //private GoogleApiClient client;
 
     public static Intent newIntent(Context packageContext) {
         Intent i = new Intent(packageContext, LogInActivity.class);
@@ -76,13 +77,13 @@ public class LogInActivity extends AppCompatActivity {
         }
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+     *
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("LogIn Page") // TODO: Define a title for the content shown.
@@ -113,5 +114,5 @@ public class LogInActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
-    }
+    }*/
 }

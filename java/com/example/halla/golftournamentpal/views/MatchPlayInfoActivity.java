@@ -1,7 +1,9 @@
 package com.example.halla.golftournamentpal.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 
 public class MatchPlayInfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,20 +26,10 @@ public class MatchPlayInfoActivity extends AppCompatActivity
     private Button mCreateButton;
     private SessionManager mSessionManager;
 
-    public void goToPlayOfftree (View view){
-        // Button Listener
-        mCreateButton = (Button) findViewById(R.id.viewbPlayOffTree);
-
-        Intent intent = new Intent(this, PlayOffTreeActivity.class);
-        startActivity(intent);
-    }
-
-    public void goToBracket(View view){
-        // Button Listener
-        mCreateButton = (Button) findViewById(R.id.viewBracket);
-
-        Intent intent = new Intent(this, BracketsActivity.class);
-        startActivity(intent);
+    public static Intent newIntent(Context packageContext, MatchPlayTournament tournament) {
+        Intent i = new Intent(packageContext, MatchPlayInfoActivity.class);
+        Log.i("From infoscreen", tournament.getName());
+        return i;
     }
 
     @Override
@@ -61,6 +54,24 @@ public class MatchPlayInfoActivity extends AppCompatActivity
             startActivity(intent);
         }
     }
+
+    public void goToPlayOfftree (View view){
+        // Button Listener
+        mCreateButton = (Button) findViewById(R.id.viewbPlayOffTree);
+
+        Intent intent = new Intent(this, PlayOffTreeActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToBracket(View view){
+        // Button Listener
+        mCreateButton = (Button) findViewById(R.id.viewBracket);
+
+        Intent intent = new Intent(this, BracketsActivity.class);
+        startActivity(intent);
+    }
+
+
 
     @Override
     public void onBackPressed() {

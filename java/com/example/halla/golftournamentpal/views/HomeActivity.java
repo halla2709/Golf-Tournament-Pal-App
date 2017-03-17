@@ -26,8 +26,8 @@ public class HomeActivity extends AppCompatActivity
     }
 
     public void createMatchPlayTournament(View view){
-       // Intent i = MatchPlayCreatorActivity.newIntent(HomeActivity.this);
-        //startActivity(i);
+        Intent i = MatchPlayCreatorActivity.newIntent(HomeActivity.this);
+        startActivity(i);
     }
 
     public void createScoreboardTournament(View view){

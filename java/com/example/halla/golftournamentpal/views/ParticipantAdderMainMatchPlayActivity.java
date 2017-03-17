@@ -86,7 +86,7 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
+            Intent intent = LogInActivity.newIntent(ParticipantAdderMainMatchPlayActivity.this);
             startActivity(intent);
         }
         else {
@@ -129,9 +129,14 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
         SaveTournamentTask task = new SaveTournamentTask();
         task.execute();
+        try {
+            task.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
-        Intent intent = new Intent(this, MatchPlayInfoActivity.class);
-        startActivity(intent);
     }
 
     public void participantAdded (View view){
@@ -251,9 +256,8 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         @Override
         protected MatchPlayTournament doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            new Networker().sendMatchPlayTournament(newTournament);
+            return new Networker().sendMatchPlayTournament(newTournament);
 
-            return null;
         }
 
         @Override
@@ -265,6 +269,9 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(MatchPlayTournament tournament) {
             super.onPostExecute(tournament);
+            Intent intent = MatchPlayInfoActivity.newIntent(ParticipantAdderMainMatchPlayActivity.this,
+                    tournament);
+            startActivity(intent);
             Log.i("TAGG", "Done");
 
         }
