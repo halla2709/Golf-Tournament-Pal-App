@@ -6,6 +6,7 @@ import com.example.halla.golftournamentpal.models.Bracket;
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.Match;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+import com.example.halla.golftournamentpal.models.PlayOffRound;
 import com.example.halla.golftournamentpal.models.PlayOffTree;
 import com.example.halla.golftournamentpal.models.Round;
 import com.example.halla.golftournamentpal.models.ScoreboardTournament;
@@ -54,20 +55,22 @@ public class JsonParser {
         golfer.setHandicap(playerJsonObject.getDouble("handicap"));
 
         Log.i("PARSEJSON", "parsing golfer" + golfer.getName());
-        JSONArray friendsJsonArray = playerJsonObject.getJSONArray("friends");
-        for(int i = 0; i < friendsJsonArray.length(); i++) {
-            JSONObject friendJsonObject = friendsJsonArray.getJSONObject(i);
-            Golfer friend = new Golfer();
 
-            friend.setName(friendJsonObject.getString("name"));
-            friend.setEmail(friendJsonObject.getString("email"));
-            friend.setSocial(friendJsonObject.getLong("social"));
-            friend.setHandicap(friendJsonObject.getDouble("handicap"));
+        if(!playerJsonObject.isNull("friends")) {
+            JSONArray friendsJsonArray = playerJsonObject.getJSONArray("friends");
+            for (int i = 0; i < friendsJsonArray.length(); i++) {
+                JSONObject friendJsonObject = friendsJsonArray.getJSONObject(i);
+                Golfer friend = new Golfer();
 
-            Log.i("PARSEJSON", "parsing golfer" + friend.getName());
-            golfer.addFriend(friend);
+                friend.setName(friendJsonObject.getString("name"));
+                friend.setEmail(friendJsonObject.getString("email"));
+                friend.setSocial(friendJsonObject.getLong("social"));
+                friend.setHandicap(friendJsonObject.getDouble("handicap"));
+
+                Log.i("PARSEJSON", "parsing golfer" + friend.getName());
+                golfer.addFriend(friend);
+            }
         }
-
         return golfer;
     }
 
@@ -184,9 +187,18 @@ public class JsonParser {
         }
 
         matchPlayTournament.setAreBrackets(matchplayJsonObject.getBoolean("areBrackets"));
-        //Ná í brackets :(
-        // matchPlayTournament.setBrackets();
-        //matchPlayTournament.setPlayOffs(JsonParser.parsePlayOffs(matchplayJsonObject.getJSONArray("playOffs")));
+        JSONArray bracketsJsonArray = matchplayJsonObject.getJSONArray("brackets");
+        List<Bracket> brackets = new ArrayList<>();
+        if(matchPlayTournament.isAreBrackets()) {
+
+            for(int i = 0; i < bracketsJsonArray.length(); i++) {
+                JSONObject bracketJsonObject = bracketsJsonArray.getJSONObject(i);
+                Bracket bracket = parseBracket(bracketJsonObject);
+                brackets.add(bracket);
+            }
+        }
+        matchPlayTournament.setBrackets(brackets);
+        matchPlayTournament.setPlayOffs(JsonParser.parsePlayOffs(matchplayJsonObject.getJSONObject("playOffs")));
         return matchPlayTournament;
     }
 
@@ -197,20 +209,24 @@ public class JsonParser {
 
         Log.i("PARSEJSON", "parsing bracket" + bracket.getName());
         JSONArray playersJsonArray = bracketJsonObject.getJSONArray("players");
+        List<Golfer> players = new ArrayList<>();
         for(int i = 0; i < playersJsonArray.length(); i++) {
             JSONObject playersJsonObject = playersJsonArray.getJSONObject(i);
             Golfer player = parseGolfer(playersJsonObject);
-
+            players.add(player);
             Log.i("PARSEJSON", "parsing player" + player.getName());
         }
-
+        bracket.setPlayers(players);
         Log.i("PARSEJSON", "parsing bracket" + bracket.getName());
         JSONArray matchesJsonArray = bracketJsonObject.getJSONArray("match");
+        List<Match> matches = new ArrayList<>();
         for(int i = 0; i < matchesJsonArray.length(); i++) {
             JSONObject matchJsonObject = matchesJsonArray.getJSONObject(i);
             Match match = parseMatch(matchJsonObject);
             Log.i("PARSEJSON", "parsing match" + match.getDate());
+            matches.add(match);
         }
+        bracket.setMatch(matches);
 
         return bracket;
     }
@@ -218,27 +234,68 @@ public class JsonParser {
     public static Match parseMatch(JSONObject matchJsonObject) throws JSONException {
         Match match = new Match(null, "", null);
 
-        match.setResults(matchJsonObject.getString("results"));
-        match.setDate(new Date(matchJsonObject.getLong("date")));
+        if(!matchJsonObject.isNull("results"))
+            match.setResults(matchJsonObject.getString("results"));
+        if(!matchJsonObject.isNull("date"))
+            match.setDate(new Date(matchJsonObject.getLong("date")));
 
         Log.i("PARSEJSON", "parsing player in bracket");
         JSONArray playersJsonArray = matchJsonObject.getJSONArray("players");
+        List<Golfer> players = new ArrayList<>();
         for(int i = 0; i < playersJsonArray.length(); i++) {
             JSONObject playerJsonObject = playersJsonArray.getJSONObject(i);
             Golfer player = parseGolfer(playerJsonObject);
+            players.add(player);
         }
+
+        match.setPlayers(players);
 
         return match;
     }
 
-    /* public static PlayOffTree parsePlayOffs(JSONArray playofftreeJsonObject){
+    public static PlayOffTree parsePlayOffs(JSONObject playofftreeJsonObject) throws JSONException {
 
-        rounds
-                matches
-                players[]
-        results
-                        date
-                                round int
+        PlayOffTree tree = new PlayOffTree(null);
+        JSONArray roundsJsonArray = playofftreeJsonObject.getJSONArray("rounds");
+        List<PlayOffRound> rounds = new ArrayList<>();
+        for(int i = 0; i < roundsJsonArray.length(); i++) {
+            JSONObject roundJsonObject = roundsJsonArray.getJSONObject(i);
+            PlayOffRound round = new PlayOffRound(0, null);
+            JSONArray matchesJsonArray = roundJsonObject.getJSONArray("matches");
+            List<Match> matches = new ArrayList<>();
+            for(int j = 0; j < matchesJsonArray.length(); j++) {
+                Match match = parseMatch(matchesJsonArray.getJSONObject(j));
+                matches.add(match);
+            }
+            round.setMatches(matches);
+            round.setRound(roundJsonObject.getInt("round"));
+        }
 
-    }*/
+        tree.setRounds(rounds);
+        return tree;
+    }
+
+    public static String matchPlayTournamentToString(MatchPlayTournament matchPlayTournament) throws JSONException {
+        JSONObject tournamentObject = new JSONObject();
+        tournamentObject.put("course", matchPlayTournament.getCourse());
+        tournamentObject.put("name", matchPlayTournament.getName());
+        tournamentObject.put("startDate", matchPlayTournament.getStartDate().toString());
+        tournamentObject.put("areBrackets", matchPlayTournament.isAreBrackets());
+
+        JSONArray playersJsonArray = new JSONArray();
+        for(int i = 0; i < matchPlayTournament.getPlayers().size(); i++) {
+            playersJsonArray.put(golferToString(matchPlayTournament.getPlayers().get(i)));
+        }
+        tournamentObject.put("players", playersJsonArray);
+        return tournamentObject.toString();
+    }
+
+    public static JSONObject golferToString(Golfer golfer) throws JSONException {
+        JSONObject golferObject = new JSONObject();
+        golferObject.put("name", golfer.getName());
+        golferObject.put("social", golfer.getSocial());
+        golferObject.put("handicap", golfer.getHandicap());
+        golferObject.put("email", golfer.getEmail());
+        return golferObject;
+    }
 }

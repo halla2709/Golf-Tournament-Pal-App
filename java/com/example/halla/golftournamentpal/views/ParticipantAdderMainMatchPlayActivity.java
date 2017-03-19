@@ -256,7 +256,9 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         @Override
         protected MatchPlayTournament doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            return new Networker().sendMatchPlayTournament(newTournament);
+            return new Networker().sendMatchPlayTournament(newTournament,
+                    getIntent().getIntExtra(TOURNAMENT_B_PARTICIPANTS, 0),
+                    getIntent().getIntExtra(TOURNAMENT_B_EXITS, 0));
 
         }
 
