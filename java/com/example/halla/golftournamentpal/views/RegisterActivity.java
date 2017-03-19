@@ -66,6 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mNewUser = new User(Long.parseLong(mNewUserSSN.getText().toString()), mNewUserPW1.getText().toString());
 
+        // Make a task and execute
         RegisterTask task = new RegisterTask();
         task.execute();
         try {
@@ -80,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    // Register a new Golfer
     private class RegisterTask extends AsyncTask<Void, Void, Golfer> {
 
         @Override

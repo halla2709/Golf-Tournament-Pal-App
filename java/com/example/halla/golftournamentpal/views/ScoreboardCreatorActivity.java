@@ -37,12 +37,13 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.my_layout);
         myLayout.requestFocus();
 
-
+        // Number picker settings
         mNumberOfRounds = (NumberPicker) findViewById(R.id.numberOfRoundsPicker);
 
         mNumberOfRounds.setMinValue(1);
         mNumberOfRounds.setMaxValue(10);
 
+        // Check if user is logged in
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(ScoreboardCreatorActivity.this);
@@ -50,6 +51,8 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         }
     }
 
+
+    // Add participant to Scoreplay Tournament
     public void addParticipants(View view){
         // Button Listener
         // Getting values from input

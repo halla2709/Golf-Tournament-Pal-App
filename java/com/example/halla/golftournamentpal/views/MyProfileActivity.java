@@ -2,8 +2,6 @@ package com.example.halla.golftournamentpal.views;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,13 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
-import com.example.halla.golftournamentpal.models.Golfer;
-import com.example.halla.golftournamentpal.models.Tournament;
-
-import java.util.List;
 
 public class MyProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,12 +41,15 @@ public class MyProfileActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         mGolferName = (TextView) findViewById(R.id.golferName);
         mGolferSocial = (TextView) findViewById(R.id.golferSSN);
         mGolferEmail = (TextView) findViewById(R.id.golferEmail);
         mHandicap = (EditText) findViewById(R.id.myHandicap);
+
+        // Navigation drawer
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,16 +60,19 @@ public class MyProfileActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Checking if user is logged in
         mSessionManager = new SessionManager(getApplicationContext());
         if (mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(MyProfileActivity.this);
             startActivity(i);
         }
 
+        // Displaying user-info
         mGolferName.setText(mSessionManager.getSessionUserName());
         mHandicap.setText(Double.toString(mSessionManager.getSessionUserHandicap()));
         mGolferEmail.setText(mSessionManager.getSessionUserEmail());
 
+        // Displaying "0" in front of users social number if necessary
         String mGolferString = mSessionManager.getSessionUserSocial().toString();
         if (mGolferString.length() != 10) {
             mGolferSocial.setText("0" + Long.toString(mSessionManager.getSessionUserSocial()));
@@ -81,10 +80,8 @@ public class MyProfileActivity extends AppCompatActivity
             mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
         }
 
-
+        // Updating user handicap
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-
         mHandicap.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View view, int keyCode, KeyEvent event) {
                 // If the event is a key-down event on the "enter" button
@@ -124,6 +121,7 @@ public class MyProfileActivity extends AppCompatActivity
         startActivity(i);
     }
 
+    // Navigation drawer
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -41,6 +41,8 @@ public class ResultsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+
+        // Navigation drawer
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,12 +55,15 @@ public class ResultsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Create a new adapter
         mListView = (ListView) findViewById(R.id.tournaments_list);
         mAdapter = new TournamentArrayAdapter(getApplicationContext());
 
+        // Fetch tournaments from database
         FetchTournamentsTask task = new FetchTournamentsTask();
         task.execute();
 
+        // Check if user is logged in
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(ResultsActivity.this);
@@ -76,6 +81,7 @@ public class ResultsActivity extends AppCompatActivity
 
     }
 
+    // Navigation drawer
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -118,6 +124,8 @@ public class ResultsActivity extends AppCompatActivity
         return true;
     }
 
+
+    // Fetch tournaments from database
     private class FetchTournamentsTask extends AsyncTask<Void, Void, List<Tournament>> {
 
         @Override

@@ -2,16 +2,15 @@ package com.example.halla.golftournamentpal.views;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
-import com.example.halla.golftournamentpal.models.User;
 /*
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -35,19 +34,20 @@ public class LogInActivity extends AppCompatActivity {
         return i;
     }
 
-
+    // User wants to login
     public void login(View view) {
         mCreateButton = (Button) findViewById(R.id.loginbutton);
         mUserSocial = (EditText) findViewById(R.id.loginSSN);
         mUserPassword = (EditText) findViewById(R.id.loginPW);
 
-
+        // Make a toast if there's no login input / else start session
         if (mUserSocial.getText().length() == 0 || mUserPassword.getText().length() == 0) {
             Toast.makeText(getApplicationContext(), "Please enter credentials", Toast.LENGTH_SHORT)
                     .show();
         } else if (mSessionManager.startSession(Long.parseLong(mUserSocial.getText().toString()),
                 mUserPassword.getText().toString())) {
 
+            // If there is a saved user in the session manager -> login / else toast: error
             if (mSessionManager.getSessionUserSocial() != 0) {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -58,6 +58,7 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
+    // User wants to register
     public void register(View view) {
         mCreateButton = (Button) findViewById(R.id.registerbutton);
 
@@ -70,6 +71,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        // Checking if user is logged in
         mSessionManager = new SessionManager(getApplicationContext());
         if (mSessionManager.getSessionUserSocial() != 0) {
             Intent i = MainActivity.newIntent(LogInActivity.this);

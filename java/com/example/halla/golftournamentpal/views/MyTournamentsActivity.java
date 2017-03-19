@@ -49,8 +49,11 @@ public class MyTournamentsActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tournaments);
+
+        // Navigation drawer
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -63,12 +66,14 @@ public class MyTournamentsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Create an adapter to fetch tournaments / Make a task and execute
         mListView = (ListView) findViewById(R.id.my_tournaments_list);
         mAdapter = new TournamentArrayAdapter(getApplicationContext());
 
         MyTournamentsActivity.FetchMyTournamentsTask task = new MyTournamentsActivity.FetchMyTournamentsTask();
         task.execute();
 
+        // Checking if user is logged in
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(MyTournamentsActivity.this);
@@ -76,6 +81,7 @@ public class MyTournamentsActivity extends AppCompatActivity
         }
     }
 
+    // Navigation drawer
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -118,6 +124,7 @@ public class MyTournamentsActivity extends AppCompatActivity
         return true;
     }
 
+    // Fetch a list of tournaments from the database.
     private class FetchMyTournamentsTask extends AsyncTask<Void, Void, List<Tournament>> {
 
         @Override
