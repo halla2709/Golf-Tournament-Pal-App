@@ -16,6 +16,9 @@ import android.widget.Button;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 
+/**
+ * This activity will have very similar functionality as the matchplay one
+ */
 public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity {
 
     /**

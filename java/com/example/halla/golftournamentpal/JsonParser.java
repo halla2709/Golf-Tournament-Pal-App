@@ -24,6 +24,8 @@ import java.util.List;
 
 /**
  * Created by Halla on 08-Mar-17.
+ * This class has static methods to parse the JsonObjects to POJOS and also to
+ * parse tournaments to Json.
  */
 
 public class JsonParser {

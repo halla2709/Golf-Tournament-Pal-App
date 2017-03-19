@@ -15,6 +15,9 @@ import android.widget.NumberPicker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 
+/**
+ * This activity will resemble the matchplay one closely
+ */
 public class ScoreboardCreatorActivity extends AppCompatActivity {
 
     private NumberPicker mNumberOfRounds;

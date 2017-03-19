@@ -56,6 +56,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         mBracketPartExit.setMinValue(2);
         mBracketPartExit.setMaxValue(6);
 
+        // If no user is logged in open the log in activity
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
             Intent intent = LogInActivity.newIntent(MatchPlayCreatorActivity.this);
@@ -64,6 +65,9 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Displays options if the checkbox is checked, else the options are hidden
+     */
     public void displayOptions(View view) {
 
         TextView textView = (TextView) findViewById(R.id.bracketPickerText);
@@ -82,16 +86,14 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         }
     }
 
+    // Button listener
     public void addParticipant(View view){
 
-        // Button Listener
         // Getting values from input
         mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
         mTourName   = (EditText) findViewById(R.id.tournamentNameMP);
         mCourseName = (EditText) findViewById(R.id.courseNameMP);
         mDatePicker = (DatePicker) findViewById(R.id.datePickerMatchPlay);
-
-        Log.i("LOGGEr", "loglolgo");
 
         int mBracketPartNum = 0;
         int mBracketPartExitNum = 0;
@@ -110,14 +112,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
             mBracketPartExitNum = mBracketPartExit.getValue();
         }
 
-        // Testing!
-        Log.v("EditText", mTourName.getText().toString());
-        Log.v("EditText", mCourseName.getText().toString());
-        Log.d("Dagur", "value = " + day);
-        Log.d("Bracket Part", ""+mBracketPartNum);
-        Log.d("Bracket Exit", ""+mBracketPartExitNum);
-        Log.d("Date String", tournamentDateString);
-
+        // Create a tournament based on the info given
         MatchPlayTournament tour = new MatchPlayTournament(mCourseName.getText().toString(),
                 mTourName.getText().toString(),
                 null,
@@ -125,6 +120,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
                 areBrackets.isChecked(),
                 null, null);
 
+        // Start the next activity with the information
         Intent i = ParticipantAdderMainMatchPlayActivity.newIntent(MatchPlayCreatorActivity.this,
                 tour, mBracketPartNum, mBracketPartExitNum, tournamentDateString);
         startActivity(i);

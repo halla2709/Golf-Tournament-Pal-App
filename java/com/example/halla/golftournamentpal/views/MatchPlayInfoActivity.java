@@ -3,7 +3,6 @@ package com.example.halla.golftournamentpal.views;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,13 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 
+/**
+ * This activity is where the information about the matchplaytournaments
+ */
 public class MatchPlayInfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,7 +28,6 @@ public class MatchPlayInfoActivity extends AppCompatActivity
 
     public static Intent newIntent(Context packageContext, MatchPlayTournament tournament) {
         Intent i = new Intent(packageContext, MatchPlayInfoActivity.class);
-        Log.i("From infoscreen", tournament.getName());
         return i;
     }
 
@@ -50,7 +49,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
 
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
-            Intent intent = new Intent(this, LogInActivity.class);
+            Intent intent = LogInActivity.newIntent(MatchPlayInfoActivity.this);
             startActivity(intent);
         }
     }
@@ -59,7 +58,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.viewbPlayOffTree);
 
-        Intent intent = new Intent(this, PlayOffTreeActivity.class);
+        Intent intent = PlayOffTreeActivity.newIntent(MatchPlayInfoActivity.this);
         startActivity(intent);
     }
 
@@ -67,7 +66,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.viewBracket);
 
-        Intent intent = new Intent(this, BracketsActivity.class);
+        Intent intent = BracketsActivity.newIntent(MatchPlayInfoActivity.this);
         startActivity(intent);
     }
 

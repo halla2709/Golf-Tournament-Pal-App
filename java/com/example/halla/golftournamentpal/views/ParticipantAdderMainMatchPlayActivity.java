@@ -21,9 +21,7 @@ import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.Golfer;
-import com.example.halla.golftournamentpal.models.Match;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
-import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,6 +30,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * This activity has tabbed view, one tab is to add friends of the golfer to the tournament
+ * the other one is to add other users.
+ */
 public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         implements ParticipantTab1MatchPlayActivity.FriendPasser,
         ParticipantTab2MatchPlayActivity.GolferPasser{
@@ -58,7 +60,6 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
     private static final String TOURNAMENT_B_PARTICIPANTS = "bracketParticipants";
     private static final String TOURNAMENT_B_EXITS = "bracketExits";
 
-    private Button mCreateButton;
     private SessionManager mSessionManager;
     private Long mUserSocial;
 
@@ -66,7 +67,6 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
     MatchPlayTournament newTournament;
 
     DateFormat df = new SimpleDateFormat("dd MM yyyy");
-
 
     public static Intent newIntent(Context packageContext, MatchPlayTournament tournament,
                                    int bracketPart, int bracketExits, String dateString) {
@@ -124,9 +124,10 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
     }
 
+    /**
+     * When the next button is clicked the data is sent to the server in a new thread.
+     */
     public void gotonext (View view){
-        mCreateButton = (Button) findViewById(R.id.nextStepParticipant);
-
         SaveTournamentTask task = new SaveTournamentTask();
         task.execute();
         try {
@@ -139,6 +140,9 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Creates a new golfer and adds them to the tournament
+     */
     public void participantAdded (View view){
 
         String golfername = ((EditText) findViewById(R.id.participantNameInput)).getText().toString();
@@ -154,6 +158,10 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         ((EditText) findViewById(R.id.participantHandicap)).setText("");
 
     }
+
+    /**
+     * These are implementations of methods so the fragments can send data to the hosting activity
+     */
 
     @Override
     public void friendClicked(Golfer golfer) {
@@ -179,7 +187,6 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
     @Override
     public List<Golfer> getParticipants() {
-        Log.i("From main", "Getting participants " + newTournament.getPlayers().size());
         return newTournament.getPlayers();
     }
 

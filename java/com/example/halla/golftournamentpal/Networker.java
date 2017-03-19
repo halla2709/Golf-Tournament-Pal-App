@@ -7,25 +7,19 @@ import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 import com.example.halla.golftournamentpal.models.Tournament;
 import com.example.halla.golftournamentpal.models.User;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +30,14 @@ import java.util.List;
 
 public class Networker {
 
-    //String BASE_URL = "http://192.168.0.106:8080";
-    String BASE_URL = "http://10.0.2.2:8080";
+    //String BASE_URL = "http://192.168.0.106:8080"; //To use with a phone
+    String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
     String TAG = "networker";
 
 
+    /**
+     * Opens a connection to GET json objects from.
+     */
     public byte[] getUrlBytes(String urlSpec) throws IOException {
         URL url = new URL(urlSpec);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -69,6 +66,9 @@ public class Networker {
         return new String(getUrlBytes(urlSpec));
     }
 
+    /**
+     * Opens a connection to post JsonData to
+     */
     public String postTournament(String urlSpec, String tournamentJson) throws MalformedURLException {
         URL url = new URL(urlSpec);
         HttpURLConnection conn = null;
@@ -82,7 +82,6 @@ public class Networker {
                     Integer.toString(tournamentJson.getBytes().length));
             conn.setRequestProperty("User-Agent", "Mozilla/5.0 ( compatible ) ");
             conn.setRequestProperty("Accept", "*/*");
-            //conn.setRequestProperty("Content-Language", "en-US");
 
             conn.setUseCaches(false);
             conn.setDoInput(true);
@@ -94,10 +93,12 @@ public class Networker {
             out.flush();
             out.close();
 
-            Log.i(TAG, ""+conn.getResponseCode());
             InputStream in = conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
+            if(conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new IOException(conn.getResponseCode() + ": with " + urlSpec);
+            }
 
             String line;
             StringBuffer response = new StringBuffer();
@@ -119,6 +120,9 @@ public class Networker {
         return null;
     }
 
+    /**
+     * Gets all tournaments that are in the database on the server
+     */
     public List<Tournament> fetchTournaments() {
         List<Tournament> tournaments = new ArrayList<>();
         try {
@@ -127,7 +131,13 @@ public class Networker {
             String jsonString = getUrlString(url);
             Log.i(TAG, "Received JSON: " + jsonString);
             JSONArray jsonBody = new JSONArray(jsonString);
-            parseItems(tournaments, jsonBody);
+            for (int i = 0; i < jsonBody.length(); i++) {
+                JSONObject tournamentJsonObject = jsonBody.getJSONObject(i);
+
+                Tournament tournament = JsonParser.parseTournament(tournamentJsonObject);
+
+                tournaments.add(tournament);
+            }
         }
         catch (IOException ioe){
             Log.e(TAG, "Failed to fetch items ", ioe);
@@ -135,9 +145,13 @@ public class Networker {
         catch (JSONException je){
             Log.e(TAG, "Failed to parse JSON", je);
         }
+
         return tournaments;
     }
 
+    /**
+     * Gets the golfer from the server who corresponds to the social number.
+     */
     public Golfer fetchGolfer(Long social) {
         Golfer golfer = new Golfer();
         try{
@@ -161,18 +175,9 @@ public class Networker {
         return golfer;
     }
 
-    private void parseItems(List<Tournament> tournaments, JSONArray jsonArray)
-            throws  IOException, JSONException {
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject tournamentJsonObject = jsonArray.getJSONObject(i);
-
-            Tournament tournament = JsonParser.parseTournament(tournamentJsonObject);
-
-            tournaments.add(tournament);
-        }
-    }
-
+    /**
+     * Checks if the password matches the social number and returns the corresponding golfer.
+     */
     public Golfer logInGolfer(Long social, String password) {
         Golfer golfer = new Golfer();
         try{
@@ -199,11 +204,12 @@ public class Networker {
         }
 
         return golfer;
-
-
     }
 
 
+    /**
+     * Creates a golfer and user on the server with the information
+     */
     public Golfer registerGolfer(User userinfo, Golfer golfer) {
 
         Golfer newgolfer = new Golfer();
@@ -230,17 +236,15 @@ public class Networker {
         return newgolfer;
     }
 
+    /**
+     * Posts MatchPlayTournament info on the server where the tournament is created.
+     * The tournament that is created is returned.
+     */
     public MatchPlayTournament sendMatchPlayTournament(MatchPlayTournament tournament,
             int numberInBrackets, int numberOutOfBrackets) {
         String tournamentJsonString = null;
         MatchPlayTournament createdTournament = null;
 
-        try {
-            tournamentJsonString = JsonParser.matchPlayTournamentToString(tournament);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.i(TAG,tournamentJsonString);
         String url = Uri.parse(BASE_URL + "/json/matchplay")
                 .buildUpon()
                 .appendQueryParameter("nIBrackets", Integer.toString(numberInBrackets))
@@ -249,6 +253,7 @@ public class Networker {
                 .toString();
 
         try {
+            tournamentJsonString = JsonParser.matchPlayTournamentToString(tournament);
             Log.i(TAG, "Sending tournament to " + url);
             String createdTournamentString = postTournament(url, tournamentJsonString);
             Log.i(TAG, createdTournamentString);
