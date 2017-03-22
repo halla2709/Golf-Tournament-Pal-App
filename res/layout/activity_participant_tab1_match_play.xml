@@ -41,6 +41,24 @@
             android:id="@+id/textView6"
             android:layout_marginBottom="20dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/hostCheckBox"
+                android:checked="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/hostCheckBox"
+                android:text="@string/add_me"/>
+        </LinearLayout>
+
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

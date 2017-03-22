@@ -62,6 +62,7 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
     private Long mUserSocial;
 
     private List<Golfer> friends;
+    private Golfer host;
     MatchPlayTournament newTournament;
 
     DateFormat df = new SimpleDateFormat("dd MM yyyy");
@@ -117,6 +118,16 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
             e.printStackTrace();
         }
         boolean tarebrackets = getIntent().getBooleanExtra(ARE_BRACKETS, false);
+
+        GetFriendsTask task = new GetFriendsTask();
+        task.execute();
+        try {
+            task.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         newTournament = new MatchPlayTournament(tcourse, tname, null, tdate, tarebrackets, null, null);
 
@@ -188,6 +199,17 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         return newTournament.getPlayers();
     }
 
+    @Override
+    public List<Golfer> hostAdder(boolean added) {
+        if(added) {
+            newTournament.addPlayer(host);
+        }
+        else {
+            newTournament.getPlayers().remove(host);
+        }
+        return newTournament.getPlayers();
+    }
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -237,6 +259,7 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         protected Golfer doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
             Golfer golfer = new Networker().fetchGolfer(mUserSocial);
+            host = golfer;
             friends = golfer.getFriends();
             Log.i("TAGG", "Done fetching");
             return golfer;
@@ -262,6 +285,7 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         protected MatchPlayTournament doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
             return new Networker().sendMatchPlayTournament(newTournament,
+                    mSessionManager.getSessionUserSocial(),
                     getIntent().getIntExtra(TOURNAMENT_B_PARTICIPANTS, 0),
                     getIntent().getIntExtra(TOURNAMENT_B_EXITS, 0));
 

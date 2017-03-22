@@ -74,7 +74,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
         String mDate = getIntent().getStringExtra("tournamentDate");
         Log.i("TAGG", "Tournament name" + mTourName );
 
-
+/*
         TextView mTourNameView = (TextView) findViewById(R.id.tourInfoName);
         TextView mCourseView = (TextView) findViewById(R.id.tourInfoCourse);
         TextView mDateView = (TextView) findViewById(R.id.tourInfoDate);
@@ -82,7 +82,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
         mTourNameView.setText(mTourName);
         mCourseView.setText(mCourse);
         mDateView.setText(mDate.substring(0,11));
-
+*/
     }
 
 

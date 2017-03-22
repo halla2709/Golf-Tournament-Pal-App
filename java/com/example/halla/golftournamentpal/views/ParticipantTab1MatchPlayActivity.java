@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class ParticipantTab1MatchPlayActivity extends Fragment {
     ListView mFriendListView;
     GolferArrayAdapter mParticipantAdapter;
     ListView mParticipantListView;
+    CheckBox mHostCheckBox;
     List<Golfer> mFriends = new ArrayList<>();
     List<Golfer> mParticipants = new ArrayList<>();
 
@@ -58,7 +60,16 @@ public class ParticipantTab1MatchPlayActivity extends Fragment {
         mFriendListView.setAdapter(mFriendAdapter);
         setFriendListHeight(mFriendListView);
 
-
+        mHostCheckBox = (CheckBox) getView().findViewById(R.id.hostCheckBox);
+        mHostCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mParticipants = mFriendPasser.hostAdder(mHostCheckBox.isChecked());
+                mParticipantAdapter.setData(mParticipants);
+                mParticipantListView.setAdapter(mParticipantAdapter);
+                setListHeight(mParticipantListView);
+            }
+        });
     }
 
     @Override
@@ -71,7 +82,6 @@ public class ParticipantTab1MatchPlayActivity extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser && isResumed()) {
-            Log.i("From tab1", "visible");
             mParticipants = mFriendPasser.getParticipants();
             mParticipantAdapter.setData(mParticipants);
             mParticipantListView.setAdapter(mParticipantAdapter);
@@ -116,6 +126,8 @@ public class ParticipantTab1MatchPlayActivity extends Fragment {
         public List<Golfer> getFriends();
 
         public List<Golfer> getParticipants();
+
+        public List<Golfer> hostAdder(boolean added);
     }
 
     public void onFriendClicked(Golfer friend) {
@@ -210,7 +222,6 @@ public class ParticipantTab1MatchPlayActivity extends Fragment {
                         @Override
                         public void onClick(View view) {
                             mFragment.onFriendClicked(friend);
-                            Log.i("logging from list", ((TextView)view.findViewById(R.id.friendName)).getText().toString());
                         }
                     });
             return view;
