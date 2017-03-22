@@ -70,7 +70,8 @@ public class Networker {
     /**
      * Opens a connection to post JsonData to
      */
-    public String postTournament(String urlSpec, String tournamentJson) throws MalformedURLException {
+    public String postTournament(String urlSpec, String tournamentJson)
+            throws MalformedURLException {
         URL url = new URL(urlSpec);
         HttpURLConnection conn = null;
 
@@ -242,14 +243,17 @@ public class Networker {
      * The tournament that is created is returned.
      */
     public MatchPlayTournament sendMatchPlayTournament(MatchPlayTournament tournament,
-            int numberInBrackets, int numberOutOfBrackets) {
-        String tournamentJsonString = null;
+                                                       Long hostSocial,
+                                                       int numberInBrackets,
+                                                       int numberOutOfBrackets) {
+        String tournamentJsonString;
         MatchPlayTournament createdTournament = null;
 
         String url = Uri.parse(BASE_URL + "/json/matchplay")
                 .buildUpon()
                 .appendQueryParameter("nIBrackets", Integer.toString(numberInBrackets))
                 .appendQueryParameter("nOOBrackets", Integer.toString(numberOutOfBrackets))
+                .appendQueryParameter("hostSocial", hostSocial.toString())
                 .build()
                 .toString();
 

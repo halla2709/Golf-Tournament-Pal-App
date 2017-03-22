@@ -186,5 +186,6 @@
     <string name="title_activity_hjalp">HjalpActivity</string>
     <string name="title_activity_friend_profile">FriendProfileActivity</string>
 
+    <string name="add_me">Add me to this tournament</string>
 
 </resources>
