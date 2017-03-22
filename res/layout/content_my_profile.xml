@@ -82,32 +82,31 @@
                 android:text="@string/handicapdot"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="20sp"
-                android:id="@+id/golferEmail"/>
+                android:id="@+id/golferHandicapField"/>
 
             <EditText
+                android:id="@+id/myHandicap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:gravity="center"
                 android:hint="@string/number"
-                android:paddingTop="10dp"
-                android:paddingLeft="5dp"
-                android:textColorHint="@color/secondaryTextColor"
-                android:textSize="20sp"
-                android:id="@+id/myHandicap"
-                android:background="@android:color/transparent"
-                android:cursorVisible="false"
                 android:inputType="number"
-                />
+                android:onClick="handicapListener"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:textColorHint="@color/secondaryTextColor"
+                android:textSize="20sp"/>
 
             <ImageView
+                android:id="@+id/updateHandicapPen"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                app:srcCompat="@android:drawable/ic_menu_edit"
-                android:id="@+id/imageView2"
-                android:contentDescription="@string/editPen"
-                android:background="@drawable/background"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/background"
+                android:contentDescription="@string/editPen"
                 android:onClick="changehandicap"
+                app:srcCompat="@android:drawable/ic_menu_edit"
                 />
 
         </LinearLayout>

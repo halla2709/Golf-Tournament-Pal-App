@@ -2,6 +2,7 @@ package com.example.halla.golftournamentpal.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,17 +11,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class MyProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +36,8 @@ public class MyProfileActivity extends AppCompatActivity
     private TextView mGolferEmail;
     private SessionManager mSessionManager;
     private EditText mHandicap;
+    private double mUpdatedHandicap;
+    private long mSocialLong;
 
     public static Intent newIntent(Context packageContext) {
         Intent i = new Intent(packageContext, MyProfileActivity.class);
@@ -69,7 +76,7 @@ public class MyProfileActivity extends AppCompatActivity
 
         // Displaying user-info
         mGolferName.setText(mSessionManager.getSessionUserName());
-        mHandicap.setText(Double.toString(mSessionManager.getSessionUserHandicap()));
+        mHandicap.setHint(Double.toString(mSessionManager.getSessionUserHandicap()));
         mGolferEmail.setText(mSessionManager.getSessionUserEmail());
 
         // Displaying "0" in front of users social number if necessary
@@ -79,23 +86,40 @@ public class MyProfileActivity extends AppCompatActivity
         } else {
             mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
         }
-
-        // Updating user handicap
+        //Cursor in handicap editText
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        mHandicap.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-                    // Here we have to insert updated hadicap into database
-                    Log.v("EditText", mHandicap.getText().toString());
-                    Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-        });
+        mHandicap.setCursorVisible(false);
+    }
+
+    public void handicapListener (View view) {
+        mHandicap.setCursorVisible(true);
+    }
+
+    public void changehandicap (View view){
+        mUpdatedHandicap = Double.parseDouble(mHandicap.getText().toString());
+        mSocialLong = Long.parseLong(mGolferSocial.getText().toString());
+
+        // Make a task and execute
+        MyProfileActivity.updateHandicapTask task = new MyProfileActivity.updateHandicapTask();
+        task.execute();
+        try {
+            task.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        mSessionManager.setSessionHandicap(mUpdatedHandicap);
+        Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
+
+        //Hide SoftInputKeyboard
+        View views = this.getCurrentFocus();
+        if (views != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            mHandicap.setCursorVisible(false);
+        }
+
     }
 
 
@@ -162,6 +186,32 @@ public class MyProfileActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private class updateHandicapTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            Log.i("TAGG", "Fetching...");
+            try {
+                new Networker().updateHandicap(mSocialLong, mUpdatedHandicap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("TAGG", "Going to fetch...");
+        }
+
+        protected void onPostExecute(boolean bool) {
+            super.onPostExecute(bool);
+
+            Log.i("TAGG", "Done");
+
+        }
     }
 
 

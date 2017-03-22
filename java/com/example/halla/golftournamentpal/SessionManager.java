@@ -31,10 +31,12 @@ public class SessionManager {
     Golfer mGolfer;
     boolean mFinished = false;
 
+
     public SessionManager(Context context) {
         this.mContext = context;
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = pref.edit();
+
     }
 
     public boolean startSession(Long userSocial, String userPassword){
@@ -90,10 +92,17 @@ public class SessionManager {
         return pref.getString(EMAIL, "");
     }
 
+    public void setSessionHandicap(double handicap) {
+        editor.remove(HANDICAP);
+        editor.putFloat(HANDICAP, (float) handicap);
+        editor.commit();
+    }
+
     public void endSession() {
         editor.clear();
         editor.commit();
     }
+
 
 
     private class LogInTask extends AsyncTask<Void, Void, Golfer> {

@@ -272,4 +272,20 @@ public class Networker {
         }
         return createdTournament;
     }
+
+    public void updateHandicap(long social, double handicap) throws IOException {
+
+        String url = Uri.parse(BASE_URL + "/json/updateHandicap")
+                .buildUpon()
+                .appendQueryParameter("social", Long.toString(social))
+                .appendQueryParameter("handicap", Double.toString(handicap))
+                .build()
+                .toString();
+
+        try {
+            String jsonString = getUrlString(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
