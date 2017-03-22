@@ -11,8 +11,8 @@ public class TeamScoreboardTournament extends ScoreboardTournament {
 
     private List<Team> mTeams;
 
-    public TeamScoreboardTournament(String course, String name, List<Golfer> players, Date startDate, int[][] sores, int numberOfRounds, List<Scorecard> scorecards, List<Team> teams) {
-        super(course, name, players, startDate, sores, numberOfRounds, scorecards);
+    public TeamScoreboardTournament(Long id, String course, String name, List<Golfer> players, Date startDate, int[][] sores, int numberOfRounds, List<Scorecard> scorecards, List<Team> teams) {
+        super(id, course, name, players, startDate, sores, numberOfRounds, scorecards);
         mTeams = teams;
     }
 

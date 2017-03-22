@@ -35,7 +35,9 @@ public class JsonParser {
 
         tournament.setCourse(jsonObject.getString("course"));
         tournament.setName(jsonObject.getString("name"));
-        tournament.setStartDate(new Date(jsonObject.getLong("startDate")));
+        tournament.setId(jsonObject.getLong("id"));
+        if(!jsonObject.isNull("startDate"))
+            tournament.setStartDate(new Date(jsonObject.getLong("startDate")));
 
         JSONArray playersJsonArray = jsonObject.getJSONArray("players");
         for (int j = 0; j < playersJsonArray.length(); j++) {
@@ -46,6 +48,13 @@ public class JsonParser {
         }
 
         return tournament;
+    }
+
+    public static Tournament parseCompleteTournament(JSONObject jsonObject) throws JSONException {
+        if(jsonObject.has("brackets"))
+            return parseMatchPlay(jsonObject);
+        else
+            return parseScoreboard(jsonObject);
     }
 
     public static Golfer parseGolfer(JSONObject playerJsonObject) throws JSONException {
@@ -80,6 +89,7 @@ public class JsonParser {
             throws JSONException {
         ScoreboardTournament scoreboardTournament = new ScoreboardTournament();
 
+        scoreboardTournament.setId(scoreboardJsonObject.getLong("id"));
         scoreboardTournament.setCourse(scoreboardJsonObject.getString("course"));
         scoreboardTournament.setName(scoreboardJsonObject.getString("name"));
         scoreboardTournament.setStartDate(new Date(scoreboardJsonObject.getLong("startDate")));
@@ -92,7 +102,7 @@ public class JsonParser {
             scoreboardTournament.addPlayer(golfer);
         }
 
-        scoreboardTournament.setSores(JsonParser.parseScores(scoreboardJsonObject.getJSONArray("scores")));
+        scoreboardTournament.setScores(JsonParser.parseScores(scoreboardJsonObject.getJSONArray("scores")));
         scoreboardTournament.setNumberOfRounds(scoreboardJsonObject.getInt("numberOfRounds"));
         scoreboardTournament.setScorecards(JsonParser.parseScorecards(scoreboardJsonObject.getJSONArray("scorecards")));
         return scoreboardTournament;
@@ -176,6 +186,7 @@ public class JsonParser {
             throws JSONException {
         MatchPlayTournament matchPlayTournament = new MatchPlayTournament();
 
+        matchPlayTournament.setId(matchplayJsonObject.getLong("id"));
         matchPlayTournament.setCourse(matchplayJsonObject.getString("course"));
         matchPlayTournament.setName(matchplayJsonObject.getString("name"));
         matchPlayTournament.setStartDate(new Date(matchplayJsonObject.getLong("startDate")));

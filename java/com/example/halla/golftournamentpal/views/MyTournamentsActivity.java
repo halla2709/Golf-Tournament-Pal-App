@@ -68,7 +68,7 @@ public class MyTournamentsActivity extends AppCompatActivity
 
         // Create an adapter to fetch tournaments / Make a task and execute
         mListView = (ListView) findViewById(R.id.my_tournaments_list);
-        mAdapter = new TournamentArrayAdapter(getApplicationContext());
+        mAdapter = new TournamentArrayAdapter(getApplicationContext(), MyTournamentsActivity.this);
 
         MyTournamentsActivity.FetchMyTournamentsTask task = new MyTournamentsActivity.FetchMyTournamentsTask();
         task.execute();
@@ -130,7 +130,7 @@ public class MyTournamentsActivity extends AppCompatActivity
         @Override
         protected List<Tournament> doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            return new Networker().fetchTournaments();
+            return new Networker().fetchTournaments("");
 
         }
 

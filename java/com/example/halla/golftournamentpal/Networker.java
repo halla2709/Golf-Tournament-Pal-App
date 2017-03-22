@@ -30,9 +30,8 @@ import java.util.List;
 
 public class Networker {
     //String BASE_URL ="http://192.168.0.109:8080"; //Heima hjá Höllu
-    String BASE_URL ="http://192.168.1.43:8080"; //Heima hjá Hafrúnu
-    //String BASE_URL = "http://192.168.0.106:8080"; //To use with a phone
-    //String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
+    //String BASE_URL ="http://192.168.1.43:8080"; //Heima hjá Hafrúnu
+    String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
     String TAG = "networker";
 
 
@@ -125,15 +124,21 @@ public class Networker {
     /**
      * Gets all tournaments that are in the database on the server
      */
-    public List<Tournament> fetchTournaments() {
+    public List<Tournament> fetchTournaments(String searchName) {
         List<Tournament> tournaments = new ArrayList<>();
         try {
-            String url = BASE_URL + "/json/results";
+            String url = Uri.parse(BASE_URL+"/json/search")
+                    .buildUpon()
+                    .appendQueryParameter("searchName", searchName)
+                    .build()
+                    .toString();
             Log.i(TAG, url);
             String jsonString = getUrlString(url);
             Log.i(TAG, "Received JSON: " + jsonString);
             JSONArray jsonBody = new JSONArray(jsonString);
+            Log.i(TAG, "Recieved tournaments: " + jsonBody.length());
             for (int i = 0; i < jsonBody.length(); i++) {
+
                 JSONObject tournamentJsonObject = jsonBody.getJSONObject(i);
 
                 Tournament tournament = JsonParser.parseTournament(tournamentJsonObject);
@@ -236,6 +241,28 @@ public class Networker {
             e.printStackTrace();
         }
         return newgolfer;
+    }
+
+    public Tournament fetchTournament(Long id) {
+        Tournament toReturn = null;
+        String url = Uri.parse(BASE_URL + "/json/getTournament")
+                .buildUpon()
+                .appendQueryParameter("id", id.toString())
+                .build()
+                .toString();
+
+
+        try {
+            String jsonString = getUrlString(url);
+            JSONObject jsonObject = new JSONObject(jsonString);
+            toReturn = JsonParser.parseCompleteTournament(jsonObject);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return toReturn;
+
     }
 
     /**

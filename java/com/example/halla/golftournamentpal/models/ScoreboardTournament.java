@@ -14,8 +14,8 @@ public class ScoreboardTournament extends Tournament {
     private int mNumberOfRounds;
     private List<Scorecard> mScorecards;
 
-    public ScoreboardTournament(String course, String name, List<Golfer> players, Date startDate, int[][] scores, int numberOfRounds, List<Scorecard> scorecards) {
-        super(course, name, players, startDate);
+    public ScoreboardTournament(Long id, String course, String name, List<Golfer> players, Date startDate, int[][] scores, int numberOfRounds, List<Scorecard> scorecards) {
+        super(id, course, name, players, startDate);
         mScores = scores;
         mNumberOfRounds = numberOfRounds;
         mScorecards = scorecards;
@@ -26,11 +26,11 @@ public class ScoreboardTournament extends Tournament {
         mScorecards = new ArrayList<>();
     }
 
-    public int[][] getSores() {
+    public int[][] getScores() {
         return mScores;
     }
 
-    public void setSores(int[][] scores) {
+    public void setScores(int[][] scores) {
         mScores = scores;
     }
 

@@ -45,7 +45,7 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity {
     public void gotonext (View view){
         mCreateButton = (Button) findViewById(R.id.nextStepParticipant);
 
-        Intent i = ScoreboardInfoActivity.newIntent(ParticipantAdderMainScoreboardActivity.this);
+        Intent i = ScoreboardInfoActivity.newIntent(ParticipantAdderMainScoreboardActivity.this, null);
         startActivity(i);
     }
 

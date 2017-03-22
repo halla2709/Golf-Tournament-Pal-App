@@ -83,6 +83,7 @@ public class SessionManager {
 
     public double getSessionUserHandicap() {
         double toreturn = JsonParser.doubleRounder((double) pref.getFloat(HANDICAP, 0));
+
         return toreturn;
     }
 

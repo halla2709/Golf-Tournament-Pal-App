@@ -129,7 +129,7 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        newTournament = new MatchPlayTournament(tcourse, tname, null, tdate, tarebrackets, null, null);
+        newTournament = new MatchPlayTournament(0L, tcourse, tname, null, tdate, tarebrackets, null, null);
 
     }
 

@@ -13,8 +13,8 @@ public class MatchPlayTournament extends Tournament {
     private List<Bracket> mBrackets;
     private PlayOffTree mPlayOffs;
 
-    public MatchPlayTournament(String course, String name, List<Golfer> players, Date startDate, boolean areBrackets, List<Bracket> brackets, PlayOffTree playOffs) {
-        super(course, name, players, startDate);
+    public MatchPlayTournament(Long id, String course, String name, List<Golfer> players, Date startDate, boolean areBrackets, List<Bracket> brackets, PlayOffTree playOffs) {
+        super(id, course, name, players, startDate);
         mAreBrackets = areBrackets;
         mBrackets = brackets;
         mPlayOffs = playOffs;

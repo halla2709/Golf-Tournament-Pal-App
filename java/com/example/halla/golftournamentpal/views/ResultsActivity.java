@@ -10,27 +10,35 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.TournamentArrayAdapter;
+import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+import com.example.halla.golftournamentpal.models.ScoreboardTournament;
 import com.example.halla.golftournamentpal.models.Tournament;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResultsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        TournamentArrayAdapter.CallBacker{
 
     private SessionManager mSessionManager;
     private List<Tournament> mTournamentList = new ArrayList<>();
     private ListView mListView;
     private TournamentArrayAdapter mAdapter;
+    private SearchView mSearchView;
+    private String mSearchString = "";
+    private Long mTournamentID;
 
     public static Intent newIntent(Context packageContext) {
         Intent i = new Intent(packageContext, ResultsActivity.class);
@@ -57,7 +65,21 @@ public class ResultsActivity extends AppCompatActivity
 
         // Create a new adapter
         mListView = (ListView) findViewById(R.id.tournaments_list);
-        mAdapter = new TournamentArrayAdapter(getApplicationContext());
+        mAdapter = new TournamentArrayAdapter(getApplicationContext(), ResultsActivity.this);
+        mSearchView = (SearchView) findViewById(R.id.searchView);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.i("Searching for", newText);
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         // Fetch tournaments from database
         FetchTournamentsTask task = new FetchTournamentsTask();
@@ -68,15 +90,6 @@ public class ResultsActivity extends AppCompatActivity
         if(mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(ResultsActivity.this);
             startActivity(i);
-        }
-
-        //Trying to get Search to work
-        //https://developer.android.com/guide/topics/search/search-dialog.html
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            // doMySearch will be a local method where the actual search operation is done.
-            // doMySearch(query); UNCOMMENT THIS WHEN READY
         }
 
     }
@@ -124,6 +137,42 @@ public class ResultsActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void openTournament(Long id) {
+        mTournamentID = id;
+        FetchOneTournamentTask task = new FetchOneTournamentTask();
+        task.execute();
+    }
+
+    private class FetchOneTournamentTask extends AsyncTask<Void, Void, Tournament> {
+
+        @Override
+        protected Tournament doInBackground(Void... params) {
+            Log.i("TAGG", "Fetching...");
+            return new Networker().fetchTournament(mTournamentID);
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("TAGG", "Going to fetch...");
+        }
+
+        @Override
+        protected void onPostExecute(Tournament tournament) {
+            if(tournament instanceof ScoreboardTournament) {
+                Intent intent = ScoreboardInfoActivity.newIntent(ResultsActivity.this,
+                        (ScoreboardTournament) tournament);
+                startActivity(intent);
+            }
+            else if(tournament instanceof MatchPlayTournament) {
+                Intent intent = MatchPlayInfoActivity.newIntent(ResultsActivity.this,
+                        (MatchPlayTournament) tournament);
+                startActivity(intent);
+            }
+        }
+    }
 
     // Fetch tournaments from database
     private class FetchTournamentsTask extends AsyncTask<Void, Void, List<Tournament>> {
@@ -131,7 +180,7 @@ public class ResultsActivity extends AppCompatActivity
         @Override
         protected List<Tournament> doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            return new Networker().fetchTournaments();
+            return new Networker().fetchTournaments(mSearchString);
 
         }
 
