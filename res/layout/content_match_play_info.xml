@@ -67,6 +67,29 @@
                     android:text="@string/coursetable"
                     android:textColor="@color/buttonTextColor"/>
             </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/tourInfoName"
+                    android:padding="3dip"
+                    android:text="@string/tournamenttable"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/tourInfoDate"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/datetable"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/tourInfoCourse"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="@string/coursetable"
+                    android:textColor="@color/colorBlack"/>
+            </TableRow>
+
         </TableLayout>
 
         <TextView

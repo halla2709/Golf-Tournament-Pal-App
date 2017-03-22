@@ -3,15 +3,17 @@ package com.example.halla.golftournamentpal.views;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
@@ -26,9 +28,18 @@ public class MatchPlayInfoActivity extends AppCompatActivity
     private Button mCreateButton;
     private SessionManager mSessionManager;
 
+    private static final String TOURNAMENT_NAME = "tournamentName";
+    private static final String TOURNAMENT_COURSE = "tournamentCourse";
+    private static final String TOURNAMENT_DATE = "tournamentDate";
+    private static final String ARE_BRACKETS = "areBrackets";
+
     public static Intent newIntent(Context packageContext, MatchPlayTournament tournament) {
-        Intent i = new Intent(packageContext, MatchPlayInfoActivity.class);
-        return i;
+        Intent intent = new Intent(packageContext, MatchPlayInfoActivity.class);
+        intent.putExtra(TOURNAMENT_NAME, tournament.getName().toString());
+        intent.putExtra(TOURNAMENT_COURSE, tournament.getCourse().toString());
+        intent.putExtra(TOURNAMENT_DATE, tournament.getStartDate().toString());
+        intent.putExtra(ARE_BRACKETS, tournament.isAreBrackets());
+        return intent;
     }
 
     @Override
@@ -52,7 +63,29 @@ public class MatchPlayInfoActivity extends AppCompatActivity
             Intent intent = LogInActivity.newIntent(MatchPlayInfoActivity.this);
             startActivity(intent);
         }
+
+        displayInfo();
     }
+
+    public void displayInfo(){
+
+        String mTourName = getIntent().getStringExtra("tournamentName");
+        String mCourse = getIntent().getStringExtra("tournamentCourse");
+        String mDate = getIntent().getStringExtra("tournamentDate");
+        Log.i("TAGG", "Tournament name" + mTourName );
+
+
+        TextView mTourNameView = (TextView) findViewById(R.id.tourInfoName);
+        TextView mCourseView = (TextView) findViewById(R.id.tourInfoCourse);
+        TextView mDateView = (TextView) findViewById(R.id.tourInfoDate);
+
+        mTourNameView.setText(mTourName);
+        mCourseView.setText(mCourse);
+        mDateView.setText(mDate.substring(0,11));
+
+    }
+
+
 
     public void goToPlayOfftree (View view){
         // Button Listener
