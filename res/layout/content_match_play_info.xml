@@ -114,15 +114,25 @@
 
                 <TextView
                     android:padding="3dip"
+                    android:text="@string/socialText"
+                    android:textColor="@color/buttonTextColor"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:padding="3dip"
                     android:text="@string/nametable"
                     android:textColor="@color/buttonTextColor"/>
 
                 <TextView
-                    android:gravity="start"
+                    android:gravity="right"
                     android:padding="3dip"
                     android:text="@string/handicaptable"
                     android:textColor="@color/buttonTextColor"/>
             </TableRow>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/participants_list_matchPlay"></ListView>
         </TableLayout>
 
         <TextView
