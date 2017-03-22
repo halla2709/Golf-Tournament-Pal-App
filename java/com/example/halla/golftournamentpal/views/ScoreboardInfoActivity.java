@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.ScoreboardTournament;
 
 
 public class ScoreboardInfoActivity extends AppCompatActivity
@@ -27,8 +29,10 @@ public class ScoreboardInfoActivity extends AppCompatActivity
     private TextView mGolferSocial;
     private TextView mGolferHandicap;
 
-    public static Intent newIntent(Context packageContext) {
+    public static Intent newIntent(Context packageContext, ScoreboardTournament tournament) {
         Intent i = new Intent(packageContext, ScoreboardInfoActivity.class);
+        Log.i("FROM scoreboardactivity", tournament.getName() +
+                " " + Integer.toString(tournament.getNumberOfRounds()));
         return i;
     }
 

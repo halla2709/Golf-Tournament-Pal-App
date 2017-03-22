@@ -113,7 +113,7 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         }
 
         // Create a tournament based on the info given
-        MatchPlayTournament tour = new MatchPlayTournament(mCourseName.getText().toString(),
+        MatchPlayTournament tour = new MatchPlayTournament(0L, mCourseName.getText().toString(),
                 mTourName.getText().toString(),
                 null,
                 tournamentDate,

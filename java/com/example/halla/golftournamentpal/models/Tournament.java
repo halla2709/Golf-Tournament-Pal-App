@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Tournament {
 
+    private Long mId;
     private String mCourse;
     private String mName;
     private List<Golfer> mPlayers;
@@ -20,9 +21,11 @@ public class Tournament {
         mStartDate = new Date();
     }
 
-    public Tournament(String course, String name, List<Golfer> players, Date startDate) {
+    public Tournament(Long id, String course, String name, List<Golfer> players, Date startDate) {
         mCourse = course;
         mName = name;
+        mId = id;
+
         if(players == null) {
             mPlayers = new ArrayList<>();
         }
@@ -30,6 +33,14 @@ public class Tournament {
             mPlayers = players;
         }
         mStartDate = startDate;
+    }
+
+    public Long getId() {
+        return mId;
+    }
+
+    public void setId(Long id) {
+        mId = id;
     }
 
     public String getCourse() {
