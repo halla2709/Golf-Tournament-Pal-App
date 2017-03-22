@@ -114,7 +114,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
 
         mTourNameView.setText(sMatchPlayTournament.getName());
         mCourseView.setText(sMatchPlayTournament.getCourse());
-        mDateView.setText(sMatchPlayTournament.toString().substring(0,11));
+        mDateView.setText(sMatchPlayTournament.getStartDate().toString().substring(0,11));
 
         mParticipantAdapter = new GolferArrayAdapter(this.getApplicationContext(), MatchPlayInfoActivity.this);
         mParticipantListView = (ListView) findViewById(R.id.participants_list_matchPlay);
