@@ -25,7 +25,7 @@
     <!-- Register Activity -->
     <string name="registerinputs">Please fill out all information:</string>
     <string name="newUserPassword1">Password</string>
-    <string name="newUserPassword2">re-enter Password</string>
+    <string name="newUserPassword2">Confirm Password</string>
 
     <!-- Main activity -->
     <string name="homeTexts">Welcome to Golf Tournament Pal</string>
@@ -129,6 +129,8 @@
 
     <!-- MyFriendsActivity -->
     <string name="view">View</string>
+    <string name="SSN2">SSN: </string>
+    <string name="handicap2">Hcp: </string>
 
     <!-- Scoreboard Activity -->
     <string name="scoreboard">Scoreboard</string>

@@ -278,27 +278,28 @@ public class Networker {
 
         String url = Uri.parse(BASE_URL + "/json/matchplay")
                 .buildUpon()
+                .appendQueryParameter("hostSocial", hostSocial.toString())
                 .appendQueryParameter("nIBrackets", Integer.toString(numberInBrackets))
                 .appendQueryParameter("nOOBrackets", Integer.toString(numberOutOfBrackets))
-                .appendQueryParameter("hostSocial", hostSocial.toString())
                 .build()
                 .toString();
 
-        try {
-            tournamentJsonString = JsonParser.matchPlayTournamentToString(tournament);
-            Log.i(TAG, "Sending tournament to " + url);
-            String createdTournamentString = postTournament(url, tournamentJsonString);
-            Log.i(TAG, createdTournamentString);
-            JSONObject tournamentJson = new JSONObject(createdTournamentString);
-            createdTournament = JsonParser.parseMatchPlay(tournamentJson);
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to send item ", e);
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+            try {
+                tournamentJsonString = JsonParser.matchPlayTournamentToString(tournament);
+                Log.i(TAG, "Sending this tournament: " + tournamentJsonString);
+                Log.i(TAG, "Sending tournament to " + url);
+                String createdTournamentString = postTournament(url, tournamentJsonString);
+                Log.i(TAG, createdTournamentString);
+                JSONObject tournamentJson = new JSONObject(createdTournamentString);
+                createdTournament = JsonParser.parseMatchPlay(tournamentJson);
+            } catch (IOException e) {
+                Log.e(TAG, "Failed to send item ", e);
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return createdTournament;
         }
-        return createdTournament;
-    }
 
     public void updateHandicap(long social, double handicap) throws IOException {
 
