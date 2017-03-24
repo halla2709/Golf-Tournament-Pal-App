@@ -137,6 +137,7 @@ public class ResultsActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
     public void openTournament(Long id) {
         mTournamentID = id;
