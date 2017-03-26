@@ -316,4 +316,36 @@ public class Networker {
             e.printStackTrace();
         }
     }
+
+    public List<Tournament> fetchMyTournaments(String golferSocial) {
+        List<Tournament> tournaments = new ArrayList<>();
+        try {
+            String url = Uri.parse(BASE_URL+"/json/getTournamentByGolfer")
+                    .buildUpon()
+                    .appendQueryParameter("golferSocial", golferSocial)
+                    .build()
+                    .toString();
+            Log.i(TAG, url);
+            String jsonString = getUrlString(url);
+            Log.i(TAG, "Received JSON: " + jsonString);
+            JSONArray jsonBody = new JSONArray(jsonString);
+            Log.i(TAG, "Recieved tournaments: " + jsonBody.length());
+            for (int i = 0; i < jsonBody.length(); i++) {
+
+                JSONObject tournamentJsonObject = jsonBody.getJSONObject(i);
+
+                Tournament tournament = JsonParser.parseTournament(tournamentJsonObject);
+
+                tournaments.add(tournament);
+            }
+        }
+        catch (IOException ioe){
+            Log.e(TAG, "Failed to fetch items ", ioe);
+        }
+        catch (JSONException je){
+            Log.e(TAG, "Failed to parse JSON", je);
+        }
+
+        return tournaments;
+    }
 }

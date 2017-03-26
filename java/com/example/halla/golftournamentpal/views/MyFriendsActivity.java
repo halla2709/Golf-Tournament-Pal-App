@@ -46,20 +46,10 @@ public class MyFriendsActivity extends AppCompatActivity
 
     }
 
-    public void goBack (View view){
-        // Button Listener
-        mCreateButton = (Button) findViewById(R.id.backBracketButton);
-
-        //Intent i = MatchPlayInfoActivity.newIntent(MyFriendsActivity.this);
-        //startActivity(i);
-    }
-
-    /*public void viewfriend (View view){
-        mCreateButton = (Button) findViewById(R.id.viewbutton);
-
-        Intent i = FriendProfileActivity.newIntent(MyFriendsActivity.this);
+    public void viewFriend(Golfer friend){
+        Intent i = FriendProfileActivity.newIntent(MyFriendsActivity.this, friend);
         startActivity(i);
-    }*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +195,13 @@ public class MyFriendsActivity extends AppCompatActivity
             ((TextView) view.findViewById(R.id.friendName)).setText(friend.getName());
             ((TextView) view.findViewById(R.id.friendSocial)).setText(Long.toString(friend.getSocial()));
             ((TextView) view.findViewById(R.id.friendHandicap)).setText(Double.toString(friend.getHandicap()));
+            view.findViewById(R.id.friend_list_layout)
+                    .setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mFragment.viewFriend(friend);
+                        }
+                    });
             return view;
         }
     }

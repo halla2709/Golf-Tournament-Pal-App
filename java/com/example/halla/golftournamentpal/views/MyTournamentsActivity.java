@@ -20,13 +20,16 @@ import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.TournamentArrayAdapter;
+import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+import com.example.halla.golftournamentpal.models.ScoreboardTournament;
 import com.example.halla.golftournamentpal.models.Tournament;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyTournamentsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        TournamentArrayAdapter.CallBacker{
 
     private Button mCreateButton;
     private SessionManager mSessionManager;
@@ -34,17 +37,11 @@ public class MyTournamentsActivity extends AppCompatActivity
     private ListView mListView;
     private TournamentArrayAdapter mAdapter;
 
+    private Long mTournamentID;
+
     public static Intent newIntent(Context packageContext) {
         Intent i = new Intent(packageContext, MyTournamentsActivity.class);
         return i;
-    }
-
-    public void goBack (View view){
-        // Button Listener
-        mCreateButton = (Button) findViewById(R.id.backBracketButton);
-
-        //Intent i = MatchPlayInfoActivity.newIntent(MyTournamentsActivity.this);
-        //startActivity(i);
     }
 
     @Override
@@ -124,13 +121,50 @@ public class MyTournamentsActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void openTournament(Long id) {
+        mTournamentID = id;
+        FetchOneTournamentTask task = new FetchOneTournamentTask();
+        task.execute();
+    }
+
+    private class FetchOneTournamentTask extends AsyncTask<Void, Void, Tournament> {
+
+        @Override
+        protected Tournament doInBackground(Void... params) {
+            Log.i("TAGG", "Fetching...");
+            return new Networker().fetchTournament(mTournamentID);
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("TAGG", "Going to fetch...");
+        }
+
+        @Override
+        protected void onPostExecute(Tournament tournament) {
+            if(tournament instanceof ScoreboardTournament) {
+                Intent intent = ScoreboardInfoActivity.newIntent(MyTournamentsActivity.this,
+                        (ScoreboardTournament) tournament);
+                startActivity(intent);
+            }
+            else if(tournament instanceof MatchPlayTournament) {
+                Intent intent = MatchPlayInfoActivity.newIntent(MyTournamentsActivity.this,
+                        (MatchPlayTournament) tournament);
+                startActivity(intent);
+            }
+        }
+    }
+
     // Fetch a list of tournaments from the database.
     private class FetchMyTournamentsTask extends AsyncTask<Void, Void, List<Tournament>> {
 
         @Override
         protected List<Tournament> doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            return new Networker().fetchTournaments("");
+            return new Networker().fetchMyTournaments(Long.toString(mSessionManager.getSessionUserSocial()));
 
         }
 

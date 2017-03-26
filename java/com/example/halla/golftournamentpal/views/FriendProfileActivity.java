@@ -14,17 +14,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.Golfer;
 
 public class FriendProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SessionManager mSessionManager;
+    private static Golfer sFriend;
 
-    public static Intent newIntent(Context packageContext) {
+    TextView mGolferName;
+    TextView mGolferSocial;
+    TextView mGolferHandicap;
+    TextView mGolferEmail;
+
+
+    public static Intent newIntent(Context packageContext, Golfer friend) {
         Intent i = new Intent(packageContext, FriendProfileActivity.class);
+        sFriend = friend;
         return i;
     }
 
@@ -48,6 +58,24 @@ public class FriendProfileActivity extends AppCompatActivity
         if(mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(FriendProfileActivity.this);
             startActivity(i);
+        }
+
+        mGolferName = (TextView) findViewById(R.id.friend_profile_name);
+        mGolferEmail = (TextView) findViewById(R.id.friend_profile_email);
+        mGolferHandicap = (TextView) findViewById(R.id.friend_profile_handicap);
+        mGolferSocial = (TextView) findViewById(R.id.friend_profile_social);
+
+        // Displaying user-info
+        mGolferName.setText(sFriend.getName());
+        mGolferHandicap.setText(Double.toString(sFriend.getHandicap()));
+        mGolferEmail.setText(sFriend.getEmail());
+
+        // Displaying "0" in front of users social number if necessary
+        String mGolferString = Long.toString(sFriend.getSocial());
+        if (mGolferString.length() != 10) {
+            mGolferSocial.setText("0" + mGolferString);
+        } else {
+            mGolferSocial.setText(mGolferString);
         }
     }
 

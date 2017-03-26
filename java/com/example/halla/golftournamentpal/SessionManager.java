@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.halla.golftournamentpal.models.Golfer;
+import com.example.halla.golftournamentpal.models.Tournament;
 
 import java.util.concurrent.ExecutionException;
 
@@ -25,6 +26,7 @@ public class SessionManager {
     private final String NAME = "userName";
     private final String HANDICAP = "userHandicap";
     private final String EMAIL = "userEmail";
+    private final String TOURNAMENT = "savedTournament";
 
     Long mUserSocial;
     String mUserPassword;
@@ -104,6 +106,17 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void storeTournament(String jsonTournamentToSave) {
+        editor.putString(TOURNAMENT, jsonTournamentToSave);
+        editor.commit();
+    }
+
+    public String getStoredTournament() {
+        String tournament = pref.getString(TOURNAMENT, "");
+        editor.remove(TOURNAMENT);
+        editor.commit();
+        return tournament;
+    }
 
 
     private class LogInTask extends AsyncTask<Void, Void, Golfer> {

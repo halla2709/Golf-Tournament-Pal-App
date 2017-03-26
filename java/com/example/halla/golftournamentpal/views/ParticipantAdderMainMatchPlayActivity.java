@@ -15,15 +15,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.halla.golftournamentpal.JsonParser;
 import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -57,6 +62,7 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
     private static final String ARE_BRACKETS = "areBrackets";
     private static final String TOURNAMENT_B_PARTICIPANTS = "bracketParticipants";
     private static final String TOURNAMENT_B_EXITS = "bracketExits";
+    private final String STORED_TOURNAMENT = "tournamentStored";
 
     private SessionManager mSessionManager;
     private Long mUserSocial;
@@ -109,6 +115,7 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+
         String tname = getIntent().getStringExtra(TOURNAMENT_NAME);
         String tcourse = getIntent().getStringExtra(TOURNAMENT_COURSE);
         Date tdate = new Date();
@@ -131,6 +138,31 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
         newTournament = new MatchPlayTournament(0L, tcourse, tname, null, tdate, tarebrackets, null, null);
 
+        if(savedInstanceState != null) {
+            Log.i("SAVED", "yes");
+            if(savedInstanceState.getBoolean(STORED_TOURNAMENT)){
+                Log.i("Tournament", "yes");
+                try {
+                    JSONObject tournamentJson = new JSONObject(mSessionManager.getStoredTournament());
+                    newTournament = JsonParser.parseMatchPlay(tournamentJson);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String jsonStringTournament = "";
+        try {
+            jsonStringTournament = JsonParser.matchPlayTournamentToString(newTournament);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new SessionManager(getApplicationContext()).storeTournament(jsonStringTournament);
+        outState.putBoolean(STORED_TOURNAMENT, true);
     }
 
     /**
@@ -174,7 +206,9 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
     @Override
     public void friendClicked(Golfer golfer) {
+
         newTournament.addPlayer(golfer);
+
     }
 
     @Override
@@ -189,7 +223,20 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            return friends;
+
+        }
+        if(newTournament.getPlayers().size() > 0) {
+            List<Golfer> found = new ArrayList<>();
+            for(Golfer friend : friends){
+                for(Golfer participant : newTournament.getPlayers()) {
+                    if(friend.getSocial() == participant.getSocial()) {
+                        Log.i("Friend in tournament", friend.getName());
+                        found.add(friend);
+                        break;
+                    }
+                }
+            }
+            friends.removeAll(found);
         }
         return friends;
     }

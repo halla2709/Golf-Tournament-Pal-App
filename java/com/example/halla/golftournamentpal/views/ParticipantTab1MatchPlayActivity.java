@@ -41,8 +41,6 @@ public class ParticipantTab1MatchPlayActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_participant_tab1_match_play, container, false);
-
-
         return rootView;
     }
 

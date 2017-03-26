@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.R;
@@ -62,7 +63,6 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
             Intent intent = LogInActivity.newIntent(MatchPlayCreatorActivity.this);
             startActivity(intent);
         }
-
     }
 
     /**
