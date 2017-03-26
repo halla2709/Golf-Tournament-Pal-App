@@ -12,6 +12,8 @@ import com.example.halla.golftournamentpal.models.Round;
 import com.example.halla.golftournamentpal.models.ScoreboardTournament;
 import com.example.halla.golftournamentpal.models.Scorecard;
 import com.example.halla.golftournamentpal.models.Tournament;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +22,7 @@ import org.w3c.dom.ls.LSException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -327,4 +330,26 @@ public class JsonParser {
         golferObject.put("email", golfer.getEmail());
         return golferObject;
     }
+
+    public static HashMap<Long, Integer> getBracketResults(JSONObject fullObject) throws JSONException {
+        HashMap<Long, Integer> bracketResults = new HashMap<>();
+
+        JsonElement element = (JsonElement) fullObject.get("bracketResults");
+        Gson gson = new Gson();
+        bracketResults = gson.fromJson(element, HashMap.class);
+
+        return bracketResults;
+    }
+
+    public static String[][] getResultTable(JSONObject fullObject, int numOfPlayers, int numOfBrackets) throws JSONException {
+        String[][] resultTable = new String[numOfPlayers][numOfBrackets*numOfPlayers];
+
+        JsonElement element = (JsonElement) fullObject.get("bracketResults");
+        Gson gson = new Gson();
+        resultTable = gson.fromJson(element, String[][].class);
+
+        return resultTable;
+    }
 }
+
+

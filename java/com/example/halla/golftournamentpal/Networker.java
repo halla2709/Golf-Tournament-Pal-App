@@ -7,6 +7,8 @@ import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 import com.example.halla.golftournamentpal.models.Tournament;
 import com.example.halla.golftournamentpal.models.User;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -347,5 +350,28 @@ public class Networker {
         }
 
         return tournaments;
+    }
+
+    public HashMap<String, Object> getBracketInfo(Long tournamentId, int numOfPlayers, int numOfBrackets) {
+        HashMap<String, Object> bracketInfo = new HashMap<>();
+        try {
+            String url = Uri.parse(BASE_URL + "/json/tournament/" + tournamentId + "/brackets")
+                    .buildUpon()
+                    .build()
+                    .toString();
+            Log.i(TAG, url);
+            String jsonString = getUrlString(url);
+            Log.i(TAG, "Received JSON: " + jsonString);
+            JSONObject jsonObject = new JSONObject(jsonString);
+            bracketInfo.put("bracketResults", JsonParser.getBracketResults(jsonObject));
+            bracketInfo.put("resultTable", JsonParser.getResultTable(jsonObject, numOfPlayers, numOfBrackets));
+        }
+        catch (IOException ioe){
+            Log.e(TAG, "Failed to fetch items ", ioe);
+        }
+        catch (JSONException je){
+            Log.e(TAG, "Failed to parse JSON", je);
+        }
+        return bracketInfo;
     }
 }
