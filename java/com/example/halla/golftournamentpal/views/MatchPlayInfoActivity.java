@@ -157,7 +157,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.viewBracket);
 
-        Intent intent = BracketsActivity.newIntent(MatchPlayInfoActivity.this);
+        Intent intent = BracketsActivity.newIntent(MatchPlayInfoActivity.this, sMatchPlayTournament);
         startActivity(intent);
     }
 

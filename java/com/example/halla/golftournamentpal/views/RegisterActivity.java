@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
@@ -81,6 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+
+
     // Register a new Golfer
     private class RegisterTask extends AsyncTask<Void, Void, Golfer> {
 
@@ -104,4 +107,5 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
     }
+
 }

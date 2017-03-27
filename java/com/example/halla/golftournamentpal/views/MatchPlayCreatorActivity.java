@@ -51,11 +51,11 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
         mBracketPartExit = (NumberPicker) findViewById(R.id.bracketParticipantsExit);
         areBrackets = (CheckBox) findViewById(R.id.bracketCheckBox);
 
-        mBracketPart.setMinValue(1);
-        mBracketPart.setMaxValue(2);
+        mBracketPart.setMinValue(2);
+        mBracketPart.setMaxValue(6);
 
-        mBracketPartExit.setMinValue(2);
-        mBracketPartExit.setMaxValue(6);
+        mBracketPartExit.setMinValue(1);
+        mBracketPartExit.setMaxValue(2);
 
         // If no user is logged in open the log in activity
         mSessionManager = new SessionManager(getApplicationContext());

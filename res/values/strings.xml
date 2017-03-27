@@ -66,6 +66,7 @@
     <string name="bracketText">Brackets</string>
     <string name="bracketsText2">Brackets Information:</string>
     <string name="goBackBracketButton">Go Back</string>
+    <string name="points">Points</string>
 
     <!-- PlayOffTreeActivity   -->
     <string name="playOffTreeText">Play Off Tree</string>
