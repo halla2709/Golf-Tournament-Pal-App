@@ -67,15 +67,15 @@ public class MyTournamentsActivity extends AppCompatActivity
         mListView = (ListView) findViewById(R.id.my_tournaments_list);
         mAdapter = new TournamentArrayAdapter(getApplicationContext(), MyTournamentsActivity.this);
 
-        MyTournamentsActivity.FetchMyTournamentsTask task = new MyTournamentsActivity.FetchMyTournamentsTask();
-        task.execute();
-
         // Checking if user is logged in
         mSessionManager = new SessionManager(getApplicationContext());
         if(mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(MyTournamentsActivity.this);
             startActivity(i);
         }
+
+        MyTournamentsActivity.FetchMyTournamentsTask task = new MyTournamentsActivity.FetchMyTournamentsTask();
+        task.execute();
     }
 
     // Navigation drawer

@@ -21,7 +21,9 @@ import android.widget.TextView;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.Golfer;
+import com.example.halla.golftournamentpal.models.Match;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+import com.example.halla.golftournamentpal.models.Tournament;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,12 +52,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
 
     public static Intent newIntent(Context packageContext, MatchPlayTournament tournament) {
         Intent intent = new Intent(packageContext, MatchPlayInfoActivity.class);
-        /*intent.putExtra(TOURNAMENT_NAME, tournament.getName().toString());
-        intent.putExtra(TOURNAMENT_COURSE, tournament.getCourse().toString());
-        intent.putExtra(TOURNAMENT_DATE, tournament.getStartDate().toString());
-        intent.putExtra(ARE_BRACKETS, tournament.isAreBrackets());
-        intent.putExtra(TOURNAMENT_JSON_PLAYERS);*/
-        sMatchPlayTournament = tournament;
+        intent.putExtra("tournament", tournament);
         return intent;
     }
 
@@ -88,6 +85,8 @@ public class MatchPlayInfoActivity extends AppCompatActivity
             Intent intent = LogInActivity.newIntent(MatchPlayInfoActivity.this);
             startActivity(intent);
         }
+
+        sMatchPlayTournament = (MatchPlayTournament) getIntent().getParcelableExtra("tournament");
 
         displayInfo();
     }
@@ -123,8 +122,6 @@ public class MatchPlayInfoActivity extends AppCompatActivity
         mParticipantAdapter.setData(mParticipants);
         mParticipantListView.setAdapter(mParticipantAdapter);
         setListHeight(mParticipantListView);
-
-
 
     }
 

@@ -38,6 +38,7 @@ import static android.support.v7.appcompat.R.attr.color;
 import static android.support.v7.appcompat.R.attr.colorPrimary;
 import static android.support.v7.appcompat.R.attr.colorPrimaryDark;
 import static com.example.halla.golftournamentpal.R.id.brackets_list_view;
+import static com.example.halla.golftournamentpal.R.id.handicap;
 //import static com.example.halla.golftournamentpal.R.id.brackets_list_view2;
 
 public class BracketsActivity extends AppCompatActivity
@@ -45,13 +46,18 @@ public class BracketsActivity extends AppCompatActivity
 
     private Button mCreateButton;
     private SessionManager mSessionManager;
-    private static MatchPlayTournament sMatchPlayTournament;
-    ListView mBracketListView;
-    ListView mBracketListView2;
+    private ListView mBracketListView;
+    private TextView mNoBrackets;
 
     ListView mParticipantListView;
-    private static List<Bracket> mBrackets = new ArrayList<>();
-    private static List<Golfer> mParticipants = new ArrayList<>();
+    private static final String BRACKETS = "brackets";
+    private static final String PARTICIPANTS = "participants";
+    private static final String TOURNAMENT_ID = "id";
+
+    private List<Bracket> mBrackets = new ArrayList<>();
+    private List<Golfer> mParticipants = new ArrayList<>();
+    private Long mTournamentid;
+
     BracketArrayAdapter mBracketsAdapter;
 
     private HashMap<Long, Integer> bracketResults;
@@ -60,8 +66,9 @@ public class BracketsActivity extends AppCompatActivity
 
     public static Intent newIntent(Context packageContext, MatchPlayTournament tournament) {
         Intent i = new Intent(packageContext, BracketsActivity.class);
-        mBrackets = tournament.getBrackets();
-        mParticipants = tournament.getPlayers();
+        i.putExtra(TOURNAMENT_ID, tournament.getId());
+        i.putParcelableArrayListExtra(BRACKETS, (ArrayList) tournament.getBrackets());
+        i.putParcelableArrayListExtra(PARTICIPANTS, (ArrayList) tournament.getPlayers());
         return i;
     }
 
@@ -82,28 +89,43 @@ public class BracketsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mBracketsAdapter = new BracketArrayAdapter(this.getApplicationContext(), BracketsActivity.this);
+        mBracketListView = (ListView) findViewById(R.id.brackets_list_view);
+        mNoBrackets = (TextView) findViewById(R.id.noBrackets);
+
         mSessionManager = new SessionManager(getApplicationContext());
         if (mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(BracketsActivity.this);
             startActivity(i);
         }
 
-        displayInfo();
+        mBrackets = getIntent().getParcelableArrayListExtra(BRACKETS);
+        mParticipants = getIntent().getParcelableArrayListExtra(PARTICIPANTS);
+        mTournamentid = getIntent().getLongExtra(TOURNAMENT_ID, 0);
+
+        if(mBrackets.size() > 0) {
+            GetBracketInfoTask task = new GetBracketInfoTask();
+            task.execute();
+        }
+
+        else displayNoBrackets();
+
+
     }
 
 
     public void displayInfo () {
-
-        mBracketsAdapter = new BracketArrayAdapter(this.getApplicationContext(), BracketsActivity.this);
-        mBracketListView = (ListView) findViewById(brackets_list_view);
-        //mBracketListView2 = (ListView) findViewById(brackets_list_view2);
-
+        mBracketListView.setVisibility(View.VISIBLE);
+        mNoBrackets.setVisibility(View.GONE);
         mBracketsAdapter.setData(mBrackets);
         mBracketListView.setAdapter(mBracketsAdapter);
-        //mBracketListView2.setAdapter(mBracketsAdapter);
         setListHeight(mBracketListView);
-        //setListHeight(mBracketListView2);
 
+    }
+
+    public void displayNoBrackets() {
+        mBracketListView.setVisibility(View.GONE);
+        mNoBrackets.setVisibility(View.VISIBLE);
     }
 
     public void setListHeight(ListView list) {
@@ -168,46 +190,64 @@ public class BracketsActivity extends AppCompatActivity
 
     public TableLayout fillTable(Bracket bracket, TableLayout tableLayout)
     {
-        TableRow newRow = new TableRow(this);
-        TableRow tableRow = new TableRow(this);
+        TableRow headerRow = new TableRow(this);
+
         //HEADER
         //column bracketname
         TextView bracketTextView = new TextView(this);
         bracketTextView.setText(bracket.getName());
-        newRow.addView(bracketTextView);
+        headerRow.addView(bracketTextView);
 
         //column for all players
         for (int x=0; x<bracket.getPlayers().size(); x++) {
             TextView playerTextView = new TextView(this);
             playerTextView.setText(bracket.getPlayers().get(x).getName());
-            newRow.addView(playerTextView);
+            headerRow.addView(playerTextView);
         }
+
         //column points
         TextView pointsTextView = new TextView(this);
         pointsTextView.setText("Points");
-        newRow.addView(pointsTextView);
+        headerRow.addView(pointsTextView);
 
         //create the NEW ROW
-        tableLayout.addView(newRow, new TableLayout.LayoutParams());
+        tableLayout.addView(headerRow, new TableLayout.LayoutParams());
 
 
         //TABLE
         //column playername
-        for (int x=0; x<bracket.getPlayers().size(); x++) {
+        for (int x=0; x < bracket.getPlayers().size(); x++) {
+            TableRow tableRow = new TableRow(this);
             TextView playerTextViewTable = new TextView(this);
             playerTextViewTable.setText(bracket.getPlayers().get(x).getName());
-            newRow.addView(playerTextViewTable);
+            tableRow.addView(playerTextViewTable);
 
+            for(int i = 0; i < bracket.getPlayers().size(); i++) {
+                String result = resultTable[x][i];
+                TextView resultTextView = new TextView(this);
+                if(result == null) resultTextView.setText("-");
+                else if(result.equals("np")) {
+                    final String names = bracket.getPlayers().get(x).getName() + " vs " + bracket.getPlayers().get(i).getName();
+                    resultTextView.setText("Add results");
+                    resultTextView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Log.i("from a bracket", names);
+                        }
+                    });
+                }
+                else resultTextView.setText(result);
+                tableRow.addView(resultTextView);
+            }
+
+            TextView playerPointsTextView = new TextView(this);
+            playerPointsTextView.setText(bracketResults.get(bracket.getPlayers().get(x).getSocial()));
             //Bannað dno why
-            //tableLayout.addView(tableRow, new TableLayout.LayoutParams());
+            tableLayout.addView(tableRow, new TableLayout.LayoutParams());
 
         }
-
-        tableLayout.addView(tableRow, new TableLayout.LayoutParams());
-
         return tableLayout;
     }
-
 
 
     private class BracketArrayAdapter extends ArrayAdapter<Bracket> {
@@ -250,18 +290,15 @@ public class BracketsActivity extends AppCompatActivity
         }
     }
 
-   /* private class GetBracketInfoTask extends AsyncTask<Void, Void, Golfer> {
+    private class GetBracketInfoTask extends AsyncTask<Void, Void, Golfer> {
 
         @Override
         protected Golfer doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            //HashMap<String, Object> bracketInfo = new Networker().getBracketInfo(tournametnid, players, brackets);
-            Long tournamentId;
-            int players;
-            int brackets;
-            HashMap<String, Object> bracketInfo = new Networker().getBracketInfo(tournamentId, players, brackets);
+            HashMap<String, Object> bracketInfo = new Networker().getBracketInfo(mTournamentid);
             Log.i("TAGG", "Done fetching");
-            bracketResults = bracketInfo.get("bracketResults");
+            bracketResults = (HashMap) bracketInfo.get("bracketResults");
+            resultTable = (String[][]) bracketInfo.get("resultTable");
             return null;
         }
 
@@ -274,8 +311,8 @@ public class BracketsActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(Golfer golfer) {
             super.onPostExecute(golfer);
+            displayInfo();
             Log.i("TAGG", "Done");
         }
     }
-    */
 }

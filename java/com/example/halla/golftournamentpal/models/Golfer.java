@@ -1,5 +1,8 @@
 package com.example.halla.golftournamentpal.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +10,7 @@ import java.util.List;
  * Created by Halla on 16-Feb-17.
  */
 
-public class Golfer {
+public class Golfer implements Parcelable {
 
     private String mName;
     private long mSocial;
@@ -70,4 +73,49 @@ public class Golfer {
     public void addFriend(Golfer friend){
         mFriends.add(friend);
     }
+
+    protected Golfer(Parcel in) {
+        mName = in.readString();
+        mSocial = in.readLong();
+        mHandicap = in.readDouble();
+        mEmail = in.readString();
+        if (in.readByte() == 0x01) {
+            mFriends = new ArrayList<Golfer>();
+            in.readList(mFriends, Golfer.class.getClassLoader());
+        } else {
+            mFriends = null;
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mName);
+        dest.writeLong(mSocial);
+        dest.writeDouble(mHandicap);
+        dest.writeString(mEmail);
+        if (mFriends == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(mFriends);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Golfer> CREATOR = new Parcelable.Creator<Golfer>() {
+        @Override
+        public Golfer createFromParcel(Parcel in) {
+            return new Golfer(in);
+        }
+
+        @Override
+        public Golfer[] newArray(int size) {
+            return new Golfer[size];
+        }
+    };
 }

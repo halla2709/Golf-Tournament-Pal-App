@@ -34,8 +34,8 @@ import java.util.List;
 public class Networker {
     //String BASE_URL ="http://192.168.0.109:8080"; //Heima hjá Höllu
     //String BASE_URL ="http://192.168.1.43:8080"; //Heima hjá Hafrúnu
-    String BASE_URL = "http://192.168.1.2:8080"; //Heima hjá Unni
-    //String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
+    //String BASE_URL = "http://192.168.1.2:8080"; //Heima hjá Unni
+    String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
     String TAG = "networker";
 
 
@@ -353,7 +353,7 @@ public class Networker {
         return tournaments;
     }
 
-    public HashMap<String, Object> getBracketInfo(Long tournamentId, int numOfPlayers, int numOfBrackets) {
+    public HashMap<String, Object> getBracketInfo(Long tournamentId) {
         HashMap<String, Object> bracketInfo = new HashMap<>();
         try {
             String url = Uri.parse(BASE_URL + "/json/tournament/" + tournamentId + "/brackets")
@@ -365,7 +365,7 @@ public class Networker {
             Log.i(TAG, "Received JSON: " + jsonString);
             JSONObject jsonObject = new JSONObject(jsonString);
             bracketInfo.put("bracketResults", JsonParser.getBracketResults(jsonObject));
-            bracketInfo.put("resultTable", JsonParser.getResultTable(jsonObject, numOfPlayers, numOfBrackets));
+            bracketInfo.put("resultTable", JsonParser.getResultTable(jsonObject));
         }
         catch (IOException ioe){
             Log.e(TAG, "Failed to fetch items ", ioe);

@@ -334,18 +334,19 @@ public class JsonParser {
     public static HashMap<Long, Integer> getBracketResults(JSONObject fullObject) throws JSONException {
         HashMap<Long, Integer> bracketResults = new HashMap<>();
 
-        JsonElement element = (JsonElement) fullObject.get("bracketResults");
+
         Gson gson = new Gson();
+        JsonElement element = gson.fromJson(fullObject.get("bracketResults").toString(), JsonElement.class);
         bracketResults = gson.fromJson(element, HashMap.class);
 
         return bracketResults;
     }
 
-    public static String[][] getResultTable(JSONObject fullObject, int numOfPlayers, int numOfBrackets) throws JSONException {
-        String[][] resultTable = new String[numOfPlayers][numOfBrackets*numOfPlayers];
+    public static String[][] getResultTable(JSONObject fullObject) throws JSONException {
+        String[][] resultTable;
 
-        JsonElement element = (JsonElement) fullObject.get("bracketResults");
         Gson gson = new Gson();
+        JsonElement element = gson.fromJson(fullObject.get("resultTable").toString(), JsonElement.class);
         resultTable = gson.fromJson(element, String[][].class);
 
         return resultTable;

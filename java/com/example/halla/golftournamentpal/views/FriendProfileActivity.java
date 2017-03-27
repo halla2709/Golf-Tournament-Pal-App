@@ -34,7 +34,8 @@ public class FriendProfileActivity extends AppCompatActivity
 
     public static Intent newIntent(Context packageContext, Golfer friend) {
         Intent i = new Intent(packageContext, FriendProfileActivity.class);
-        sFriend = friend;
+        i.putExtra("friend", friend);
+        //sFriend = friend;
         return i;
     }
 
@@ -59,6 +60,8 @@ public class FriendProfileActivity extends AppCompatActivity
             Intent i = LogInActivity.newIntent(FriendProfileActivity.this);
             startActivity(i);
         }
+
+        sFriend = (Golfer) getIntent().getParcelableExtra("friend");
 
         mGolferName = (TextView) findViewById(R.id.friend_profile_name);
         mGolferEmail = (TextView) findViewById(R.id.friend_profile_email);

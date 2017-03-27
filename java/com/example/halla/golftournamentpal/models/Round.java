@@ -1,10 +1,13 @@
 package com.example.halla.golftournamentpal.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Halla on 16-Feb-17.
  */
 
-public class Round {
+public class Round implements Parcelable {
 
     private int mH1;
     private int mH2;
@@ -209,4 +212,67 @@ public class Round {
     public void setH1(int h1) {
         mH1 = h1;
     }
+
+    protected Round(Parcel in) {
+        mH1 = in.readInt();
+        mH2 = in.readInt();
+        mH3 = in.readInt();
+        mH4 = in.readInt();
+        mH5 = in.readInt();
+        mH6 = in.readInt();
+        mH7 = in.readInt();
+        mH8 = in.readInt();
+        mH9 = in.readInt();
+        mH10 = in.readInt();
+        mH11 = in.readInt();
+        mH12 = in.readInt();
+        mH13 = in.readInt();
+        mH14 = in.readInt();
+        mH15 = in.readInt();
+        mH16 = in.readInt();
+        mH17 = in.readInt();
+        mH18 = in.readInt();
+        total = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mH1);
+        dest.writeInt(mH2);
+        dest.writeInt(mH3);
+        dest.writeInt(mH4);
+        dest.writeInt(mH5);
+        dest.writeInt(mH6);
+        dest.writeInt(mH7);
+        dest.writeInt(mH8);
+        dest.writeInt(mH9);
+        dest.writeInt(mH10);
+        dest.writeInt(mH11);
+        dest.writeInt(mH12);
+        dest.writeInt(mH13);
+        dest.writeInt(mH14);
+        dest.writeInt(mH15);
+        dest.writeInt(mH16);
+        dest.writeInt(mH17);
+        dest.writeInt(mH18);
+        dest.writeInt(total);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Round> CREATOR = new Parcelable.Creator<Round>() {
+        @Override
+        public Round createFromParcel(Parcel in) {
+            return new Round(in);
+        }
+
+        @Override
+        public Round[] newArray(int size) {
+            return new Round[size];
+        }
+    };
 }
