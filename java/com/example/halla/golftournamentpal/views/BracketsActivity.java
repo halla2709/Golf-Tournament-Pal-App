@@ -1,6 +1,5 @@
 package com.example.halla.golftournamentpal.views;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -21,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.Networker;
@@ -190,8 +190,14 @@ public class BracketsActivity extends AppCompatActivity
 
     public TableLayout fillTable(Bracket bracket, TableLayout tableLayout)
     {
+        Log.i("players in b", Integer.toString(bracket.getPlayers().size()));
+        Log.i("bracket name", bracket.getName());
+        Log.i("bracket results", bracketResults.toString());
         TableRow headerRow = new TableRow(this);
-
+        headerRow.setLayoutParams(new LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        ));
         //HEADER
         //column bracketname
         TextView bracketTextView = new TextView(this);
@@ -211,13 +217,20 @@ public class BracketsActivity extends AppCompatActivity
         headerRow.addView(pointsTextView);
 
         //create the NEW ROW
-        tableLayout.addView(headerRow, new TableLayout.LayoutParams());
+        tableLayout.addView(headerRow, new TableLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
         //TABLE
         //column playername
         for (int x=0; x < bracket.getPlayers().size(); x++) {
             TableRow tableRow = new TableRow(this);
+            tableRow.setLayoutParams(new LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            ));
+
             TextView playerTextViewTable = new TextView(this);
             playerTextViewTable.setText(bracket.getPlayers().get(x).getName());
             tableRow.addView(playerTextViewTable);
@@ -241,9 +254,14 @@ public class BracketsActivity extends AppCompatActivity
             }
 
             TextView playerPointsTextView = new TextView(this);
-            playerPointsTextView.setText(bracketResults.get(bracket.getPlayers().get(x).getSocial()));
-            //Bannað dno why
-            tableLayout.addView(tableRow, new TableLayout.LayoutParams());
+            Log.i("player in bracket", bracketResults.get(2709942619L).toString());
+            playerPointsTextView.setText(bracketResults
+                    .get(bracket.getPlayers().get(x).getSocial()).toString());
+
+            tableLayout.addView(tableRow, new TableLayout.LayoutParams(new LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            )));
 
         }
         return tableLayout;

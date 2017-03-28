@@ -14,6 +14,7 @@ import com.example.halla.golftournamentpal.models.Scorecard;
 import com.example.halla.golftournamentpal.models.Tournament;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -144,7 +145,7 @@ public class JsonParser {
             int numberOfRounds = roundsJsonArray.length();
             int[] totalforRounds = JsonParser.parseArray(scorecardJsonObject.getJSONArray("totalForRounds"));
 
-            Scorecard newScorecard = new Scorecard(golfer, scorecardCourse, null, numberOfRounds, newRounds);
+            Scorecard newScorecard = new Scorecard(golfer, scorecardCourse, numberOfRounds, newRounds);
             newScorecards.add(newScorecard);
         }
 
@@ -332,12 +333,11 @@ public class JsonParser {
     }
 
     public static HashMap<Long, Integer> getBracketResults(JSONObject fullObject) throws JSONException {
-        HashMap<Long, Integer> bracketResults = new HashMap<>();
-
+        HashMap<Long, Integer> bracketResults;
 
         Gson gson = new Gson();
         JsonElement element = gson.fromJson(fullObject.get("bracketResults").toString(), JsonElement.class);
-        bracketResults = gson.fromJson(element, HashMap.class);
+        bracketResults = gson.fromJson(element, new TypeToken<HashMap<Long, Integer>>(){}.getType());
 
         return bracketResults;
     }
