@@ -258,6 +258,7 @@ public class Networker {
 
         try {
             String jsonString = getUrlString(url);
+            if(jsonString == null) return null;
             JSONObject jsonObject = new JSONObject(jsonString);
             toReturn = JsonParser.parseCompleteTournament(jsonObject);
         } catch (IOException e) {
@@ -331,6 +332,7 @@ public class Networker {
                     .toString();
             Log.i(TAG, url);
             String jsonString = getUrlString(url);
+            if(jsonString == null) return null;
             Log.i(TAG, "Received JSON: " + jsonString);
             JSONArray jsonBody = new JSONArray(jsonString);
             Log.i(TAG, "Recieved tournaments: " + jsonBody.length());

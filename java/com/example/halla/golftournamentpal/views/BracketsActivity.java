@@ -97,9 +97,11 @@ public class BracketsActivity extends AppCompatActivity
         mParticipants = getIntent().getParcelableArrayListExtra(PARTICIPANTS);
         mTournamentid = getIntent().getLongExtra(TOURNAMENT_ID, 0);
 
-        if(mBrackets.size() > 0) {
-            GetBracketInfoTask task = new GetBracketInfoTask();
-            task.execute();
+        if(mBrackets != null) {
+            if(mBrackets.size() > 0) {
+                GetBracketInfoTask task = new GetBracketInfoTask();
+                task.execute();
+            }
         }
 
         else displayNoBrackets();

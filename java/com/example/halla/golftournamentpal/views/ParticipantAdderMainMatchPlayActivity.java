@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.halla.golftournamentpal.JsonParser;
 import com.example.halla.golftournamentpal.Networker;
@@ -347,9 +348,14 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(MatchPlayTournament tournament) {
             super.onPostExecute(tournament);
-            Intent intent = MatchPlayInfoActivity.newIntent(ParticipantAdderMainMatchPlayActivity.this,
-                    tournament);
-            startActivity(intent);
+            if(tournament != null) {
+                Intent intent = MatchPlayInfoActivity.newIntent(ParticipantAdderMainMatchPlayActivity.this,
+                        tournament);
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Please enter the correct number of players", Toast.LENGTH_LONG).show();
+            }
             Log.i("TAGG", "Done");
 
         }
