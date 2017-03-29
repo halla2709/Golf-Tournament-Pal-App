@@ -167,7 +167,7 @@ public class MyFriendsActivity extends AppCompatActivity
         private MyFriendsActivity mFragment;
 
         public GolferArrayAdapter(Context context, MyFriendsActivity myFragment) {
-            super(context, R.layout.friend_list_item);
+            super(context, R.layout.friend_list_item_table);
             mFragment = myFragment;
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
@@ -186,7 +186,7 @@ public class MyFriendsActivity extends AppCompatActivity
             View view;
 
             if (convertView == null) {
-                view = mInflater.inflate(R.layout.friend_list_item, parent, false);
+                view = mInflater.inflate(R.layout.friend_list_item_table, parent, false);
             } else {
                 view = convertView;
             }
