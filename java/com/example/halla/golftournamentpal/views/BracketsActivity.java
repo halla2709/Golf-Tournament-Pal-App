@@ -4,16 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,12 +33,6 @@ import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static android.support.v7.appcompat.R.attr.color;
-import static android.support.v7.appcompat.R.attr.colorPrimary;
-import static android.support.v7.appcompat.R.attr.colorPrimaryDark;
-import static com.example.halla.golftournamentpal.R.id.brackets_list_view;
-import static com.example.halla.golftournamentpal.R.id.handicap;
 //import static com.example.halla.golftournamentpal.R.id.brackets_list_view2;
 
 public class BracketsActivity extends AppCompatActivity
@@ -103,13 +97,12 @@ public class BracketsActivity extends AppCompatActivity
         mParticipants = getIntent().getParcelableArrayListExtra(PARTICIPANTS);
         mTournamentid = getIntent().getLongExtra(TOURNAMENT_ID, 0);
 
-        if(mBrackets.size() > 0) {
+        if(mBrackets != null) {
             GetBracketInfoTask task = new GetBracketInfoTask();
             task.execute();
         }
 
         else displayNoBrackets();
-
 
     }
 
@@ -197,7 +190,6 @@ public class BracketsActivity extends AppCompatActivity
         Log.i("bracket results", bracketResults.toString());
         TableRow headerRow = new TableRow(this);
         headerRow.setLayoutParams(new LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.FILL_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
@@ -229,7 +221,6 @@ public class BracketsActivity extends AppCompatActivity
 
         //create the NEW ROW
         tableLayout.addView(headerRow, new TableLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.FILL_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -239,7 +230,6 @@ public class BracketsActivity extends AppCompatActivity
         for (int x=0; x < bracket.getPlayers().size(); x++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.FILL_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
 
@@ -270,12 +260,11 @@ public class BracketsActivity extends AppCompatActivity
             }
 
             TextView playerPointsTextView = new TextView(this);
-            Log.i("player in bracket", bracketResults.get(2709942619L).toString());
+            //Log.i("player in bracket", bracketResults.get(2709942619L).toString());
             playerPointsTextView.setText(bracketResults
                     .get(bracket.getPlayers().get(x).getSocial()).toString());
 
             tableLayout.addView(tableRow, new TableLayout.LayoutParams(new LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.FILL_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
             )));
@@ -351,5 +340,4 @@ public class BracketsActivity extends AppCompatActivity
             Log.i("TAGG", "Done");
         }
     }
-}
 }

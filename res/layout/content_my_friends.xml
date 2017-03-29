@@ -74,6 +74,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/myFriendsList"></ListView>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/noFriends"
+                    android:textColor="@color/secondaryTextColor"
+                    android:id="@+id/noFriends"
+                    android:visibility="gone"
+                    android:textSize="20sp"/>
             </TableLayout>
         </ScrollView>
     </LinearLayout>

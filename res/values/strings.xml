@@ -132,6 +132,7 @@
     <string name="view">View</string>
     <string name="SSN2">SSN: </string>
     <string name="handicap2">Hcp: </string>
+    <string name="noFriends">"You don't have any friends :("</string>
 
     <!-- Scoreboard Activity -->
     <string name="scoreboard">Scoreboard</string>

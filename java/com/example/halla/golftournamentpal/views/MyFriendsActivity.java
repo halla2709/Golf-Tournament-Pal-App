@@ -36,6 +36,7 @@ public class MyFriendsActivity extends AppCompatActivity
     private SessionManager mSessionManager;
     private Golfer mGolfer;
     private Long mUserSocial;
+    private TextView mNofriendsView;
     GolferArrayAdapter mParticipantAdapter;
     ListView mParticipantListView;
     List<Golfer> mParticipants = new ArrayList<>();
@@ -49,6 +50,11 @@ public class MyFriendsActivity extends AppCompatActivity
     public void viewFriend(Golfer friend){
         Intent i = FriendProfileActivity.newIntent(MyFriendsActivity.this, friend);
         startActivity(i);
+    }
+
+    public void displayNoFriends() {
+        mParticipantListView.setVisibility(View.GONE);
+        mNofriendsView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -92,12 +98,18 @@ public class MyFriendsActivity extends AppCompatActivity
 
         mParticipantAdapter = new GolferArrayAdapter(this.getApplicationContext(), MyFriendsActivity.this);
         mParticipantListView = (ListView) findViewById(R.id.myFriendsList);
+        mNofriendsView = (TextView) findViewById(R.id.noFriends);
 
         mParticipants = mGolfer.getFriends();
 
-        mParticipantAdapter.setData(mParticipants);
-        mParticipantListView.setAdapter(mParticipantAdapter);
-        setListHeight(mParticipantListView);
+        if(!mParticipants.isEmpty()){
+            mParticipantAdapter.setData(mParticipants);
+            mParticipantListView.setAdapter(mParticipantAdapter);
+            setListHeight(mParticipantListView);
+        } else {
+            displayNoFriends();
+        }
+
     }
 
 
