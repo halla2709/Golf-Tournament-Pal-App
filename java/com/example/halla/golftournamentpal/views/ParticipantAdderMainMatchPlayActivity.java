@@ -104,6 +104,7 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -172,14 +173,6 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
     public void gotonext (View view){
         SaveTournamentTask task = new SaveTournamentTask();
         task.execute();
-        try {
-            task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
     }
 
     /**
