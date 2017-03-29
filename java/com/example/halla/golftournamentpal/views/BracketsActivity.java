@@ -103,9 +103,11 @@ public class BracketsActivity extends AppCompatActivity
         mParticipants = getIntent().getParcelableArrayListExtra(PARTICIPANTS);
         mTournamentid = getIntent().getLongExtra(TOURNAMENT_ID, 0);
 
-        if(mBrackets.size() > 0) {
-            GetBracketInfoTask task = new GetBracketInfoTask();
-            task.execute();
+        if(mBrackets != null) {
+            if(mBrackets.size() > 0) {
+                GetBracketInfoTask task = new GetBracketInfoTask();
+                task.execute();
+            }
         }
 
         else displayNoBrackets();
@@ -254,7 +256,6 @@ public class BracketsActivity extends AppCompatActivity
             }
 
             TextView playerPointsTextView = new TextView(this);
-            Log.i("player in bracket", bracketResults.get(2709942619L).toString());
             playerPointsTextView.setText(bracketResults
                     .get(bracket.getPlayers().get(x).getSocial()).toString());
 
