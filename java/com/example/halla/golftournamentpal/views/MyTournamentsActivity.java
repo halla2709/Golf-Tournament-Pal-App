@@ -180,6 +180,7 @@ public class MyTournamentsActivity extends AppCompatActivity
             mAdapter.setData(mTournamentList);
             mListView.setAdapter(mAdapter);
             Log.i("TAGG", tournaments.get(0).getStartDate().toString());
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
         }
     }

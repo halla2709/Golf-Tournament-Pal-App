@@ -237,6 +237,7 @@ public class MyFriendsActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(Golfer golfer) {
             super.onPostExecute(golfer);
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             Log.i("TAGG", "Done");
         }
     }

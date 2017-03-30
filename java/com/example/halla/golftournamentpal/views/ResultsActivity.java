@@ -1,6 +1,5 @@
 package com.example.halla.golftournamentpal.views;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -196,6 +195,7 @@ public class ResultsActivity extends AppCompatActivity
             mTournamentList = tournaments;
             mAdapter.setData(mTournamentList);
             mListView.setAdapter(mAdapter);
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             Log.i("TAGG", tournaments.get(0).getStartDate().toString());
 
         }
