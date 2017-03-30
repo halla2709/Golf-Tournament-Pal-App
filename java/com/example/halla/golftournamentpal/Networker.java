@@ -7,12 +7,11 @@ import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 import com.example.halla.golftournamentpal.models.Tournament;
 import com.example.halla.golftournamentpal.models.User;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -84,7 +83,7 @@ public class Networker {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Content-Length", "" +
-                    Integer.toString(tournamentJson.getBytes().length));
+                    Integer.toString(tournamentJson.getBytes("UTF-8").length));
             conn.setRequestProperty("User-Agent", "Mozilla/5.0 ( compatible ) ");
             conn.setRequestProperty("Accept", "*/*");
 
@@ -94,7 +93,7 @@ public class Networker {
 
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
 
-            out.writeBytes(tournamentJson);
+            out.write(tournamentJson.getBytes("UTF-8"));
             out.flush();
             out.close();
 
