@@ -137,7 +137,7 @@ public class PlayOffTreeActivity extends AppCompatActivity
 
     @Override
     public PlayOffRound getRound(int round) {
-        return null;
+        return mPlayOffTree.getRounds().get(round);
     }
 
     /**

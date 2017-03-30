@@ -262,7 +262,7 @@ public class JsonParser {
         }
 
         public static Match parseMatch(JSONObject matchJsonObject) throws JSONException {
-            Match match = new Match(null, "", null);
+            Match match = new Match(0L, null, "", null);
 
             if(!matchJsonObject.isNull("results"))
                 match.setResults(matchJsonObject.getString("results"));

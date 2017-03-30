@@ -13,11 +13,13 @@ import java.util.List;
 
 public class Match implements Parcelable {
 
+    private Long mID;
     private List<Golfer> mPlayers;
     private String mResults;
     private Date mDate;
 
-    public Match(List<Golfer> players, String results, Date date) {
+    public Match(Long id, List<Golfer> players, String results, Date date) {
+        mID = id;
         mPlayers = players;
         mResults = results;
         mDate = date;
@@ -47,7 +49,16 @@ public class Match implements Parcelable {
         mDate = date;
     }
 
+    public Long getID() {
+        return mID;
+    }
+
+    public void setID(Long ID) {
+        mID = ID;
+    }
+
     protected Match(Parcel in) {
+        mID = in.readLong();
         if (in.readByte() == 0x01) {
             mPlayers = new ArrayList<Golfer>();
             in.readList(mPlayers, Golfer.class.getClassLoader());
@@ -57,6 +68,7 @@ public class Match implements Parcelable {
         mResults = in.readString();
         long tmpMDate = in.readLong();
         mDate = tmpMDate != -1 ? new Date(tmpMDate) : null;
+
     }
 
     @Override
@@ -66,6 +78,7 @@ public class Match implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(mID != null ? mID : -1L);
         if (mPlayers == null) {
             dest.writeByte((byte) (0x00));
         } else {
