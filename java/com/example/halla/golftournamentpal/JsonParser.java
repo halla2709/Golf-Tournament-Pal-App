@@ -301,6 +301,7 @@ public class JsonParser {
             }
             round.setMatches(matches);
             round.setRound(roundJsonObject.getInt("round"));
+            rounds.add(round);
         }
 
         tree.setRounds(rounds);
