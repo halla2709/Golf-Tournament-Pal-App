@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +44,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
     private static final String ARE_BRACKETS = "areBrackets";
     private static final String TOURNAMENT_JSON_PLAYERS = "jsonPlayer";
 
-    private static MatchPlayTournament sMatchPlayTournament;
+    private MatchPlayTournament sMatchPlayTournament;
 
     GolferArrayAdapter mParticipantAdapter;
     ListView mParticipantListView;
@@ -52,6 +53,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
 
     public static Intent newIntent(Context packageContext, MatchPlayTournament tournament) {
         Intent intent = new Intent(packageContext, MatchPlayInfoActivity.class);
+        Log.i("intent in info", Integer.toString(tournament.getPlayOffs().getRounds().size()));
         intent.putExtra("tournament", tournament);
         return intent;
     }
@@ -87,25 +89,12 @@ public class MatchPlayInfoActivity extends AppCompatActivity
         }
 
         sMatchPlayTournament = (MatchPlayTournament) getIntent().getParcelableExtra("tournament");
+        Log.i("in info", Integer.toString(sMatchPlayTournament.getPlayOffs().getRounds().size()));
 
         displayInfo();
     }
 
     public void displayInfo(){
-
-        /*String mTourName = getIntent().getStringExtra(TOURNAMENT_NAME);
-        String mCourse = getIntent().getStringExtra(TOURNAMENT_COURSE);
-        String mDate = getIntent().getStringExtra(TOURNAMENT_DATE);
-        Log.i("TAGG", "Tournament name" + mTourName );
-
-
-        TextView mTourNameView = (TextView) findViewById(R.id.tourInfoName);
-        TextView mCourseView = (TextView) findViewById(R.id.tourInfoCourse);
-        TextView mDateView = (TextView) findViewById(R.id.tourInfoDate);
-
-        mTourNameView.setText(mTourName);
-        mCourseView.setText(mCourse);
-        mDateView.setText(mDate.substring(0,11));*/
 
         TextView mTourNameView = (TextView) findViewById(R.id.tourInfoName);
         TextView mCourseView = (TextView) findViewById(R.id.tourInfoCourse);
@@ -146,7 +135,7 @@ public class MatchPlayInfoActivity extends AppCompatActivity
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.viewbPlayOffTree);
 
-        Intent intent = PlayOffTreeActivity.newIntent(MatchPlayInfoActivity.this);
+        Intent intent = PlayOffTreeActivity.newIntent(MatchPlayInfoActivity.this, sMatchPlayTournament);
         startActivity(intent);
     }
 

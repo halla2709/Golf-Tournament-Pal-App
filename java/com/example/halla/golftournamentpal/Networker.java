@@ -254,8 +254,6 @@ public class Networker {
                 .appendQueryParameter("id", id.toString())
                 .build()
                 .toString();
-
-
         try {
             String jsonString = getUrlString(url);
             if(jsonString == null) return null;
