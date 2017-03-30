@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+import com.example.halla.golftournamentpal.models.ScoreboardTournament;
 import com.example.halla.golftournamentpal.models.Tournament;
 import com.example.halla.golftournamentpal.models.User;
 
@@ -291,6 +292,7 @@ public class Networker {
                 Log.i(TAG, "Sending this tournament: " + tournamentJsonString);
                 Log.i(TAG, "Sending tournament to " + url);
                 String createdTournamentString = postTournament(url, tournamentJsonString);
+                if(createdTournamentString == null) return null;
                 Log.i(TAG, createdTournamentString);
                 JSONObject tournamentJson = new JSONObject(createdTournamentString);
                 createdTournament = JsonParser.parseMatchPlay(tournamentJson);
@@ -302,6 +304,32 @@ public class Networker {
             }
             return createdTournament;
         }
+
+    public ScoreboardTournament sendScoreboardTournament(ScoreboardTournament tournament, Long hostSocial){
+        String tournamentJsonString;
+        ScoreboardTournament createdTournament = null;
+
+        String url = Uri.parse(BASE_URL + "/json/scoreboard")
+                .buildUpon()
+                .appendQueryParameter("hostSocial", hostSocial.toString())
+                .build()
+                .toString();
+        try {
+            tournamentJsonString = JsonParser.scoreboardTournamentToString(tournament);
+            Log.i(TAG,"Sending this tournament:" + tournamentJsonString);
+            Log.i(TAG,"Sending tournament to" + url);
+            String createdTournamentString = postTournament(url, tournamentJsonString);
+            Log.i(TAG, createdTournamentString);
+            JSONObject tournamentJson = new JSONObject(createdTournamentString);
+            createdTournament = JsonParser.parseScoreboard(tournamentJson);
+        } catch (IOException e){
+            Log.e(TAG, "Failed to send item", e);
+            e.printStackTrace();
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        return createdTournament;
+    }
 
     public void updateHandicap(long social, double handicap) throws IOException {
 

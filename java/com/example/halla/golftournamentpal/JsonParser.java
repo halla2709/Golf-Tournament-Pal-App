@@ -93,7 +93,7 @@ public class JsonParser {
     }
 
     public static ScoreboardTournament parseScoreboard(JSONObject scoreboardJsonObject)
-            throws JSONException {
+    throws JSONException {
         ScoreboardTournament scoreboardTournament = new ScoreboardTournament();
 
         if(scoreboardJsonObject.has("id")) {
@@ -123,7 +123,7 @@ public class JsonParser {
             JSONArray individual = scoresJsonObject.getJSONArray(i);
             newScores[i] = new int[individual.length()];
             for(int j = 0; j < individual.length(); j++) {
-                newScores[i][j] = individual.getInt(i);
+                newScores[i][j] = individual.getInt(j);
             }
         }
 
@@ -173,185 +173,201 @@ public class JsonParser {
         int h18 = roundsJsonObject.getInt("h18");
         int total = roundsJsonObject.getInt("total");
         int[] myscores = {h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11,
-                h12, h13, h14, h15, h16, h17, h18};
-        return new Round(myscores, total, h18, h17, h16, h15, h14, h13,
+            h12, h13, h14, h15, h16, h17, h18};
+            return new Round(myscores, total, h18, h17, h16, h15, h14, h13,
                 h12, h11, h10, h9, h8, h7, h6, h5, h4, h3, h2, h1);
-    }
-
-    public static int[] parseArray(JSONArray totalJsonArray) throws JSONException {
-        int[] array = new int[totalJsonArray.length()];
-        for(int i = 0; i < totalJsonArray.length(); i++) {
-            array[i] = totalJsonArray.getInt(i);
         }
 
-        return array;
-    }
-
-    public static double doubleRounder(double toRound) {
-        return (double) Math.round(toRound*10)/10;
-    }
-
-    public static MatchPlayTournament parseMatchPlay(JSONObject matchplayJsonObject)
-            throws JSONException {
-        MatchPlayTournament matchPlayTournament = new MatchPlayTournament();
-
-        if(matchplayJsonObject.has("id")) {
-            matchPlayTournament.setId(matchplayJsonObject.getLong("id"));
-        }
-        matchPlayTournament.setCourse(matchplayJsonObject.getString("course"));
-        matchPlayTournament.setName(matchplayJsonObject.getString("name"));
-        matchPlayTournament.setStartDate(new Date(matchplayJsonObject.getLong("startDate")));
-
-        JSONArray playersJsonArray = matchplayJsonObject.getJSONArray("players");
-        for (int j = 0; j < playersJsonArray.length(); j++) {
-            JSONObject playerJsonObject = playersJsonArray.getJSONObject(j);
-            Golfer golfer = JsonParser.parseGolfer(playerJsonObject);
-
-            matchPlayTournament.addPlayer(golfer);
-        }
-
-        matchPlayTournament.setAreBrackets(matchplayJsonObject.getBoolean("areBrackets"));
-        if(matchplayJsonObject.has("brackets") && matchPlayTournament.isAreBrackets()) {
-            JSONArray bracketsJsonArray = matchplayJsonObject.getJSONArray("brackets");
-            List<Bracket> brackets = new ArrayList<>();
-            if(matchPlayTournament.isAreBrackets()) {
-
-                for(int i = 0; i < bracketsJsonArray.length(); i++) {
-                    JSONObject bracketJsonObject = bracketsJsonArray.getJSONObject(i);
-                    Bracket bracket = parseBracket(bracketJsonObject);
-                    brackets.add(bracket);
-                }
+        public static int[] parseArray(JSONArray totalJsonArray) throws JSONException {
+            int[] array = new int[totalJsonArray.length()];
+            for(int i = 0; i < totalJsonArray.length(); i++) {
+                array[i] = totalJsonArray.getInt(i);
             }
-            matchPlayTournament.setBrackets(brackets);
+
+            return array;
         }
 
-        if(matchplayJsonObject.has("playOffs")){
-            matchPlayTournament.setPlayOffs(JsonParser.parsePlayOffs(matchplayJsonObject.getJSONObject("playOffs")));
+        public static double doubleRounder(double toRound) {
+            return (double) Math.round(toRound*10)/10;
         }
 
-        return matchPlayTournament;
-    }
+        public static MatchPlayTournament parseMatchPlay(JSONObject matchplayJsonObject)
+        throws JSONException {
+            MatchPlayTournament matchPlayTournament = new MatchPlayTournament();
 
-    public static Bracket parseBracket(JSONObject bracketJsonObject) throws JSONException {
-        Bracket bracket = new Bracket(null,null,"");
+            if(matchplayJsonObject.has("id")) {
+                matchPlayTournament.setId(matchplayJsonObject.getLong("id"));
+            }
+            matchPlayTournament.setCourse(matchplayJsonObject.getString("course"));
+            matchPlayTournament.setName(matchplayJsonObject.getString("name"));
+            matchPlayTournament.setStartDate(new Date(matchplayJsonObject.getLong("startDate")));
 
-        bracket.setName(bracketJsonObject.getString("name"));
+            JSONArray playersJsonArray = matchplayJsonObject.getJSONArray("players");
+            for (int j = 0; j < playersJsonArray.length(); j++) {
+                JSONObject playerJsonObject = playersJsonArray.getJSONObject(j);
+                Golfer golfer = JsonParser.parseGolfer(playerJsonObject);
 
-        Log.i("PARSEJSON", "parsing bracket" + bracket.getName());
-        JSONArray playersJsonArray = bracketJsonObject.getJSONArray("players");
-        List<Golfer> players = new ArrayList<>();
-        for(int i = 0; i < playersJsonArray.length(); i++) {
-            JSONObject playersJsonObject = playersJsonArray.getJSONObject(i);
-            Golfer player = parseGolfer(playersJsonObject);
-            players.add(player);
-            Log.i("PARSEJSON", "parsing player" + player.getName());
+                matchPlayTournament.addPlayer(golfer);
+            }
+
+            matchPlayTournament.setAreBrackets(matchplayJsonObject.getBoolean("areBrackets"));
+            if(matchplayJsonObject.has("brackets") && matchPlayTournament.isAreBrackets()) {
+                JSONArray bracketsJsonArray = matchplayJsonObject.getJSONArray("brackets");
+                List<Bracket> brackets = new ArrayList<>();
+                if(matchPlayTournament.isAreBrackets()) {
+
+                    for(int i = 0; i < bracketsJsonArray.length(); i++) {
+                        JSONObject bracketJsonObject = bracketsJsonArray.getJSONObject(i);
+                        Bracket bracket = parseBracket(bracketJsonObject);
+                        brackets.add(bracket);
+                    }
+                }
+                matchPlayTournament.setBrackets(brackets);
+            }
+
+            if(matchplayJsonObject.has("playOffs")){
+                matchPlayTournament.setPlayOffs(JsonParser.parsePlayOffs(matchplayJsonObject.getJSONObject("playOffs")));
+            }
+
+            return matchPlayTournament;
         }
-        bracket.setPlayers(players);
-        Log.i("PARSEJSON", "parsing bracket" + bracket.getName());
-        JSONArray matchesJsonArray = bracketJsonObject.getJSONArray("match");
-        List<Match> matches = new ArrayList<>();
-        for(int i = 0; i < matchesJsonArray.length(); i++) {
-            JSONObject matchJsonObject = matchesJsonArray.getJSONObject(i);
-            Match match = parseMatch(matchJsonObject);
-            Log.i("PARSEJSON", "parsing match" + match.getDate());
-            matches.add(match);
-        }
-        bracket.setMatch(matches);
 
-        return bracket;
-    }
+        public static Bracket parseBracket(JSONObject bracketJsonObject) throws JSONException {
+            Bracket bracket = new Bracket(null,null,"");
 
-    public static Match parseMatch(JSONObject matchJsonObject) throws JSONException {
-        Match match = new Match(null, "", null);
+            bracket.setName(bracketJsonObject.getString("name"));
 
-        if(!matchJsonObject.isNull("results"))
-            match.setResults(matchJsonObject.getString("results"));
-        if(!matchJsonObject.isNull("date"))
-            match.setDate(new Date(matchJsonObject.getLong("date")));
-
-        if(!matchJsonObject.isNull("players")) {
-            Log.i("PARSEJSON", "parsing player in bracket");
-            JSONArray playersJsonArray = matchJsonObject.getJSONArray("players");
+            Log.i("PARSEJSON", "parsing bracket" + bracket.getName());
+            JSONArray playersJsonArray = bracketJsonObject.getJSONArray("players");
             List<Golfer> players = new ArrayList<>();
             for(int i = 0; i < playersJsonArray.length(); i++) {
-                JSONObject playerJsonObject = playersJsonArray.getJSONObject(i);
-                Golfer player = parseGolfer(playerJsonObject);
+                JSONObject playersJsonObject = playersJsonArray.getJSONObject(i);
+                Golfer player = parseGolfer(playersJsonObject);
                 players.add(player);
+                Log.i("PARSEJSON", "parsing player" + player.getName());
             }
-
-            match.setPlayers(players);
-        }
-
-        return match;
-    }
-
-    public static PlayOffTree parsePlayOffs(JSONObject playofftreeJsonObject) throws JSONException {
-
-        PlayOffTree tree = new PlayOffTree(null);
-        JSONArray roundsJsonArray = playofftreeJsonObject.getJSONArray("rounds");
-        List<PlayOffRound> rounds = new ArrayList<>();
-        for(int i = 0; i < roundsJsonArray.length(); i++) {
-            JSONObject roundJsonObject = roundsJsonArray.getJSONObject(i);
-            PlayOffRound round = new PlayOffRound(0, null);
-            JSONArray matchesJsonArray = roundJsonObject.getJSONArray("matches");
+            bracket.setPlayers(players);
+            Log.i("PARSEJSON", "parsing bracket" + bracket.getName());
+            JSONArray matchesJsonArray = bracketJsonObject.getJSONArray("match");
             List<Match> matches = new ArrayList<>();
-            for(int j = 0; j < matchesJsonArray.length(); j++) {
-                Match match = parseMatch(matchesJsonArray.getJSONObject(j));
+            for(int i = 0; i < matchesJsonArray.length(); i++) {
+                JSONObject matchJsonObject = matchesJsonArray.getJSONObject(i);
+                Match match = parseMatch(matchJsonObject);
+                Log.i("PARSEJSON", "parsing match" + match.getDate());
                 matches.add(match);
             }
-            round.setMatches(matches);
-            round.setRound(roundJsonObject.getInt("round"));
-            rounds.add(round);
+            bracket.setMatch(matches);
+
+            return bracket;
         }
 
-        tree.setRounds(rounds);
-        return tree;
-    }
+        public static Match parseMatch(JSONObject matchJsonObject) throws JSONException {
+            Match match = new Match(null, "", null);
 
-    public static String matchPlayTournamentToString(MatchPlayTournament matchPlayTournament) throws JSONException {
-        JSONObject tournamentObject = new JSONObject();
-        tournamentObject.put("course", matchPlayTournament.getCourse());
-        tournamentObject.put("name", matchPlayTournament.getName());
-        tournamentObject.put("startDate", matchPlayTournament.getStartDate().getTime());
-        tournamentObject.put("areBrackets", matchPlayTournament.isAreBrackets());
+            if(!matchJsonObject.isNull("results"))
+                match.setResults(matchJsonObject.getString("results"));
+            if(!matchJsonObject.isNull("date"))
+                match.setDate(new Date(matchJsonObject.getLong("date")));
 
-        JSONArray playersJsonArray = new JSONArray();
-        for(int i = 0; i < matchPlayTournament.getPlayers().size(); i++) {
-            playersJsonArray.put(golferToString(matchPlayTournament.getPlayers().get(i)));
+            if(!matchJsonObject.isNull("players")) {
+                Log.i("PARSEJSON", "parsing player in bracket");
+                JSONArray playersJsonArray = matchJsonObject.getJSONArray("players");
+                List<Golfer> players = new ArrayList<>();
+                for(int i = 0; i < playersJsonArray.length(); i++) {
+                    JSONObject playerJsonObject = playersJsonArray.getJSONObject(i);
+                    Golfer player = parseGolfer(playerJsonObject);
+                    players.add(player);
+                }
+
+                match.setPlayers(players);
+            }
+
+            return match;
         }
-        tournamentObject.put("players", playersJsonArray);
 
-        return tournamentObject.toString();
+        public static PlayOffTree parsePlayOffs(JSONObject playofftreeJsonObject) throws JSONException {
+
+            PlayOffTree tree = new PlayOffTree(null);
+            JSONArray roundsJsonArray = playofftreeJsonObject.getJSONArray("rounds");
+            List<PlayOffRound> rounds = new ArrayList<>();
+            for(int i = 0; i < roundsJsonArray.length(); i++) {
+                JSONObject roundJsonObject = roundsJsonArray.getJSONObject(i);
+                PlayOffRound round = new PlayOffRound(0, null);
+                JSONArray matchesJsonArray = roundJsonObject.getJSONArray("matches");
+                List<Match> matches = new ArrayList<>();
+                for(int j = 0; j < matchesJsonArray.length(); j++) {
+                    Match match = parseMatch(matchesJsonArray.getJSONObject(j));
+                    matches.add(match);
+                }
+                round.setMatches(matches);
+                round.setRound(roundJsonObject.getInt("round"));
+                rounds.add(round);
+            }
+
+            tree.setRounds(rounds);
+            return tree;
+        }
+
+        public static String matchPlayTournamentToString(MatchPlayTournament matchPlayTournament) throws JSONException {
+            JSONObject tournamentObject = new JSONObject();
+            tournamentObject.put("course", matchPlayTournament.getCourse());
+            tournamentObject.put("name", matchPlayTournament.getName());
+            tournamentObject.put("startDate", matchPlayTournament.getStartDate().getTime());
+            tournamentObject.put("areBrackets", matchPlayTournament.isAreBrackets());
+
+            JSONArray playersJsonArray = new JSONArray();
+            for(int i = 0; i < matchPlayTournament.getPlayers().size(); i++) {
+                playersJsonArray.put(golferToString(matchPlayTournament.getPlayers().get(i)));
+            }
+            tournamentObject.put("players", playersJsonArray);
+
+            return tournamentObject.toString();
+        }
+
+        public static JSONObject golferToString(Golfer golfer) throws JSONException {
+            JSONObject golferObject = new JSONObject();
+            golferObject.put("name", golfer.getName());
+            golferObject.put("social", golfer.getSocial());
+            golferObject.put("handicap", golfer.getHandicap());
+            golferObject.put("email", golfer.getEmail());
+            return golferObject;
+        }
+
+        public static HashMap<Long, Integer> getBracketResults(JSONObject fullObject) throws JSONException {
+            HashMap<Long, Integer> bracketResults;
+
+            Gson gson = new Gson();
+            JsonElement element = gson.fromJson(fullObject.get("bracketResults").toString(), JsonElement.class);
+            bracketResults = gson.fromJson(element, new TypeToken<HashMap<Long, Integer>>(){}.getType());
+
+            return bracketResults;
+        }
+
+        public static String[][] getResultTable(JSONObject fullObject) throws JSONException {
+            String[][] resultTable;
+
+            Gson gson = new Gson();
+            JsonElement element = gson.fromJson(fullObject.get("resultTable").toString(), JsonElement.class);
+            resultTable = gson.fromJson(element, String[][].class);
+
+            return resultTable;
+        }
+
+        public static String scoreboardTournamentToString(ScoreboardTournament scoreboardTournament) throws JSONException {
+            JSONObject tournamentObject = new JSONObject();
+            tournamentObject.put("course", scoreboardTournament.getCourse());
+            tournamentObject.put("name", scoreboardTournament.getName());
+            tournamentObject.put("startDate", scoreboardTournament.getStartDate().getTime());
+            tournamentObject.put("numberOfRounds", scoreboardTournament.getNumberOfRounds());
+
+            JSONArray playersJsonArray = new JSONArray();
+            for(int i = 0; i < scoreboardTournament.getPlayers().size(); i++) {
+                playersJsonArray.put(golferToString(scoreboardTournament.getPlayers().get(i)));
+            }
+            tournamentObject.put("players", playersJsonArray);
+
+            return tournamentObject.toString();
+        }
     }
-
-    public static JSONObject golferToString(Golfer golfer) throws JSONException {
-        JSONObject golferObject = new JSONObject();
-        golferObject.put("name", golfer.getName());
-        golferObject.put("social", golfer.getSocial());
-        golferObject.put("handicap", golfer.getHandicap());
-        golferObject.put("email", golfer.getEmail());
-        return golferObject;
-    }
-
-    public static HashMap<Long, Integer> getBracketResults(JSONObject fullObject) throws JSONException {
-        HashMap<Long, Integer> bracketResults;
-
-        Gson gson = new Gson();
-        JsonElement element = gson.fromJson(fullObject.get("bracketResults").toString(), JsonElement.class);
-        bracketResults = gson.fromJson(element, new TypeToken<HashMap<Long, Integer>>(){}.getType());
-
-        return bracketResults;
-    }
-
-    public static String[][] getResultTable(JSONObject fullObject) throws JSONException {
-        String[][] resultTable;
-
-        Gson gson = new Gson();
-        JsonElement element = gson.fromJson(fullObject.get("resultTable").toString(), JsonElement.class);
-        resultTable = gson.fromJson(element, String[][].class);
-
-        return resultTable;
-    }
-}
 
 

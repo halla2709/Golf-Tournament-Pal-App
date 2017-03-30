@@ -14,6 +14,10 @@ import android.widget.NumberPicker;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.ScoreboardTournament;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * This activity will resemble the matchplay one closely
@@ -68,6 +72,11 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         int month = mDatePicker.getMonth() + 1;
         int year = mDatePicker.getYear();
 
+        Calendar cal = Calendar.getInstance();
+        cal.set(year+1900, month, day);
+        Date tournamentDate = cal.getTime();
+        String tournamentDateString = "" + day + " " + month + " " + year;
+
         // Testing!
         Log.v("EditText", mTourName.getText().toString());
         Log.v("EditText", mCourseName.getText().toString());
@@ -76,7 +85,11 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         Log.d("Dagur", "value = " + day);
         Log.d("Rounds", ""+mNumberOfRounds.getValue());
 
-        Intent i = ParticipantAdderMainScoreboardActivity.newIntent(ScoreboardCreatorActivity.this);
+        ScoreboardTournament tour = new ScoreboardTournament(0L, mCourseName.getText().toString(),
+                mTourName.getText().toString(), null, tournamentDate,
+                null, mNumberOfRounds.getValue(), null);
+
+        Intent i = ParticipantAdderMainScoreboardActivity.newIntent(ScoreboardCreatorActivity.this, tour, tournamentDateString, mNumberOfRounds.getValue());
         startActivity(i);
     }
 }

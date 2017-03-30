@@ -19,14 +19,14 @@
                   tools:context="com.example.halla.golftournamentpal.views.ScoreboardInfoActivity">
 
         <TextView
-            android:id="@+id/scoreboardInfo"
+            android:id="@+id/matchPlayInfo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:gravity="center|top"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:text="@string/scoreboardInfo"
+            android:text="@string/matchPlayInfo"
             android:textColor="@color/mainTextColor"
             android:textSize="30sp"/>
 
@@ -67,6 +67,29 @@
                     android:text="@string/coursetable"
                     android:textColor="@color/buttonTextColor"/>
             </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/tourInfoName"
+                    android:padding="3dip"
+                    android:text="@string/tournamenttable"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/tourInfoDate"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/datetable"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/tourInfoCourse"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="@string/coursetable"
+                    android:textColor="@color/colorBlack"/>
+            </TableRow>
+
         </TableLayout>
 
         <TextView
@@ -91,61 +114,28 @@
 
                 <TextView
                     android:padding="3dip"
+                    android:text="@string/socialText"
+                    android:textColor="@color/buttonTextColor"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:padding="3dip"
                     android:text="@string/nametable"
                     android:textColor="@color/buttonTextColor"/>
 
                 <TextView
-                    android:gravity="center"
-                    android:padding="3dip"
-                    android:text="@string/ssntable"
-                    android:textColor="@color/buttonTextColor"/>
-
-                <TextView
-                    android:gravity="center"
-                    android:padding="3dip"
-                    android:text="@string/emailtable"
-                    android:textColor="@color/buttonTextColor"/>
-
-                <TextView
-                    android:gravity="end"
+                    android:gravity="right"
                     android:padding="3dip"
                     android:text="@string/handicaptable"
                     android:textColor="@color/buttonTextColor"/>
             </TableRow>
         </TableLayout>
 
-        <TextView
-            android:id="@+id/matchplayMatchInfo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="20dp"
-            android:text="@string/scoreboardname"
-            android:textAlignment="center"
-            android:textColor="@color/secondaryTextColor"
-            android:textSize="20sp"/>
-
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:stretchColumns="1">
-
-            <TableRow
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/buttonTextColor">
-
-                <TextView
-                    android:padding="3dip"
-                    android:text="@string/matchplayer"
-                    android:textColor="@color/buttonTextColor"/>
-
-                <TextView
-                    android:gravity="center"
-                    android:padding="3dip"
-                    android:text="@string/roundstable"
-                    android:textColor="@color/buttonTextColor"/>
-            </TableRow>
-        </TableLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/participants_list_scoreboard"
+            android:layout_weight="0"></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"

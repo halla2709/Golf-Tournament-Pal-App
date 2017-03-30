@@ -49,31 +49,23 @@
             android:padding="10dp"
             android:gravity="center">
 
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/hostCheckBox"
+                android:checked="false"/>
+
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="@string/searchfriend"
-                android:textColor="@color/secondaryTextColor"
-                android:textSize="20sp"
-                android:gravity="center"/>
-
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background"/>
-
-            <Button
-                android:id="@+id/addParticipantButton"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/grey"
-                android:text="@string/addParticipantButton"
-                android:textColor="@color/buttonTextColor"/>
+                android:labelFor="@id/hostCheckBox"
+                android:text="@string/add_me"/>
         </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/friend_list"></ListView>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -98,26 +90,10 @@
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="20sp"/>
 
-            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:stretchColumns="*">
-
-                <TableRow
-                    android:background="@color/colorPrimaryDark"
-                    android:textColor="@color/buttonTextColor">
-
-                    <TextView
-                        android:padding="3dip"
-                        android:text="@string/nametable"
-                        android:textColor="@color/buttonTextColor"/>
-
-                    <TextView
-                        android:padding="3dip"
-                        android:text="@string/handicaptable"
-                        android:textColor="@color/buttonTextColor"/>
-                </TableRow>
-            </TableLayout>
+            <ListView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/participants_list"></ListView>
 
             <Button
                 android:id="@+id/nextStepParticipant"
