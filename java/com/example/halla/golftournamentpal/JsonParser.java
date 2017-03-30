@@ -138,7 +138,7 @@ public class JsonParser {
             JSONArray roundsJsonArray = scorecardJsonObject.getJSONArray("rounds");
             List<Round> newRounds = new ArrayList<>();
             for(int j = 0; j < roundsJsonArray.length(); j++) {
-                newRounds.add(parseRound(roundsJsonArray.getJSONObject(i)));
+                newRounds.add(parseRound(roundsJsonArray.getJSONObject(j)));
             }
             String scorecardCourse = scorecardJsonObject.getString("course");
             Golfer golfer = JsonParser.parseGolfer(scorecardJsonObject.getJSONObject("player"));

@@ -127,6 +127,7 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity
 
         String tname = getIntent().getStringExtra(TOURNAMENT_NAME);
         String tcourse = getIntent().getStringExtra(TOURNAMENT_COURSE);
+        int tnumofrounds = getIntent().getIntExtra(TOURNAMENT_ROUNDS, 0);
         Date tdate = new Date();
         try {
             tdate = df.parse(getIntent().getStringExtra(TOURNAMENT_DATE));
@@ -144,7 +145,7 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        newTournament = new ScoreboardTournament(0L, tcourse, tname, null, tdate, null, 0, null);
+        newTournament = new ScoreboardTournament(0L, tcourse, tname, null, tdate, null, tnumofrounds, null);
 
         if (savedInstanceState != null) {
             Log.i("SAVED", "yes");

@@ -76,7 +76,7 @@
                 android:linksClickable="true"/>
 
             <EditText
-                android:id="@+id/handicap"
+                android:id="@+id/participantHandicap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -84,7 +84,7 @@
                 android:inputType="numberDecimal"/>
 
             <EditText
-                android:id="@+id/socialNumber"
+                android:id="@+id/participantSocialNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -105,7 +105,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/grey"
+                android:background="@color/colorPrimaryDark"
                 android:text="@string/addParticipantButton"
                 android:textColor="@color/buttonTextColor"/>
         </LinearLayout>
