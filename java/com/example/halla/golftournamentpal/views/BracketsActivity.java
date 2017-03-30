@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +48,7 @@ public class BracketsActivity extends AppCompatActivity
     private static final String BRACKETS = "brackets";
     private static final String PARTICIPANTS = "participants";
     private static final String TOURNAMENT_ID = "id";
+    private static final int FONT_SIZE = 18;
 
     private List<Bracket> mBrackets = new ArrayList<>();
     private List<Golfer> mParticipants = new ArrayList<>();
@@ -196,6 +198,7 @@ public class BracketsActivity extends AppCompatActivity
         //HEADER
         //column bracketname
         TextView bracketTextView = new TextView(this);
+        bracketTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
         bracketTextView.setText(bracket.getName());
         headerRow.addView(bracketTextView);
         bracketTextView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -204,6 +207,7 @@ public class BracketsActivity extends AppCompatActivity
         //column for all players
         for (int x=0; x<bracket.getPlayers().size(); x++) {
             TextView playerTextView = new TextView(this);
+            playerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
             playerTextView.setText(bracket.getPlayers().get(x).getName());
             headerRow.addView(playerTextView);
             playerTextView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -213,6 +217,7 @@ public class BracketsActivity extends AppCompatActivity
 
         //column points
         TextView pointsTextView = new TextView(this);
+        pointsTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
         pointsTextView.setText("Points");
         headerRow.addView(pointsTextView);
 
@@ -236,6 +241,7 @@ public class BracketsActivity extends AppCompatActivity
             ));
 
             TextView playerTextViewTable = new TextView(this);
+            playerTextViewTable.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
             playerTextViewTable.setText(bracket.getPlayers().get(x).getName());
             tableRow.addView(playerTextViewTable);
             playerTextViewTable.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -244,6 +250,7 @@ public class BracketsActivity extends AppCompatActivity
             for(int i = 0; i < bracket.getPlayers().size(); i++) {
                 String result = resultTable[x][i];
                 TextView resultTextView = new TextView(this);
+                resultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
                 if(result == null) resultTextView.setText("-");
                 else if(result.equals("np")) {
                     final String names = bracket.getPlayers().get(x).getName() + " vs " + bracket.getPlayers().get(i).getName();
