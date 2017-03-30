@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
@@ -35,6 +36,8 @@ public class MyTournamentsActivity extends AppCompatActivity
     private SessionManager mSessionManager;
     private List<Tournament> mTournamentList = new ArrayList<>();
     private ListView mListView;
+    private TextView mNoTournamentView;
+
     private TournamentArrayAdapter mAdapter;
 
     private Long mTournamentID;
@@ -74,8 +77,16 @@ public class MyTournamentsActivity extends AppCompatActivity
             startActivity(i);
         }
 
+        mNoTournamentView  = (TextView) findViewById(R.id.noTournaments);
+
         MyTournamentsActivity.FetchMyTournamentsTask task = new MyTournamentsActivity.FetchMyTournamentsTask();
         task.execute();
+
+    }
+
+    public void displayNoTournaments() {
+        mListView.setVisibility(View.GONE);
+        mNoTournamentView.setVisibility(View.VISIBLE);
     }
 
     // Navigation drawer
@@ -179,9 +190,11 @@ public class MyTournamentsActivity extends AppCompatActivity
             mTournamentList = tournaments;
             mAdapter.setData(mTournamentList);
             mListView.setAdapter(mAdapter);
-            Log.i("TAGG", tournaments.get(0).getStartDate().toString());
+            //Log.i("TAGG", tournaments.get(0).getStartDate().toString());
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-
+            if(tournaments.isEmpty()){
+                displayNoTournaments();
+            }
         }
     }
 }

@@ -128,6 +128,8 @@
 
     <!-- MyTournamentsActivity -->
 
+    <string name="noTournament">"You haven't participated in any tournaments yet!</string>
+
     <!-- MyFriendsActivity -->
     <string name="view">View</string>
     <string name="SSN2">SSN: </string>
