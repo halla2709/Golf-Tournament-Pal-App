@@ -258,7 +258,8 @@ public class BracketsActivity extends AppCompatActivity
                     resultTextView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Log.i("from a bracket", names);
+                            Intent intent = AddResultsActivty.newIntent(BracketsActivity.this);
+                            startActivity(intent);
                         }
                     });
                 }
@@ -302,6 +303,7 @@ public class BracketsActivity extends AppCompatActivity
                 }
             }
         }
+
 
         @Override
         public View getView(int position, View convertView, final ViewGroup parent) {

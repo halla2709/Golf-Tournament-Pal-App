@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      xmlns:tools="http://schemas.android.com/tools"
+                      android:id="@+id/activity_match_play_creator"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:focusable="true"
+                      android:focusableInTouchMode="true"
+                      android:gravity="top|center"
+                      android:orientation="vertical"
+                      android:paddingBottom="@dimen/activity_vertical_margin"
+                      android:paddingLeft="@dimen/activity_horizontal_margin"
+                      android:paddingRight="@dimen/activity_horizontal_margin"
+                      android:paddingTop="@dimen/activity_vertical_margin"
+                      tools:context="com.example.halla.golftournamentpal.views.AddResultsActivity">
+
+            <TextView
+                android:id="@+id/addresultstitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:calendarViewShown="false"
+                android:gravity="center|top"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+                android:text="@string/addresults"
+                android:textColor="@color/mainTextColor"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/addresultstext"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"/>
+
+            <CheckBox
+                android:id="@+id/player1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/nametable"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"/>
+
+            <CheckBox
+                android:id="@+id/player2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/nametable"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/whatwasresults"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/resultshint"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center|bottom"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
+                <Button
+                    android:id="@+id/saveresultsbutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@color/colorPrimaryDark"
+                    android:onClick="addParticipant"
+                    android:text="@string/saveresultsbutton"
+                    android:textColor="@color/buttonTextColor"
+                    tools:layout_gravity="bottom|end"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>

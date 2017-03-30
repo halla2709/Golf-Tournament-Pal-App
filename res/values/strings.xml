@@ -161,6 +161,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- AddResultsActivity -->
+    <string name="addresults">Add Results</string>
+    <string name="saveresultsbutton">Save Result</string>
+    <string name="addresultstext">Who won?</string>
+    <string name="whatwasresults">What was the result?</string>
+    <string name="resultshint">2/1 or 22.hole</string>
+    <string name="and">and</string>
+
     <string name="action_settings">Settings</string>
     <string name="title_activity_prufa">prufa</string>
     <string name="title_activity_prufa2nav">prufa2nav</string>
