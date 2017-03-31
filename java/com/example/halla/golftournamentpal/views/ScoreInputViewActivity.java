@@ -8,16 +8,18 @@ import android.widget.Button;
 
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
+import com.example.halla.golftournamentpal.models.ScoreboardTournament;
 
 public class ScoreInputViewActivity extends AppCompatActivity {
 
     private Button mCreateButton;
     private SessionManager mSessionManager;
+    private ScoreboardTournament mScoreboardTournament;
 
     public void save (View view){
         mCreateButton = (Button) findViewById(R.id.savebutton);
 
-        Intent i = ScoreboardActivity.newIntent(ScoreInputViewActivity.this);
+        Intent i = ScoreboardActivity.newIntent(getApplicationContext(), mScoreboardTournament);
         startActivity(i);
     }
 

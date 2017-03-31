@@ -58,7 +58,7 @@ public class ScoreboardInfoActivity extends AppCompatActivity
         // Button Listener
         mCreateButton = (Button) findViewById(R.id.viewscoreboard);
 
-        Intent i = ScoreboardActivity.newIntent(ScoreboardInfoActivity.this);
+        Intent i = ScoreboardActivity.newIntent(getApplicationContext(),mScoreboardTournament);
         startActivity(i);
     }
 

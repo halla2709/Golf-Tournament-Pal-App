@@ -23,39 +23,23 @@
         android:textColor="@color/mainTextColor"
         android:textSize="30sp"/>
 
-
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true">
+                android:layout_width="fill_parent" android:layout_height="fill_parent"
+                android:scrollbars="vertical">
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                     android:layout_width="fill_parent"
-                     android:layout_height="fill_parent"
-                     android:stretchColumns="1">
+        <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                              android:layout_width="fill_parent" android:layout_height="fill_parent">
 
-            <TableRow
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/buttonTextColor">
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                         android:layout_width="fill_parent"
+                         android:layout_height="fill_parent"
+                         android:id="@+id/scoreboardLayout"
+                         android:stretchColumns="1">
+            </TableLayout>
+        </HorizontalScrollView>
 
-                <TextView
-                    android:padding="3dip"
-                    android:text="@string/nametable"
-                    android:textColor="@color/buttonTextColor"/>
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:gravity="center"
-                    android:padding="3dip"
-                    android:text="@string/rounds"
-                    android:textColor="@color/buttonTextColor"/>
-
-                <TextView
-                    android:gravity="right"
-                    android:padding="3dip"
-                    android:text="@string/total"
-                    android:textColor="@color/buttonTextColor"/>
-            </TableRow>
-        </TableLayout>
     </ScrollView>
+
+
 </LinearLayout>
+
