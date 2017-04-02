@@ -87,6 +87,7 @@ public class MyProfileActivity extends AppCompatActivity
         } else {
             mGolferSocial.setText(Long.toString(mSessionManager.getSessionUserSocial()));
         }
+
         //Cursor in handicap editText
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         mHandicap.setCursorVisible(false);

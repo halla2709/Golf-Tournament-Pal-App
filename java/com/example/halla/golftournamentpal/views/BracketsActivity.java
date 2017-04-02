@@ -212,7 +212,11 @@ public class BracketsActivity extends AppCompatActivity
         for (int x=0; x<bracket.getPlayers().size(); x++) {
             TextView playerTextView = new TextView(this);
             playerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
-            playerTextView.setText(bracket.getPlayers().get(x).getName());
+            String firstName = bracket.getPlayers().get(x).getName();
+            if(bracket.getPlayers().get(x).getName().indexOf(" ") > 0)
+                firstName = bracket.getPlayers().get(x).getName()
+                        .substring(0,bracket.getPlayers().get(x).getName().indexOf(" "));
+            playerTextView.setText(firstName);
             headerRow.addView(playerTextView);
             playerTextView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
             playerTextView.setTextColor(getResources().getColor(R.color.buttonTextColor));
@@ -305,6 +309,7 @@ public class BracketsActivity extends AppCompatActivity
         }
 
         return tableLayout;
+
     }
 
 
