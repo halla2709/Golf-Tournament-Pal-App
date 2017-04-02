@@ -162,7 +162,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- AddResultsActivity -->
-    <string name="addresults">Add Results</string>
+    <string name="addresults">Add Result</string>
     <string name="saveresultsbutton">Save Result</string>
     <string name="addresultstext">Who won?</string>
     <string name="whatwasresults">What was the result?</string>

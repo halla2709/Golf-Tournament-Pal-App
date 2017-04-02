@@ -76,8 +76,9 @@ public class MyProfileActivity extends AppCompatActivity
 
         // Displaying user-info
         mGolferName.setText(mSessionManager.getSessionUserName());
-        mHandicap.setHint(Double.toString(mSessionManager.getSessionUserHandicap()));
+        mHandicap.setText(Double.toString(mSessionManager.getSessionUserHandicap()));
         mGolferEmail.setText(mSessionManager.getSessionUserEmail());
+
 
         // Displaying "0" in front of users social number if necessary
         String mGolferString = mSessionManager.getSessionUserSocial().toString();

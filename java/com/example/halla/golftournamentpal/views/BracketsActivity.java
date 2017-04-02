@@ -29,6 +29,7 @@ import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.Bracket;
 import com.example.halla.golftournamentpal.models.Golfer;
+import com.example.halla.golftournamentpal.models.Match;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class BracketsActivity extends AppCompatActivity
     private SessionManager mSessionManager;
     private ListView mBracketListView;
     private TextView mNoBrackets;
+    private MatchPlayTournament mMatchPlayTournament;
 
     ListView mParticipantListView;
     private static final String BRACKETS = "brackets";
@@ -53,6 +55,8 @@ public class BracketsActivity extends AppCompatActivity
     private List<Bracket> mBrackets = new ArrayList<>();
     private List<Golfer> mParticipants = new ArrayList<>();
     private Long mTournamentid;
+    private Match sMatch;
+    private Bracket sBracket;
 
     BracketArrayAdapter mBracketsAdapter;
 
@@ -183,7 +187,7 @@ public class BracketsActivity extends AppCompatActivity
 
     }
 
-    public TableLayout fillTable(Bracket bracket, TableLayout tableLayout)
+    public TableLayout fillTable(final Bracket bracket, TableLayout tableLayout)
     {
         tableLayout.setStretchAllColumns(true);
 
@@ -254,12 +258,33 @@ public class BracketsActivity extends AppCompatActivity
                 if(result == null) resultTextView.setText("-");
                 else if(result.equals("np")) {
                     final String names = bracket.getPlayers().get(x).getName() + " vs " + bracket.getPlayers().get(i).getName();
+                    final Bracket thisBracket = bracket;
+                    final Golfer golfer = bracket.getPlayers().get(x);
+                    final Golfer golfer2 = bracket.getPlayers().get(i);
                     resultTextView.setText("Add results");
                     resultTextView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = AddResultsActivty.newIntent(BracketsActivity.this);
-                            startActivity(intent);
+                            List<Match> matches = thisBracket.getMatch();
+                            for (int y = 0; y<matches.size(); y++) {
+                                Match match1 = matches.get(y);
+                                MatchPlayTournament matchPlayTournament = mMatchPlayTournament;
+                                if (match1.getPlayers().get(0).getSocial() == golfer.getSocial()) {
+                                    if(match1.getPlayers().get(1).getSocial() == golfer2.getSocial()) {
+                                        Intent intent = AddResultsActivty.newIntent(BracketsActivity.this, match1, matchPlayTournament);
+                                        intent.putExtra("flag", "IAmFromBracket");
+                                        startActivity(intent);
+                                    }
+                                }
+                                if (match1.getPlayers().get(1).getSocial() == golfer.getSocial()) {
+                                    if (match1.getPlayers().get(0).getSocial() == golfer2.getSocial()) {
+                                        Intent intent = AddResultsActivty.newIntent(BracketsActivity.this, match1, matchPlayTournament);
+                                        intent.putExtra("flag", "IAmFromBracket");
+                                        startActivity(intent);
+                                    }
+                                }
+                            }
+
                         }
                     });
                 }
