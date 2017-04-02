@@ -99,9 +99,28 @@ public class AddResultsActivty extends AppCompatActivity {
                 }
 
             }
+
             else
             {
                 //Came from someplace else
+                if (mPlayer1Won.isChecked()) {
+                    // Player1Won
+                    mResults.getText().toString();
+                    mWinner = mMatch.getPlayers().get(0).getSocial();
+
+                    Intent i = PlayOffTreeActivity.newIntent(AddResultsActivty.this, mMatchPlayTournament);
+                    startActivity(i);
+                } else if (mPlayer2Won.isChecked()) {
+                    // Player2won
+                    mResults.getText().toString();
+                    mWinner = mMatch.getPlayers().get(1).getSocial();
+                    Intent i = PlayOffTreeActivity.newIntent(AddResultsActivty.this, mMatchPlayTournament);
+                    startActivity(i);
+                } else {
+                    //No one has been marked as winner
+                    Toast.makeText(getApplicationContext(), "Please choose a winner", Toast.LENGTH_SHORT)
+                            .show();
+                }
             }
 
             }

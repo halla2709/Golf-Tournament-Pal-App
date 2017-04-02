@@ -1,6 +1,7 @@
 package com.example.halla.golftournamentpal.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.Match;
+import com.example.halla.golftournamentpal.models.MatchPlayTournament;
 import com.example.halla.golftournamentpal.models.PlayOffRound;
 
 import org.w3c.dom.Text;
@@ -101,6 +103,7 @@ public class PlayOffRoundFragment extends Fragment {
 
     public interface RoundGetter {
         PlayOffRound getRound(int round);
+        MatchPlayTournament getTournament();
     }
 
     private class RoundArrayAdapter extends ArrayAdapter<Match> {
@@ -150,7 +153,9 @@ public class PlayOffRoundFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Log.i("button clicked", "Match " + match.getID());
-                        // addresults activity
+                        Intent intent = AddResultsActivty.newIntent((PlayOffTreeActivity) getActivity(), match, mRoundGetter.getTournament());
+                        intent.putExtra("flag", "IAmFromBracket");
+                        startActivity(intent);
                     }
                 });
             }

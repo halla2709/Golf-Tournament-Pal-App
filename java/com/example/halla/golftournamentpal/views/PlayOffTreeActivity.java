@@ -49,12 +49,14 @@ public class PlayOffTreeActivity extends AppCompatActivity
     private SessionManager mSessionManager;
 
     private static final String PLAYOFF_TREE = "playofftree";
+    private static final String TOURNAMENT = "matchPlayTournament";
     private PlayOffTree mPlayOffTree;
 
     public static Intent newIntent(Context packageContext, MatchPlayTournament tournament) {
         Intent i = new Intent(packageContext, PlayOffTreeActivity.class);
         Log.i("log from intent", Integer.toString(tournament.getPlayOffs().getRounds().size()));
         i.putExtra(PLAYOFF_TREE, tournament.getPlayOffs());
+        i.putExtra(TOURNAMENT, tournament);
         return i;
     }
 
@@ -139,6 +141,11 @@ public class PlayOffTreeActivity extends AppCompatActivity
     @Override
     public PlayOffRound getRound(int round) {
         return mPlayOffTree.getRounds().get(round);
+    }
+
+    @Override
+    public MatchPlayTournament getTournament() {
+        return getIntent().getParcelableExtra(TOURNAMENT);
     }
 
     /**
