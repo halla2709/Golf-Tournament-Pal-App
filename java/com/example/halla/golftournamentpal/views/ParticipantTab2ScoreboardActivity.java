@@ -12,8 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.Golfer;
 
 import java.util.ArrayList;
@@ -102,10 +104,19 @@ public class ParticipantTab2ScoreboardActivity extends Fragment {
         list.setLayoutParams(params);
     }
 
+    private void removeGolferFromTournament(Golfer friend) {
+        mParticipants = mGolferPasser.removeFromTournament(friend);
+        mParticipantAdapter.setData(mParticipants);
+        mParticipantListView.setAdapter(mParticipantAdapter);
+        setListHeight(mParticipantListView);
+    }
+
     public interface GolferPasser {
         public List<Golfer> getParticipants();
 
         public void participantAdded(View view);
+
+        List<Golfer> removeFromTournament(Golfer golfer);
     }
 
     private class GolferArrayAdapter extends ArrayAdapter<Golfer> {
@@ -142,6 +153,18 @@ public class ParticipantTab2ScoreboardActivity extends Fragment {
             ((TextView)view.findViewById(R.id.friendName)).setText(friend.getName());
             ((TextView)view.findViewById(R.id.friendSocial)).setText(Long.toString(friend.getSocial()));
             ((TextView)view.findViewById(R.id.friendHandicap)).setText(Double.toString(friend.getHandicap()));
+            view.findViewById(R.id.friend_list_layout)
+                    .setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(new SessionManager(getContext()).getSessionUserSocial() != friend.getSocial())
+                                mFragment.removeGolferFromTournament(friend);
+                            else
+                                Toast.makeText(getContext(),
+                                        "To remove yourself, uncheck the checkbox",
+                                        Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
             return view;
         }
