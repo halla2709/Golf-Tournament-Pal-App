@@ -87,6 +87,19 @@
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="20sp"/>
 
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/presstodelete"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="16sp"/>
+
             <ListView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"

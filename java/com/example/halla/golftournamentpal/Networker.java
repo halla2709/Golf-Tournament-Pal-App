@@ -449,4 +449,30 @@ public class Networker {
         return mScoreboardTournament;
     }
 
+    public MatchPlayTournament addResultToBracket(Long tournamentId, Long bracketId, Long matchId,
+                                                  Long winner, String resulttext) {
+
+        MatchPlayTournament matchPlayTournament = null;
+        String url = Uri.parse(BASE_URL + "/json/addResultsToBracket/" + tournamentId)
+                .buildUpon()
+                .appendQueryParameter("bracketID", Long.toString(bracketId))
+                .appendQueryParameter("matchID", Long.toString(matchId))
+                .appendQueryParameter("winner", Long.toString(winner))
+                .appendQueryParameter("resulttext", resulttext)
+                .build()
+                .toString();
+
+        try {
+            String jsonString = getUrlString(url);
+            JSONObject tournamentJson = new JSONObject(jsonString);
+            Log.i(TAG, jsonString);
+            matchPlayTournament = JsonParser.parseMatchPlay(tournamentJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return matchPlayTournament;
+    }
 }

@@ -12,14 +12,24 @@ import java.util.List;
 
 public class Bracket implements Parcelable {
 
+    private Long mId;
     private List<Match> mMatch;
     private List<Golfer> mPlayers;
     private String mName;
 
-    public Bracket(List<Match> match, List<Golfer> players, String name) {
+    public Bracket(Long id, List<Match> match, List<Golfer> players, String name) {
+        mId = id;
         mMatch = match;
         mPlayers = players;
         mName = name;
+    }
+
+    public Long getId() {
+        return mId;
+    }
+
+    public void setId(Long id) {
+        mId = id;
     }
 
     public List<Match> getMatch() {
@@ -47,6 +57,7 @@ public class Bracket implements Parcelable {
     }
 
     protected Bracket(Parcel in) {
+        mId = in.readLong();
         if (in.readByte() == 0x01) {
             mMatch = new ArrayList<Match>();
             in.readList(mMatch, Match.class.getClassLoader());
@@ -69,6 +80,7 @@ public class Bracket implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(mId);
         if (mMatch == null) {
             dest.writeByte((byte) (0x00));
         } else {

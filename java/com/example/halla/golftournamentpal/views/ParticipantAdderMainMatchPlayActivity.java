@@ -251,6 +251,12 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         return newTournament.getPlayers();
     }
 
+    @Override
+    public List<Golfer> removeFromTournament(Golfer participant) {
+        newTournament.getPlayers().remove(participant);
+        return newTournament.getPlayers();
+    }
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

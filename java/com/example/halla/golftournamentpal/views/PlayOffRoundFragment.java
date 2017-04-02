@@ -153,7 +153,7 @@ public class PlayOffRoundFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Log.i("button clicked", "Match " + match.getID());
-                        Intent intent = AddResultsActivty.newIntent((PlayOffTreeActivity) getActivity(), match, mRoundGetter.getTournament());
+                        Intent intent = AddResultsActivty.newIntent((PlayOffTreeActivity) getActivity(), match, mRoundGetter.getTournament().getId());
                         intent.putExtra("flag", "IAmFromBracket");
                         startActivity(intent);
                     }

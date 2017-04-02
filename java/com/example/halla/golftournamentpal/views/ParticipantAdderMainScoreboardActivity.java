@@ -244,6 +244,11 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity
         return newTournament.getPlayers();
     }
 
+    @Override
+    public List<Golfer> removeFromTournament(Golfer participant) {
+        newTournament.getPlayers().remove(participant);
+        return newTournament.getPlayers();
+    }
 
 
     /**

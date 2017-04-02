@@ -65,6 +65,16 @@
         </ListView>
 
         </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seeplayofftree"
+            android:layout_gravity="end"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/bracketbutton"
+            android:textColor="@color/buttonTextColor"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 </ScrollView>
