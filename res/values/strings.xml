@@ -164,6 +164,7 @@
     <string name="h17">H17</string>
     <string name="h18">H18</string>
 
+    <string name="inputWarning">Please enter input greater than 0!</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
