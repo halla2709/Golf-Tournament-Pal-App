@@ -29,8 +29,10 @@ public class Round implements Parcelable {
     private int mH18;
     private int total;
     private int[] myScores;
+    private long mId;
 
-    public Round(int[] myScores, int total, int h18, int h17, int h16, int h15, int h14, int h13, int h12, int h11, int h10, int h9, int h8, int h7, int h6, int h5, int h4, int h3, int h2, int h1) {
+    public Round(long id, int[] myScores, int total, int h18, int h17, int h16, int h15, int h14, int h13, int h12, int h11, int h10, int h9, int h8, int h7, int h6, int h5, int h4, int h3, int h2, int h1) {
+        mId = id;
         this.myScores = myScores;
         this.total = total;
         mH18 = h18;
@@ -212,6 +214,8 @@ public class Round implements Parcelable {
     public void setH1(int h1) {
         mH1 = h1;
     }
+
+    public long getId (){ return mId; }
 
     protected Round(Parcel in) {
         mH1 = in.readInt();
