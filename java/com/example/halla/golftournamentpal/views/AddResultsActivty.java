@@ -28,6 +28,7 @@ public class AddResultsActivty extends AppCompatActivity {
     private static Bracket sBracket;
     private MatchPlayTournament mMatchPlayTournament;
     private Long mWinner;
+    private String mCheckFlag;
 
     EditText mResults;
     Button mSaveResults;
@@ -36,11 +37,32 @@ public class AddResultsActivty extends AppCompatActivity {
 
     private static final String MATCH = "match";
     private static final String MATCHPLAY = "matchPlayTournament";
+    private static final String BRACKET_ID = "bracketID";
+    private static final String MATCH_ID = "matchID";
+    private static final String TOURNAMENT_ID = "tournamentID";
+    private static final String FLAG = "flag";
+    private String mResultText = "";
 
 
-    public static Intent newIntent(Context packageContext, Match match, MatchPlayTournament matchPlayTournament) {
+    public static Intent newIntent(Context packageContext, Match match,
+                                   Long tournamentID,
+                                   Long bracketID,
+                                   String flag) {
         Intent intent = new Intent(packageContext, AddResultsActivty.class);
         intent.putExtra(MATCH, match);
+        intent.putExtra(BRACKET_ID, bracketID);
+        intent.putExtra(MATCH_ID, match.getID());
+        intent.putExtra(TOURNAMENT_ID, tournamentID);
+        intent.putExtra(FLAG, flag);
+        Log.i("opening results", Long.toString(tournamentID));
+        return intent;
+    }
+
+    public static Intent newIntent(Context packageContext, Match match,
+                                   Long tournamentID) {
+        Intent intent = new Intent(packageContext, AddResultsActivty.class);
+        intent.putExtra(MATCH, match);
+        intent.putExtra(TOURNAMENT_ID, tournamentID);
         return intent;
     }
 
@@ -68,75 +90,52 @@ public class AddResultsActivty extends AppCompatActivity {
         mPlayer1Won.setText(mMatch.getPlayers().get(0).getName());
         mPlayer2Won.setText(mMatch.getPlayers().get(1).getName());
 
+        mCheckFlag = getIntent().getStringExtra(FLAG);
+
         mSaveResults = (Button) findViewById(R.id.saveresultsbutton);
         mSaveResults.setOnClickListener(new View.OnClickListener() {
 
-            Intent intent = getIntent();
-            String checkFlag = intent.getStringExtra("flag");
-
             @Override
             public void onClick(View view) {
-            if(checkFlag.contentEquals("IAmFromBracket"))
-            {
-                //Came from BracketsActivity
-                if (mPlayer1Won.isChecked()) {
-                    // Player1Won
-                    mResults.getText().toString();
-                    mWinner = mMatch.getPlayers().get(0).getSocial();
-
-                    Intent i = BracketsActivity.newIntent(AddResultsActivty.this, mMatchPlayTournament);
-                    startActivity(i);
-                } else if (mPlayer2Won.isChecked()) {
-                    // Player2won
-                    mResults.getText().toString();
-                    mWinner = mMatch.getPlayers().get(1).getSocial();
-                    Intent i = BracketsActivity.newIntent(AddResultsActivty.this, mMatchPlayTournament);
-                    startActivity(i);
-                } else {
-                    //No one has been marked as winner
-                    Toast.makeText(getApplicationContext(), "Please choose a winner", Toast.LENGTH_SHORT)
+                if(mResults.getText().length() <= 0)
+                    Toast.makeText(getApplicationContext(), "Please enter result", Toast.LENGTH_SHORT)
                             .show();
+                else{
+                    if (mPlayer1Won.isChecked()) {
+                        // Player1Won
+                        mResultText = mResults.getText().toString();
+                        mWinner = mMatch.getPlayers().get(0).getSocial();
+                        SaveResultTask task = new SaveResultTask();
+                        task.execute();
+
+                    } else if (mPlayer2Won.isChecked()) {
+                        // Player2won
+                        mResultText = mResults.getText().toString();
+                        mWinner = mMatch.getPlayers().get(1).getSocial();
+                        SaveResultTask task = new SaveResultTask();
+                        task.execute();
+
+                    } else {
+                        //No one has been marked as winner
+                        Toast.makeText(getApplicationContext(), "Please choose a winner", Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 }
-
-            }
-
-            else
-            {
-                //Came from someplace else
-                if (mPlayer1Won.isChecked()) {
-                    // Player1Won
-                    mResults.getText().toString();
-                    mWinner = mMatch.getPlayers().get(0).getSocial();
-
-                    Intent i = PlayOffTreeActivity.newIntent(AddResultsActivty.this, mMatchPlayTournament);
-                    startActivity(i);
-                } else if (mPlayer2Won.isChecked()) {
-                    // Player2won
-                    mResults.getText().toString();
-                    mWinner = mMatch.getPlayers().get(1).getSocial();
-                    Intent i = PlayOffTreeActivity.newIntent(AddResultsActivty.this, mMatchPlayTournament);
-                    startActivity(i);
-                } else {
-                    //No one has been marked as winner
-                    Toast.makeText(getApplicationContext(), "Please choose a winner", Toast.LENGTH_SHORT)
-                            .show();
-                }
-            }
-
             }
         });
     }
 
-    /*
-    private class SaveResults extends AsyncTask<Void, Void, Golfer> {
+
+    private class SaveResultTask extends AsyncTask<Void, Void, MatchPlayTournament> {
 
         @Override
-        protected Golfer doInBackground(Void... params) {
+        protected MatchPlayTournament doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            Golfer golfer = new Networker().sendMatchPlayTournament()
-            host = golfer;
-            Log.i("TAGG", "Done fetching");
-            return golfer;
+            return new Networker().addResultToBracket(getIntent().getLongExtra(TOURNAMENT_ID, 0L),
+                    getIntent().getLongExtra(BRACKET_ID, 0L),
+                    getIntent().getLongExtra(MATCH_ID, 0L),
+                    mWinner,
+                    mResultText);
         }
 
         @Override
@@ -146,11 +145,18 @@ public class AddResultsActivty extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Golfer golfer) {
-            super.onPostExecute(golfer);
+        protected void onPostExecute(MatchPlayTournament tournament) {
+            super.onPostExecute(tournament);
             Log.i("TAGG", "Done");
-
+            if(mCheckFlag.equals("IAmFromBracket")) {
+                Intent intent = BracketsActivity.newIntent(AddResultsActivty.this, tournament);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = PlayOffTreeActivity.newIntent(AddResultsActivty.this, tournament);
+                startActivity(intent);
+            }
         }
-    }*/
+    }
 
 }

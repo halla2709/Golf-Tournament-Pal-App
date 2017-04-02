@@ -233,8 +233,10 @@ public class JsonParser {
         }
 
         public static Bracket parseBracket(JSONObject bracketJsonObject) throws JSONException {
-            Bracket bracket = new Bracket(null,null,"");
+            Bracket bracket = new Bracket(0L, null,null,"");
 
+            if(!bracketJsonObject.isNull("id"))
+                bracket.setId(bracketJsonObject.getLong("id"));
             bracket.setName(bracketJsonObject.getString("name"));
 
             Log.i("PARSEJSON", "parsing bracket" + bracket.getName());

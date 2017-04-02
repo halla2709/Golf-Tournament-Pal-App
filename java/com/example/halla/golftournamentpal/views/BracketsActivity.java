@@ -69,6 +69,7 @@ public class BracketsActivity extends AppCompatActivity
         i.putExtra(TOURNAMENT_ID, tournament.getId());
         i.putParcelableArrayListExtra(BRACKETS, (ArrayList) tournament.getBrackets());
         i.putParcelableArrayListExtra(PARTICIPANTS, (ArrayList) tournament.getPlayers());
+        Log.i("opening bracket", Long.toString(tournament.getId()));
         return i;
     }
 
@@ -187,7 +188,7 @@ public class BracketsActivity extends AppCompatActivity
 
     }
 
-    public TableLayout fillTable(final Bracket bracket, TableLayout tableLayout)
+    public TableLayout fillTable(final Bracket bracket, TableLayout tableLayout, int position)
     {
         tableLayout.setStretchAllColumns(true);
 
@@ -256,7 +257,7 @@ public class BracketsActivity extends AppCompatActivity
             playerTextViewTable.setTextColor(getResources().getColor(R.color.buttonTextColor));
 
             for(int i = 0; i < bracket.getPlayers().size(); i++) {
-                String result = resultTable[x][i];
+                String result = resultTable[x+position*bracket.getPlayers().size()][i];
                 TextView resultTextView = new TextView(this);
                 resultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
                 if(result == null) resultTextView.setText("-");
@@ -275,15 +276,25 @@ public class BracketsActivity extends AppCompatActivity
                                 MatchPlayTournament matchPlayTournament = mMatchPlayTournament;
                                 if (match1.getPlayers().get(0).getSocial() == golfer.getSocial()) {
                                     if(match1.getPlayers().get(1).getSocial() == golfer2.getSocial()) {
-                                        Intent intent = AddResultsActivty.newIntent(BracketsActivity.this, match1, matchPlayTournament);
-                                        intent.putExtra("flag", "IAmFromBracket");
+                                        Intent intent = AddResultsActivty
+                                                .newIntent(BracketsActivity.this,
+                                                        match1,
+                                                        getIntent().getLongExtra(TOURNAMENT_ID, 0L),
+                                                        thisBracket.getId(),
+                                                        "IAmFromBracket"
+                                                        );
                                         startActivity(intent);
                                     }
                                 }
                                 if (match1.getPlayers().get(1).getSocial() == golfer.getSocial()) {
                                     if (match1.getPlayers().get(0).getSocial() == golfer2.getSocial()) {
-                                        Intent intent = AddResultsActivty.newIntent(BracketsActivity.this, match1, matchPlayTournament);
-                                        intent.putExtra("flag", "IAmFromBracket");
+                                        Intent intent = AddResultsActivty
+                                                .newIntent(BracketsActivity.this,
+                                                        match1,
+                                                        getIntent().getLongExtra(TOURNAMENT_ID, 0L),
+                                                        thisBracket.getId(),
+                                                        "IAmFromBracket"
+                                                );
                                         startActivity(intent);
                                     }
                                 }
@@ -297,9 +308,10 @@ public class BracketsActivity extends AppCompatActivity
             }
 
             TextView playerPointsTextView = new TextView(this);
-            //Log.i("player in bracket", bracketResults.get(2709942619L).toString());
             playerPointsTextView.setText(bracketResults
                     .get(bracket.getPlayers().get(x).getSocial()).toString());
+
+            tableRow.addView(playerPointsTextView);
 
             tableLayout.addView(tableRow, new TableLayout.LayoutParams(new LayoutParams(
                     ViewGroup.LayoutParams.FILL_PARENT,
@@ -348,7 +360,7 @@ public class BracketsActivity extends AppCompatActivity
 
             final Bracket bracket = getItem(position);
             ((TextView)view.findViewById(R.id.friendName)).setText(bracket.getName());
-            fillTable(bracket, (TableLayout) view.findViewById(R.id.bracketLayout));
+            fillTable(bracket, (TableLayout) view.findViewById(R.id.bracketLayout), position);
             return view;
 
         }

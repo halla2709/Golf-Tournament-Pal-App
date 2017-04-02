@@ -11,8 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.halla.golftournamentpal.R;
+import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.Golfer;
 
 import java.util.ArrayList;
@@ -122,12 +124,25 @@ public class ParticipantTab1ScoreboardActivity extends Fragment {
         public List<Golfer> getParticipants();
 
         public List<Golfer> hostAdder(boolean added);
+
+        public List<Golfer> removeFromTournament(Golfer participant);
     }
 
     public void onFriendClicked(Golfer friend) {
         mFriendPasser.friendClicked(friend);
         mFriends.remove(friend);
         mParticipants = mFriendPasser.getParticipants();
+        mFriendAdapter.setData(mFriends);
+        mFriendListView.setAdapter(mFriendAdapter);
+        mParticipantAdapter.setData(mParticipants);
+        mParticipantListView.setAdapter(mParticipantAdapter);
+        setFriendListHeight(mFriendListView);
+        setListHeight(mParticipantListView);
+    }
+
+    private void removeGolferFromTournament(Golfer friend) {
+        mParticipants = mFriendPasser.removeFromTournament(friend);
+        mFriends.add(friend);
         mFriendAdapter.setData(mFriends);
         mFriendListView.setAdapter(mFriendAdapter);
         mParticipantAdapter.setData(mParticipants);
@@ -170,6 +185,18 @@ public class ParticipantTab1ScoreboardActivity extends Fragment {
             ((TextView)view.findViewById(R.id.friendName)).setText(friend.getName());
             ((TextView)view.findViewById(R.id.friendSocial)).setText(Long.toString(friend.getSocial()));
             ((TextView)view.findViewById(R.id.friendHandicap)).setText(Double.toString(friend.getHandicap()));
+            view.findViewById(R.id.friend_list_layout)
+                    .setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(new SessionManager(getContext()).getSessionUserSocial() != friend.getSocial())
+                                mFragment.removeGolferFromTournament(friend);
+                            else
+                                Toast.makeText(getContext(),
+                                        "To remove yourself, uncheck the checkbox",
+                                        Toast.LENGTH_SHORT).show();
+                        }
+                    });
             return view;
         }
     }
