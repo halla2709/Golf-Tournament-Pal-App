@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -144,7 +145,7 @@ public class PlayOffTreeActivity extends AppCompatActivity
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         int mNumberOfRounds;
 
@@ -157,9 +158,7 @@ public class PlayOffTreeActivity extends AppCompatActivity
         @Override
         public Fragment getItem(int position) {
             if(position < mNumberOfRounds) {
-                PlayOffRoundFragment playOffRoundFragment = new PlayOffRoundFragment();
-                playOffRoundFragment.setRoundNumber(position);
-                return playOffRoundFragment;
+                return PlayOffRoundFragment.newInstance(position);
             }
 
             return null;

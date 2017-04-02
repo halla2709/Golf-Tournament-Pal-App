@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,12 +31,30 @@ import java.util.List;
 
 public class PlayOffRoundFragment extends Fragment {
 
+    private static final String ROUND_NUMBER = "roundNumber";
     private int mRoundNumber;
     private PlayOffRound mRound;
     private RoundGetter mRoundGetter;
 
     private RoundArrayAdapter mRoundArrayAdapter;
     private ListView mMatchListView;
+
+    public static PlayOffRoundFragment newInstance(int roundNumber) {
+
+        Bundle args = new Bundle();
+        args.putInt(ROUND_NUMBER, roundNumber);
+
+        PlayOffRoundFragment fragment = new PlayOffRoundFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mRoundNumber = getArguments().getInt(ROUND_NUMBER);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,12 +73,7 @@ public class PlayOffRoundFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRoundArrayAdapter = new RoundArrayAdapter(getActivity().getApplicationContext());
-        mMatchListView = (ListView) getActivity().findViewById(R.id.matchList);
-
-        mRound = mRoundGetter.getRound(mRoundNumber);
-        Log.i("Matches in round", ""+mRound.getMatches().size());
-        mRoundArrayAdapter.setData(mRound.getMatches());
-        mMatchListView.setAdapter(mRoundArrayAdapter);
+        mMatchListView = (ListView) getView().findViewById(R.id.matchList);
 
     }
 
@@ -79,10 +93,10 @@ public class PlayOffRoundFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-    }
-
-    public void setRoundNumber(int roundNumber) {
-        mRoundNumber = roundNumber;
+        mRound = mRoundGetter.getRound(mRoundNumber);
+        Log.i("Matches in round", ""+mRound.getMatches().size());
+        mRoundArrayAdapter.setData(mRound.getMatches());
+        mMatchListView.setAdapter(mRoundArrayAdapter);
     }
 
     public interface RoundGetter {
@@ -100,6 +114,7 @@ public class PlayOffRoundFragment extends Fragment {
 
         public void setData(List<Match> data) {
             clear();
+
             if(data != null) {
                 for( Match appEntry : data ) {
                     add(appEntry);
@@ -119,14 +134,17 @@ public class PlayOffRoundFragment extends Fragment {
             }
 
             final Match match = getItem(position);
+            Log.i("match in adapter", "" +  match.getPlayers().size());
             ((TextView) view.findViewById(R.id.matchName)).setText("Match " + (position+1));
-            /*if(match.getPlayers().size() > 0) {
-                ((TextView) view.findViewById(R.id.matchplayer1)).setText(match.getPlayers().get(0).getName());
-                ((TextView) view.findViewById(R.id.matchplayer2)).setText(match.getPlayers().get(1).getName());
+            if(match.getPlayers().size() > 0) {
+                ((TextView) view.findViewById(R.id.matchplayer1))
+                        .setText(match.getPlayers().get(0).getName());
+                ((TextView) view.findViewById(R.id.matchplayer2))
+                        .setText(match.getPlayers().get(1).getName());
                 ((TextView) view.findViewById(R.id.matchplayer1hcp))
-                        .setText("Handicap: " + match.getPlayers().get(0).getSocial());
+                        .setText("Handicap: " + match.getPlayers().get(0).getHandicap());
                 ((TextView) view.findViewById(R.id.matchplayer2hcp))
-                        .setText("Handicap: " + match.getPlayers().get(1).getSocial());
+                        .setText("Handicap: " + match.getPlayers().get(1).getHandicap());
 
                 view.findViewById(R.id.addResultsButton).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -136,8 +154,6 @@ public class PlayOffRoundFragment extends Fragment {
                     }
                 });
             }
-*/
-
             return view;
         }
     }
