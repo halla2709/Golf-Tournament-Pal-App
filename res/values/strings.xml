@@ -144,6 +144,27 @@
     <string name="scoreboardinput">Input Scores</string>
     <string name="savebutton">Save</string>
 
+    <!-- Scoreboard input view -->
+    <string name="h1">H1</string>
+    <string name="h2">H2</string>
+    <string name="h3">H3</string>
+    <string name="h4">H4</string>
+    <string name="h5">H5</string>
+    <string name="h6">H6</string>
+    <string name="h7">H7</string>
+    <string name="h8">H8</string>
+    <string name="h9">H9</string>
+    <string name="h10">H10</string>
+    <string name="h11">H11</string>
+    <string name="h12">H12</string>
+    <string name="h13">H13</string>
+    <string name="h14">H14</string>
+    <string name="h15">H15</string>
+    <string name="h16">H16</string>
+    <string name="h17">H17</string>
+    <string name="h18">H18</string>
+
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
