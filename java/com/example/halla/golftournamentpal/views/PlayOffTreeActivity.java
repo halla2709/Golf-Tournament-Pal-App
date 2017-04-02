@@ -167,7 +167,6 @@ public class PlayOffTreeActivity extends AppCompatActivity
             if(position < mNumberOfRounds) {
                 return PlayOffRoundFragment.newInstance(position);
             }
-
             return null;
 
         }
@@ -179,7 +178,8 @@ public class PlayOffTreeActivity extends AppCompatActivity
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if(position < mNumberOfRounds) return "Round " + (position+1);
+            if(position < mNumberOfRounds-1) return "Round " + (position+1);
+            if(position == mNumberOfRounds-1) return "Final Round";
             return null;
         }
     }
