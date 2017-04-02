@@ -403,13 +403,13 @@ public class Networker {
         return bracketInfo;
     }
 
-    public void setRound(long id, long social, int round,
+    public ScoreboardTournament setRound(long id, long social, int round,
                           int h1, int h2, int h3, int h4,
                           int h5, int h6, int h7, int h8,
                           int h9, int h10, int h11, int h12,
                           int h13, int h14, int h15, int h16,
                           int h17, int h18) throws IOException {
-
+        ScoreboardTournament mScoreboardTournament = null;
         String url = Uri.parse(BASE_URL + "/json/rounds/" + id)
                 .buildUpon()
                 .appendQueryParameter("social", Long.toString(social))
@@ -438,9 +438,15 @@ public class Networker {
 
         try {
             String jsonString = getUrlString(url);
+            JSONObject tournamentJson = new JSONObject(jsonString);
+            mScoreboardTournament = JsonParser.parseScoreboard(tournamentJson);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+
+        return mScoreboardTournament;
     }
 
 }
