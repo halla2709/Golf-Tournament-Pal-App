@@ -126,7 +126,7 @@ public class PlayOffRoundFragment extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, final ViewGroup parent) {
+        public View getView(final int position, View convertView, final ViewGroup parent) {
             View view;
 
             if(convertView == null) {
@@ -137,27 +137,39 @@ public class PlayOffRoundFragment extends Fragment {
             }
 
             final Match match = getItem(position);
-            Log.i("match in adapter", "" +  match.getPlayers().size());
             ((TextView) view.findViewById(R.id.matchName)).setText("Match " + (position+1));
-            if(match.getPlayers().size() > 0) {
-                ((TextView) view.findViewById(R.id.matchplayer1))
-                        .setText(match.getPlayers().get(0).getName());
-                ((TextView) view.findViewById(R.id.matchplayer2))
-                        .setText(match.getPlayers().get(1).getName());
-                ((TextView) view.findViewById(R.id.matchplayer1hcp))
-                        .setText("Handicap: " + match.getPlayers().get(0).getHandicap());
-                ((TextView) view.findViewById(R.id.matchplayer2hcp))
-                        .setText("Handicap: " + match.getPlayers().get(1).getHandicap());
-
-                view.findViewById(R.id.addResultsButton).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Log.i("button clicked", "Match " + match.getID());
-                        Intent intent = AddResultsActivty.newIntent((PlayOffTreeActivity) getActivity(), match, mRoundGetter.getTournament().getId());
-                        intent.putExtra("flag", "IAmFromBracket");
-                        startActivity(intent);
+            if(match.getPlayers() != null) {
+                if(match.getPlayers().size()>0) {
+                    if (match.getPlayers().size() == 1)
+                    {
+                        ((TextView) view.findViewById(R.id.matchplayer1))
+                                .setText(match.getPlayers().get(0).getName());
+                        ((TextView) view.findViewById(R.id.matchplayer1hcp))
+                                .setText("Handicap: " + match.getPlayers().get(0).getHandicap());
                     }
-                });
+                    else {
+                        ((TextView) view.findViewById(R.id.matchplayer1))
+                                .setText(match.getPlayers().get(0).getName());
+                        ((TextView) view.findViewById(R.id.matchplayer2))
+                                .setText(match.getPlayers().get(1).getName());
+                        ((TextView) view.findViewById(R.id.matchplayer1hcp))
+                                .setText("Handicap: " + match.getPlayers().get(0).getHandicap());
+                        ((TextView) view.findViewById(R.id.matchplayer2hcp))
+                                .setText("Handicap: " + match.getPlayers().get(1).getHandicap());
+
+                        view.findViewById(R.id.addResultsButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Log.i("button clicked", "Match " + match.getID());
+                                Intent intent = AddResultsActivty.newIntent((PlayOffTreeActivity) getActivity(), match, mRoundGetter.getTournament().getId(), mRoundNumber);
+                                startActivity(intent);
+                            }
+                        });
+
+                    }
+
+                }
+
             }
             return view;
         }

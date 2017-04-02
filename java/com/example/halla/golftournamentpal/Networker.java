@@ -34,8 +34,8 @@ import java.util.List;
 public class Networker {
     //String BASE_URL ="http://192.168.0.109:8080"; //Heima hjá Höllu
     //String BASE_URL ="http://192.168.1.43:8080"; //Heima hjá Hafrúnu
-    //String BASE_URL = "http://192.168.1.2:8080"; //Heima hjá Unni
-    String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
+    String BASE_URL = "http://192.168.1.2:8080"; //Heima hjá Unni
+    //String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
     String TAG = "networker";
 
 
@@ -50,18 +50,18 @@ public class Networker {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             InputStream in = conn.getInputStream();
 
-            if(conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new IOException(conn.getResponseCode() + ": with " + urlSpec);
             }
 
             int bytesRead = 0;
             byte[] buffer = new byte[1024];
-            while((bytesRead = in.read(buffer)) > 0) {
+            while ((bytesRead = in.read(buffer)) > 0) {
                 out.write(buffer, 0, bytesRead);
             }
             out.close();
             return out.toByteArray();
-        }   finally {
+        } finally {
             conn.disconnect();
         }
     }
@@ -101,13 +101,13 @@ public class Networker {
             InputStream in = conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
-            if(conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new IOException(conn.getResponseCode() + ": with " + urlSpec);
             }
 
             String line;
             StringBuffer response = new StringBuffer();
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 response.append(line);
                 response.append('\r');
             }
@@ -116,9 +116,8 @@ public class Networker {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
-            if(conn != null) {
+        } finally {
+            if (conn != null) {
                 conn.disconnect();
             }
         }
@@ -131,7 +130,7 @@ public class Networker {
     public List<Tournament> fetchTournaments(String searchName) {
         List<Tournament> tournaments = new ArrayList<>();
         try {
-            String url = Uri.parse(BASE_URL+"/json/search")
+            String url = Uri.parse(BASE_URL + "/json/search")
                     .buildUpon()
                     .appendQueryParameter("searchName", searchName)
                     .build()
@@ -149,11 +148,9 @@ public class Networker {
 
                 tournaments.add(tournament);
             }
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             Log.e(TAG, "Failed to fetch items ", ioe);
-        }
-        catch (JSONException je){
+        } catch (JSONException je) {
             Log.e(TAG, "Failed to parse JSON", je);
         }
 
@@ -165,8 +162,8 @@ public class Networker {
      */
     public Golfer fetchGolfer(Long social) {
         Golfer golfer = new Golfer();
-        try{
-            String url = Uri.parse(BASE_URL+"/json/golfer")
+        try {
+            String url = Uri.parse(BASE_URL + "/json/golfer")
                     .buildUpon()
                     .appendQueryParameter("social", social.toString())
                     .build()
@@ -176,11 +173,9 @@ public class Networker {
             Log.i(TAG, "Received JSON: " + jsonString);
             JSONObject jsonBody = new JSONObject(jsonString);
             golfer = JsonParser.parseGolfer(jsonBody);
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             Log.e(TAG, "Failed to fetch items ", ioe);
-        }
-        catch (JSONException je){
+        } catch (JSONException je) {
             Log.e(TAG, "Failed to parse JSON", je);
         }
         return golfer;
@@ -191,9 +186,9 @@ public class Networker {
      */
     public Golfer logInGolfer(Long social, String password) {
         Golfer golfer = new Golfer();
-        try{
+        try {
 
-            String url = Uri.parse(BASE_URL+"/json/loginuser")
+            String url = Uri.parse(BASE_URL + "/json/loginuser")
                     .buildUpon()
                     .appendQueryParameter("social", social.toString())
                     .appendQueryParameter("password", password)
@@ -206,11 +201,9 @@ public class Networker {
             golfer = JsonParser.parseGolfer(jsonBody);
             Log.i(TAG, "Done parsing JSON");
 
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             Log.e(TAG, "Failed to fetch items ", ioe);
-        }
-        catch (JSONException je){
+        } catch (JSONException je) {
             Log.e(TAG, "Failed to parse JSON", je);
         }
 
@@ -225,7 +218,7 @@ public class Networker {
 
         Golfer newgolfer = new Golfer();
         try {
-            String url = Uri.parse(BASE_URL+"/json/registerUser")
+            String url = Uri.parse(BASE_URL + "/json/registerUser")
                     .buildUpon()
                     .appendQueryParameter("social", Long.toString(userinfo.getSocial()))
                     .appendQueryParameter("name", golfer.getName())
@@ -238,8 +231,7 @@ public class Networker {
             String jsonString = getUrlString(url);
             JSONObject jsonBody = new JSONObject(jsonString);
             newgolfer = JsonParser.parseGolfer(jsonBody);
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             Log.e(TAG, "Failed to fetch items ", ioe);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -256,7 +248,7 @@ public class Networker {
                 .toString();
         try {
             String jsonString = getUrlString(url);
-            if(jsonString == null) return null;
+            if (jsonString == null) return null;
             JSONObject jsonObject = new JSONObject(jsonString);
             toReturn = JsonParser.parseCompleteTournament(jsonObject);
         } catch (IOException e) {
@@ -287,25 +279,25 @@ public class Networker {
                 .build()
                 .toString();
 
-            try {
-                tournamentJsonString = JsonParser.matchPlayTournamentToString(tournament);
-                Log.i(TAG, "Sending this tournament: " + tournamentJsonString);
-                Log.i(TAG, "Sending tournament to " + url);
-                String createdTournamentString = postTournament(url, tournamentJsonString);
-                if(createdTournamentString == null) return null;
-                Log.i(TAG, createdTournamentString);
-                JSONObject tournamentJson = new JSONObject(createdTournamentString);
-                createdTournament = JsonParser.parseMatchPlay(tournamentJson);
-            } catch (IOException e) {
-                Log.e(TAG, "Failed to send item ", e);
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return createdTournament;
+        try {
+            tournamentJsonString = JsonParser.matchPlayTournamentToString(tournament);
+            Log.i(TAG, "Sending this tournament: " + tournamentJsonString);
+            Log.i(TAG, "Sending tournament to " + url);
+            String createdTournamentString = postTournament(url, tournamentJsonString);
+            if (createdTournamentString == null) return null;
+            Log.i(TAG, createdTournamentString);
+            JSONObject tournamentJson = new JSONObject(createdTournamentString);
+            createdTournament = JsonParser.parseMatchPlay(tournamentJson);
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to send item ", e);
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return createdTournament;
+    }
 
-    public ScoreboardTournament sendScoreboardTournament(ScoreboardTournament tournament, Long hostSocial){
+    public ScoreboardTournament sendScoreboardTournament(ScoreboardTournament tournament, Long hostSocial) {
         String tournamentJsonString;
         ScoreboardTournament createdTournament = null;
 
@@ -316,16 +308,16 @@ public class Networker {
                 .toString();
         try {
             tournamentJsonString = JsonParser.scoreboardTournamentToString(tournament);
-            Log.i(TAG,"Sending this tournament:" + tournamentJsonString);
-            Log.i(TAG,"Sending tournament to" + url);
+            Log.i(TAG, "Sending this tournament:" + tournamentJsonString);
+            Log.i(TAG, "Sending tournament to" + url);
             String createdTournamentString = postTournament(url, tournamentJsonString);
             Log.i(TAG, createdTournamentString);
             JSONObject tournamentJson = new JSONObject(createdTournamentString);
             createdTournament = JsonParser.parseScoreboard(tournamentJson);
-        } catch (IOException e){
+        } catch (IOException e) {
             Log.e(TAG, "Failed to send item", e);
             e.printStackTrace();
-        } catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return createdTournament;
@@ -350,14 +342,14 @@ public class Networker {
     public List<Tournament> fetchMyTournaments(String golferSocial) {
         List<Tournament> tournaments = new ArrayList<>();
         try {
-            String url = Uri.parse(BASE_URL+"/json/getTournamentByGolfer")
+            String url = Uri.parse(BASE_URL + "/json/getTournamentByGolfer")
                     .buildUpon()
                     .appendQueryParameter("golferSocial", golferSocial)
                     .build()
                     .toString();
             Log.i(TAG, url);
             String jsonString = getUrlString(url);
-            if(jsonString == null) return null;
+            if (jsonString == null) return null;
             Log.i(TAG, "Received JSON: " + jsonString);
             JSONArray jsonBody = new JSONArray(jsonString);
             Log.i(TAG, "Recieved tournaments: " + jsonBody.length());
@@ -369,11 +361,9 @@ public class Networker {
 
                 tournaments.add(tournament);
             }
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             Log.e(TAG, "Failed to fetch items ", ioe);
-        }
-        catch (JSONException je){
+        } catch (JSONException je) {
             Log.e(TAG, "Failed to parse JSON", je);
         }
 
@@ -393,22 +383,20 @@ public class Networker {
             JSONObject jsonObject = new JSONObject(jsonString);
             bracketInfo.put("bracketResults", JsonParser.getBracketResults(jsonObject));
             bracketInfo.put("resultTable", JsonParser.getResultTable(jsonObject));
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             Log.e(TAG, "Failed to fetch items ", ioe);
-        }
-        catch (JSONException je){
+        } catch (JSONException je) {
             Log.e(TAG, "Failed to parse JSON", je);
         }
         return bracketInfo;
     }
 
     public ScoreboardTournament setRound(long id, long social, int round,
-                          int h1, int h2, int h3, int h4,
-                          int h5, int h6, int h7, int h8,
-                          int h9, int h10, int h11, int h12,
-                          int h13, int h14, int h15, int h16,
-                          int h17, int h18) throws IOException {
+                                         int h1, int h2, int h3, int h4,
+                                         int h5, int h6, int h7, int h8,
+                                         int h9, int h10, int h11, int h12,
+                                         int h13, int h14, int h15, int h16,
+                                         int h17, int h18) throws IOException {
         ScoreboardTournament mScoreboardTournament = null;
         String url = Uri.parse(BASE_URL + "/json/rounds/" + id)
                 .buildUpon()
@@ -475,4 +463,51 @@ public class Networker {
 
         return matchPlayTournament;
     }
+
+
+    public MatchPlayTournament createPlayOffTree(Long tournamentId) {
+
+        MatchPlayTournament matchPlayTournament = null;
+        String url = Uri.parse(BASE_URL + "/json/createPlayOffTree/" + tournamentId)
+                .buildUpon()
+                .build()
+                .toString();
+
+        try {
+            String jsonString = getUrlString(url);
+            JSONObject tournamentJson = new JSONObject(jsonString);
+            Log.i(TAG, jsonString);
+            matchPlayTournament = JsonParser.parseMatchPlay(tournamentJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return matchPlayTournament;
+    }
+
+    public MatchPlayTournament addResultToPlayoffs(long tournamentId, int roundNumber, Long winner, String resulttext) {
+        MatchPlayTournament matchPlayTournament = null;
+        String url = Uri.parse(BASE_URL + "/json/addResultsToPlayoff/" + tournamentId)
+                .buildUpon()
+                .appendQueryParameter("roundNum", Integer.toString(roundNumber))
+                .appendQueryParameter("winner", Long.toString(winner))
+                .build()
+                .toString();
+
+        try {
+            String jsonString = getUrlString(url);
+            JSONObject tournamentJson = new JSONObject(jsonString);
+            Log.i(TAG, jsonString);
+            matchPlayTournament = JsonParser.parseMatchPlay(tournamentJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return matchPlayTournament;
+
+    }
+
 }

@@ -28,7 +28,7 @@ public class AddResultsActivty extends AppCompatActivity {
     private static Bracket sBracket;
     private MatchPlayTournament mMatchPlayTournament;
     private Long mWinner;
-    private String mCheckFlag;
+    private String mCheckFlag = "notBracket";
 
     EditText mResults;
     Button mSaveResults;
@@ -41,6 +41,7 @@ public class AddResultsActivty extends AppCompatActivity {
     private static final String MATCH_ID = "matchID";
     private static final String TOURNAMENT_ID = "tournamentID";
     private static final String FLAG = "flag";
+    private static final String ROUNDNUMBER = "roundNumber";
     private String mResultText = "";
 
 
@@ -59,10 +60,13 @@ public class AddResultsActivty extends AppCompatActivity {
     }
 
     public static Intent newIntent(Context packageContext, Match match,
-                                   Long tournamentID) {
+                                   Long tournamentID,
+                                   int roundNumber) {
         Intent intent = new Intent(packageContext, AddResultsActivty.class);
         intent.putExtra(MATCH, match);
         intent.putExtra(TOURNAMENT_ID, tournamentID);
+        intent.putExtra(ROUNDNUMBER, roundNumber);
+        intent.putExtra(FLAG, "IAmFromPlayOff");
         return intent;
     }
 
@@ -131,11 +135,19 @@ public class AddResultsActivty extends AppCompatActivity {
         @Override
         protected MatchPlayTournament doInBackground(Void... params) {
             Log.i("TAGG", "Fetching...");
-            return new Networker().addResultToBracket(getIntent().getLongExtra(TOURNAMENT_ID, 0L),
-                    getIntent().getLongExtra(BRACKET_ID, 0L),
-                    getIntent().getLongExtra(MATCH_ID, 0L),
-                    mWinner,
-                    mResultText);
+            if(mCheckFlag.equals("IAmFromBracket")) {
+                return new Networker().addResultToBracket(getIntent().getLongExtra(TOURNAMENT_ID, 0L),
+                        getIntent().getLongExtra(BRACKET_ID, 0L),
+                        getIntent().getLongExtra(MATCH_ID, 0L),
+                        mWinner,
+                        mResultText);
+            }
+            else {
+                return new Networker().addResultToPlayoffs(getIntent().getLongExtra(TOURNAMENT_ID, 0L),
+                        getIntent().getIntExtra(ROUNDNUMBER, 0),
+                        mWinner,
+                        mResultText);
+            }
         }
 
         @Override

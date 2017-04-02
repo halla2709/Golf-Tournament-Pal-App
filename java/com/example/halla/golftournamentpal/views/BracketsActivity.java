@@ -31,10 +31,13 @@ import com.example.halla.golftournamentpal.models.Bracket;
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.Match;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
+import com.example.halla.golftournamentpal.models.PlayOffTree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.example.halla.golftournamentpal.R.color.logOutButtonColor;
 //import static com.example.halla.golftournamentpal.R.id.brackets_list_view2;
 
 public class BracketsActivity extends AppCompatActivity
@@ -94,9 +97,17 @@ public class BracketsActivity extends AppCompatActivity
         mBracketsAdapter = new BracketArrayAdapter(this.getApplicationContext(), BracketsActivity.this);
         mBracketListView = (ListView) findViewById(R.id.brackets_list_view);
         mNoBrackets = (TextView) findViewById(R.id.noBrackets);
-        mPlayOffButton = (Button) findViewById(R.id.seeplayofftree);
 
-        mSessionManager = new SessionManager(getApplicationContext());
+        mPlayOffButton = (Button) findViewById(R.id.seeplayofftree);
+        mPlayOffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreatePlayOffTreeTask task = new CreatePlayOffTreeTask();
+                task.execute();
+            }
+        });
+
+                mSessionManager = new SessionManager(getApplicationContext());
         if (mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(BracketsActivity.this);
             startActivity(i);
@@ -110,9 +121,7 @@ public class BracketsActivity extends AppCompatActivity
             GetBracketInfoTask task = new GetBracketInfoTask();
             task.execute();
         }
-
         else displayNoBrackets();
-
     }
 
 
@@ -270,6 +279,7 @@ public class BracketsActivity extends AppCompatActivity
                     final Golfer golfer = bracket.getPlayers().get(x);
                     final Golfer golfer2 = bracket.getPlayers().get(i);
                     resultTextView.setText("Add results");
+                    resultTextView.setTextColor(getResources().getColor(R.color.logOutButtonColor));
                     resultTextView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -391,6 +401,31 @@ public class BracketsActivity extends AppCompatActivity
         protected void onPostExecute(Golfer golfer) {
             super.onPostExecute(golfer);
             displayInfo();
+            Log.i("TAGG", "Done");
+        }
+    }
+
+    private class CreatePlayOffTreeTask extends AsyncTask<Void, Void, MatchPlayTournament> {
+
+        @Override
+        protected MatchPlayTournament doInBackground(Void... params) {
+            Log.i("TAGG", "Fetching...");
+            MatchPlayTournament matchPlayTournament = new Networker().createPlayOffTree(mTournamentid);
+            Log.i("TAGG", "Done fetching");
+            return matchPlayTournament;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("TAGG", "Going to fetch...");
+        }
+
+        @Override
+        protected void onPostExecute(MatchPlayTournament matchPlayTournament) {
+            super.onPostExecute(matchPlayTournament);
+            Intent intent = PlayOffTreeActivity.newIntent(BracketsActivity.this, matchPlayTournament);
+            startActivity(intent);
             Log.i("TAGG", "Done");
         }
     }
