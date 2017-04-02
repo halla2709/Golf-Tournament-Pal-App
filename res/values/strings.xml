@@ -204,6 +204,7 @@
     <string name="noBrackets">This tournament has no brackets. Try looking at the playoff tree</string>
 
     <string name="addMatchResults">Add results</string>
-    <string name="playertobedeclared">TBD</string>
+    <string name="playertobedeclared">Player Still To Be Declared</string>
+    <string name="handicaptobedeclared">Handicap</string>
 
 </resources>

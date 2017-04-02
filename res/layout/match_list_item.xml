@@ -3,12 +3,12 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:gravity="center_horizontal"
-                >
+              android:gravity="center_horizontal">
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
         android:layout_margin="5dp"
         android:gravity="center_horizontal">
 
@@ -21,8 +21,9 @@
                 android:id="@+id/matchName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:layout_span="2"
-                android:gravity="center_horizontal"
+                android:textAlignment="center"
                 android:text="match"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimary"/>
@@ -44,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:textColor="@color/grey"
+                    android:paddingLeft="5dp"
                     android:text="@string/playertobedeclared"/>
 
                 <TextView
@@ -52,10 +54,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:textColor="@color/grey"
-                    android:text="hcp"/>
+                    android:paddingRight="5dp"
+                    android:text="@string/handicaptobedeclared"/>
 
             </RelativeLayout>
-
         </TableRow>
 
         <TableRow
@@ -72,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:textColor="@color/grey"
+                    android:paddingLeft="5dp"
                     android:text="@string/playertobedeclared"/>
 
                 <TextView
@@ -80,7 +83,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:textColor="@color/grey"
-                    android:text="hcp"/>
+                    android:paddingRight="5dp"
+                    android:text="@string/handicaptobedeclared"/>
 
             </RelativeLayout>
 
@@ -96,7 +100,8 @@
                 android:layout_span="2"
                 android:text="@string/addMatchResults"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/buttonTextColor"/>
+                android:textColor="@color/buttonTextColor"
+                android:layout_marginTop="5dp"/>
         </TableRow>
     </TableLayout>
 
