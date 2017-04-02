@@ -224,6 +224,7 @@
 
     <string name="add_me">Add me to this tournament</string>
     <string name="noBrackets">This tournament has no brackets. Try looking at the playoff tree</string>
+    <string name="bracketbutton">Create a Playoff Tree from these results</string>
 
     <string name="addMatchResults">Add results</string>
     <string name="playertobedeclared">Player Still To Be Declared</string>

@@ -44,6 +44,7 @@ public class BracketsActivity extends AppCompatActivity
     private SessionManager mSessionManager;
     private ListView mBracketListView;
     private TextView mNoBrackets;
+    private Button mPlayOffButton;
     private MatchPlayTournament mMatchPlayTournament;
 
     ListView mParticipantListView;
@@ -93,6 +94,7 @@ public class BracketsActivity extends AppCompatActivity
         mBracketsAdapter = new BracketArrayAdapter(this.getApplicationContext(), BracketsActivity.this);
         mBracketListView = (ListView) findViewById(R.id.brackets_list_view);
         mNoBrackets = (TextView) findViewById(R.id.noBrackets);
+        mPlayOffButton = (Button) findViewById(R.id.seeplayofftree);
 
         mSessionManager = new SessionManager(getApplicationContext());
         if (mSessionManager.getSessionUserSocial() == 0) {
@@ -115,6 +117,7 @@ public class BracketsActivity extends AppCompatActivity
 
 
     public void displayInfo () {
+        mPlayOffButton.setVisibility(View.VISIBLE);
         mBracketListView.setVisibility(View.VISIBLE);
         mNoBrackets.setVisibility(View.GONE);
         mBracketsAdapter.setData(mBrackets);
