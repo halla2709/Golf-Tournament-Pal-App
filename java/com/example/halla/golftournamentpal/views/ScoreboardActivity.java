@@ -23,7 +23,11 @@ import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.ScoreboardTournament;
+import com.example.halla.golftournamentpal.models.Scorecard;
 import com.example.halla.golftournamentpal.models.Tournament;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScoreboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +36,8 @@ public class ScoreboardActivity extends AppCompatActivity
     private static final int FONT_SIZE = 18;
     private static final String TOURNAMENT_ID = "id";
     private Long mTournamentId;
-    private ScoreboardTournament mTournament;
+    private static ScoreboardTournament mTournament;
+    private List<Scorecard> mScorecards = new ArrayList<>();
 
     public static Intent newIntent(Context packageContext, ScoreboardTournament tournament) {
         Intent i = new Intent(packageContext, ScoreboardActivity.class);
@@ -118,30 +123,13 @@ public class ScoreboardActivity extends AppCompatActivity
         return true;
     }
 
-    /*public View getView(int position, View convertView, final ViewGroup parent) {
-        View view;
-
-        if(convertView == null) {
-            view = mInflater.inflate(R.layout.bracket_table, parent, false);
-        }
-        else {
-            view = convertView;
-        }
-
-        final Bracket bracket = getItem(position);
-        ((TextView)view.findViewById(R.id.friendName)).setText(bracket.getName());
-        fillTable(mTournament, (TableLayout) view.findViewById(R.id.bracketLayout));
-        return view;
-
-    }*/
-
-    public TableLayout fillTable(ScoreboardTournament tournament, TableLayout tableLayout)
+    public TableLayout fillTable(final ScoreboardTournament tournament, TableLayout tableLayout)
     {
+        mScorecards = tournament.getScorecards();
+        Log.i("Scorecards ", mScorecards.toString());
+
         tableLayout.setStretchAllColumns(true);
 
-        /*Log.i("players in b", Integer.toString(bracket.getPlayers().size()));
-        Log.i("bracket name", bracket.getName());
-        Log.i("bracket results", bracketResults.toString()); */
         TableRow headerRow = new TableRow(this);
         headerRow.setLayoutParams(new TableRow.LayoutParams(
                 ViewGroup.LayoutParams.FILL_PARENT,
@@ -172,9 +160,9 @@ public class ScoreboardActivity extends AppCompatActivity
         pointsTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
         pointsTextView.setText(" Points ");
         headerRow.addView(pointsTextView);
-
         pointsTextView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         pointsTextView.setTextColor(getResources().getColor(R.color.buttonTextColor));
+
 
         //create the NEW ROW
         tableLayout.addView(headerRow, new TableLayout.LayoutParams(
@@ -194,24 +182,32 @@ public class ScoreboardActivity extends AppCompatActivity
 
             TextView playerTextViewTable = new TextView(this);
             playerTextViewTable.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
-            playerTextViewTable.setText(tournament.getPlayers().get(x).getName());
+            playerTextViewTable.setText(mScorecards.get(x).getPlayer().getName());
             tableRow.addView(playerTextViewTable);
             playerTextViewTable.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
             playerTextViewTable.setTextColor(getResources().getColor(R.color.buttonTextColor));
 
+            final Scorecard scorecard = mScorecards.get(x);
             for(int i = 0; i < tournament.getNumberOfRounds(); i++) {
+                final int round = i;
                 TextView resultTextView = new TextView(this);
                 resultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
-                final String name = tournament.getPlayers().get(x).getName();
-                resultTextView.setText(" 0 ");
+                resultTextView.setText(""+scorecard.getRounds().get(i).getTotal());
                 resultTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.i("from rounds ", name);
+                        Log.i("from rounds ", scorecard.getPlayer().getName().toString());
+                        Intent intent = ScoreInputViewActivity.newIntent(getApplicationContext(), tournament, scorecard, scorecard.getRounds().get(round), round+1);
+                        startActivity(intent);
                     }
                 });
                 tableRow.addView(resultTextView);
             }
+            TextView pointsTextViewTable = new TextView(this);
+            pointsTextViewTable.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
+            pointsTextViewTable.setText(Integer.toString(scorecard.getTotalForScorecard()));
+            tableRow.addView(pointsTextViewTable);
+
 
             tableLayout.addView(tableRow, new TableLayout.LayoutParams(new TableRow.LayoutParams(
                     ViewGroup.LayoutParams.FILL_PARENT,
@@ -243,6 +239,7 @@ public class ScoreboardActivity extends AppCompatActivity
         protected void onPostExecute(ScoreboardTournament tournament) {
             super.onPostExecute(tournament);
             fillTable(mTournament, (TableLayout) findViewById(R.id.scoreboardLayout));
+
             Log.i("TAGG", "Done");
         }
     }

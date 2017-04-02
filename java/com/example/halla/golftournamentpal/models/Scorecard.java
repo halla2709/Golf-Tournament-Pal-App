@@ -56,6 +56,14 @@ public class Scorecard implements Parcelable {
         mRounds = rounds;
     }
 
+    public int getTotalForScorecard() {
+        int total = 0;
+        for (int i=0; i < getNumberOfRounds(); i++){
+            total += getRounds().get(i).getTotal();
+        }
+        return total;
+    }
+
     protected Scorecard(Parcel in) {
         mPlayer = (Golfer) in.readValue(Golfer.class.getClassLoader());
         mCourse = in.readString();
