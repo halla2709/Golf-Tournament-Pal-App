@@ -19,7 +19,6 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.ls.LSException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -153,6 +152,7 @@ public class JsonParser {
     }
 
     public static Round parseRound(JSONObject roundsJsonObject) throws JSONException {
+        int id = roundsJsonObject.getInt("id");
         int h1 = roundsJsonObject.getInt("h1");
         int h2 = roundsJsonObject.getInt("h2");
         int h3 = roundsJsonObject.getInt("h3");
@@ -174,7 +174,7 @@ public class JsonParser {
         int total = roundsJsonObject.getInt("total");
         int[] myscores = {h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11,
             h12, h13, h14, h15, h16, h17, h18};
-            return new Round(myscores, total, h18, h17, h16, h15, h14, h13,
+            return new Round(id, myscores, total, h18, h17, h16, h15, h14, h13,
                 h12, h11, h10, h9, h8, h7, h6, h5, h4, h3, h2, h1);
         }
 

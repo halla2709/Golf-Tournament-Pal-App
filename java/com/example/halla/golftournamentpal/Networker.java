@@ -402,4 +402,45 @@ public class Networker {
         }
         return bracketInfo;
     }
+
+    public void setRound(long id, long social, int round,
+                          int h1, int h2, int h3, int h4,
+                          int h5, int h6, int h7, int h8,
+                          int h9, int h10, int h11, int h12,
+                          int h13, int h14, int h15, int h16,
+                          int h17, int h18) throws IOException {
+
+        String url = Uri.parse(BASE_URL + "/json/rounds/" + id)
+                .buildUpon()
+                .appendQueryParameter("social", Long.toString(social))
+                .appendQueryParameter("round", Integer.toString(round))
+                .appendQueryParameter("h1", Integer.toString(h1))
+                .appendQueryParameter("h2", Integer.toString(h2))
+                .appendQueryParameter("h3", Integer.toString(h3))
+                .appendQueryParameter("h4", Integer.toString(h4))
+                .appendQueryParameter("h5", Integer.toString(h5))
+                .appendQueryParameter("h6", Integer.toString(h6))
+                .appendQueryParameter("h7", Integer.toString(h7))
+                .appendQueryParameter("h8", Integer.toString(h8))
+                .appendQueryParameter("h9", Integer.toString(h9))
+                .appendQueryParameter("h10", Integer.toString(h10))
+                .appendQueryParameter("h11", Integer.toString(h11))
+                .appendQueryParameter("h12", Integer.toString(h12))
+                .appendQueryParameter("h13", Integer.toString(h13))
+                .appendQueryParameter("h14", Integer.toString(h14))
+                .appendQueryParameter("h15", Integer.toString(h15))
+                .appendQueryParameter("h16", Integer.toString(h16))
+                .appendQueryParameter("h17", Integer.toString(h17))
+                .appendQueryParameter("h18", Integer.toString(h18))
+
+                .build()
+                .toString();
+
+        try {
+            String jsonString = getUrlString(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
