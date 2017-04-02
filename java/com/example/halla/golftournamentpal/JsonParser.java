@@ -264,6 +264,8 @@ public class JsonParser {
         public static Match parseMatch(JSONObject matchJsonObject) throws JSONException {
             Match match = new Match(0L, null, "", null);
 
+            if(!matchJsonObject.isNull("id"))
+                match.setID(matchJsonObject.getLong("id"));
             if(!matchJsonObject.isNull("results"))
                 match.setResults(matchJsonObject.getString("results"));
             if(!matchJsonObject.isNull("date"))

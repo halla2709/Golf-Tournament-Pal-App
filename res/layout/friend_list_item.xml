@@ -35,8 +35,7 @@
         android:layout_columnSpan="1"
         android:layout_gravity="fill_vertical"
         android:layout_rowSpan="3"
-        android:visibility="visible"
-        android:clickable="true"/>
+        android:visibility="visible"/>
 
     <TextView
         android:id="@+id/friendSocials"

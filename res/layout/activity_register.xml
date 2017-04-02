@@ -30,6 +30,8 @@
             android:textColor="@color/mainTextColor"
             android:textSize="30sp"/>
 
+
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -51,7 +53,6 @@
             android:hint="@string/participantNameInput"
             android:inputType="textPersonName"
             android:linksClickable="true"/>
-
 
         <EditText
             android:id="@+id/newUserSSN"

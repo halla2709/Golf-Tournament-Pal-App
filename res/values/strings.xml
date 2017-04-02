@@ -183,7 +183,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- AddResultsActivity -->
-    <string name="addresults">Add Results</string>
+    <string name="addresults">Add Result</string>
     <string name="saveresultsbutton">Save Result</string>
     <string name="addresultstext">Who won?</string>
     <string name="whatwasresults">What was the result?</string>
@@ -225,6 +225,7 @@
     <string name="noBrackets">This tournament has no brackets. Try looking at the playoff tree</string>
 
     <string name="addMatchResults">Add results</string>
-    <string name="playertobedeclared">TBD</string>
+    <string name="playertobedeclared">Player Still To Be Declared</string>
+    <string name="handicaptobedeclared">Handicap</string>
 
 </resources>
