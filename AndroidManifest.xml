@@ -65,7 +65,6 @@
         <activity
             android:name=".views.BracketsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".views.HomeActivity"
