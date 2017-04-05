@@ -153,6 +153,8 @@ public class AddResultsActivty extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            if(!new Networker().checkConnectivity(getApplicationContext()))
+                this.cancel(true);
             Log.i("TAGG", "Going to fetch...");
         }
 

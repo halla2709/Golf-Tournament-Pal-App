@@ -237,16 +237,24 @@ public class ScoreboardActivity extends AppCompatActivity
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableRow.LayoutParams(
                     ViewGroup.LayoutParams.FILL_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-
-            ));
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
 
             TextView playerTextViewTable = new TextView(this);
             playerTextViewTable.setTextSize(TypedValue.COMPLEX_UNIT_SP, FONT_SIZE);
             playerTextViewTable.setText(mSortedCards.get(x).getPlayer().getName());
+
+
+            String firstName = tournament.getPlayers().get(x).getName();
+            if(tournament.getPlayers().get(x).getName().indexOf(" ") > 0)
+                firstName = tournament.getPlayers().get(x).getName()
+                        .substring(0,tournament.getPlayers().get(x).getName().indexOf(" "));
+            playerTextViewTable.setText(firstName);
+
             tableRow.addView(playerTextViewTable);
             playerTextViewTable.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
             playerTextViewTable.setTextColor(getResources().getColor(R.color.buttonTextColor));
+
+
 
             final Scorecard scorecard = mSortedCards.get(x);
             for(int i = 0; i < tournament.getNumberOfRounds(); i++) {

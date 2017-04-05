@@ -1,7 +1,11 @@
 package com.example.halla.golftournamentpal;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.halla.golftournamentpal.models.Golfer;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
@@ -34,8 +38,9 @@ import java.util.List;
 public class Networker {
     //String BASE_URL ="http://192.168.0.109:8080"; //Heima hjá Höllu
     //String BASE_URL ="http://192.168.1.43:8080"; //Heima hjá Hafrúnu
-    String BASE_URL = "http://192.168.1.2:8080"; //Heima hjá Unni
-    //String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
+    //String BASE_URL = "http://192.168.1.2:8080"; //Heima hjá Unni
+    String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
+    // String BASE_URL = https://golftournamentpal.herokuapp.com //HEROKU JEIJ
     String TAG = "networker";
 
 
@@ -507,6 +512,17 @@ public class Networker {
             e.printStackTrace();
         }
         return matchPlayTournament;
+
+    }
+
+    public boolean checkConnectivity(Context context) {
+        ConnectivityManager conn = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = conn.getActiveNetworkInfo();
+        if(!(ni != null && ni.isConnectedOrConnecting())) {
+            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
 
     }
 

@@ -65,6 +65,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent" android:layout_height="fill_parent"
+                        android:scrollbars="vertical">
+
+                <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                      android:layout_width="fill_parent" android:layout_height="fill_parent">
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,6 +79,9 @@
             android:id="@+id/brackets_list_view"
             android:layout_margin="5dp">
         </ListView>
+                </HorizontalScrollView>
+
+            </ScrollView>
 
         </LinearLayout>
         <Button

@@ -81,17 +81,20 @@ public class MyFriendsActivity extends AppCompatActivity
 
         mUserSocial = mSessionManager.getSessionUserSocial();
 
-        GetFriendsTask task = new GetFriendsTask();
-        task.execute();
-        try {
-            task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            GetFriendsTask task = new GetFriendsTask();
+            task.execute();
+            try {
+                task.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            displayFriends();
         }
 
-        displayFriends();
     }
 
     public void displayFriends() {
@@ -231,6 +234,7 @@ public class MyFriendsActivity extends AppCompatActivity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
             Log.i("TAGG", "Going to fetch...");
         }
 

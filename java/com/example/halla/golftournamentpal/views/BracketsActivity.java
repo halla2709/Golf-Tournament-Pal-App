@@ -102,12 +102,14 @@ public class BracketsActivity extends AppCompatActivity
         mPlayOffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CreatePlayOffTreeTask task = new CreatePlayOffTreeTask();
-                task.execute();
+                if(new Networker().checkConnectivity(getApplicationContext())) {
+                    CreatePlayOffTreeTask task = new CreatePlayOffTreeTask();
+                    task.execute();
+                }
             }
         });
 
-                mSessionManager = new SessionManager(getApplicationContext());
+        mSessionManager = new SessionManager(getApplicationContext());
         if (mSessionManager.getSessionUserSocial() == 0) {
             Intent i = LogInActivity.newIntent(BracketsActivity.this);
             startActivity(i);
@@ -118,8 +120,10 @@ public class BracketsActivity extends AppCompatActivity
         mTournamentid = getIntent().getLongExtra(TOURNAMENT_ID, 0);
 
         if(mBrackets != null) {
-            GetBracketInfoTask task = new GetBracketInfoTask();
-            task.execute();
+            if(new Networker().checkConnectivity(getApplicationContext())) {
+                GetBracketInfoTask task = new GetBracketInfoTask();
+                task.execute();
+            }
         }
         else displayNoBrackets();
     }
