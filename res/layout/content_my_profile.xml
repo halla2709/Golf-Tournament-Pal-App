@@ -91,7 +91,7 @@
                 android:background="@android:color/transparent"
                 android:gravity="center"
                 android:hint="@string/number"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:onClick="handicapListener"
                 android:paddingLeft="5dp"
                 android:paddingTop="10dp"
