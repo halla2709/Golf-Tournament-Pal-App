@@ -54,6 +54,7 @@ public class BracketsActivity extends AppCompatActivity
     private static final String BRACKETS = "brackets";
     private static final String PARTICIPANTS = "participants";
     private static final String TOURNAMENT_ID = "id";
+    private static final String TOURNAMENT = "mathcPlayTournament";
     private static final int FONT_SIZE = 18;
 
     private List<Bracket> mBrackets = new ArrayList<>();
@@ -71,6 +72,7 @@ public class BracketsActivity extends AppCompatActivity
     public static Intent newIntent(Context packageContext, MatchPlayTournament tournament) {
         Intent i = new Intent(packageContext, BracketsActivity.class);
         i.putExtra(TOURNAMENT_ID, tournament.getId());
+        i.putExtra(TOURNAMENT, tournament);
         i.putParcelableArrayListExtra(BRACKETS, (ArrayList) tournament.getBrackets());
         i.putParcelableArrayListExtra(PARTICIPANTS, (ArrayList) tournament.getPlayers());
         Log.i("opening bracket", Long.toString(tournament.getId()));
@@ -165,7 +167,8 @@ public class BracketsActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent i = MatchPlayInfoActivity.newIntent(BracketsActivity.this, getTournament());
+            startActivity(i);
         }
     }
 
@@ -203,6 +206,11 @@ public class BracketsActivity extends AppCompatActivity
         return true;
 
     }
+
+    public MatchPlayTournament getTournament(){
+        return  getIntent().getParcelableExtra(TOURNAMENT);
+    }
+
 
     public TableLayout fillTable(final Bracket bracket, TableLayout tableLayout, int position)
     {
@@ -383,6 +391,7 @@ public class BracketsActivity extends AppCompatActivity
         }
     }
 
+
     private class GetBracketInfoTask extends AsyncTask<Void, Void, Golfer> {
 
         @Override
@@ -409,6 +418,8 @@ public class BracketsActivity extends AppCompatActivity
         }
     }
 
+
+
     private class CreatePlayOffTreeTask extends AsyncTask<Void, Void, MatchPlayTournament> {
 
         @Override
@@ -433,4 +444,5 @@ public class BracketsActivity extends AppCompatActivity
             Log.i("TAGG", "Done");
         }
     }
+
 }
