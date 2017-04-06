@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,7 +41,8 @@ public class PlayOffRoundFragment extends Fragment {
 
     private RoundArrayAdapter mRoundArrayAdapter;
     private ListView mMatchListView;
-
+    private Match mMatch;
+    private Button mButton;
     public static PlayOffRoundFragment newInstance(int roundNumber) {
 
         Bundle args = new Bundle();
@@ -55,6 +57,7 @@ public class PlayOffRoundFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRoundNumber = getArguments().getInt(ROUND_NUMBER);
+
     }
 
     @Nullable
@@ -77,7 +80,7 @@ public class PlayOffRoundFragment extends Fragment {
         mRoundArrayAdapter = new RoundArrayAdapter(getActivity().getApplicationContext());
         mMatchListView = (ListView) getView().findViewById(R.id.matchList);
 
-    }
+}
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -104,6 +107,12 @@ public class PlayOffRoundFragment extends Fragment {
     public interface RoundGetter {
         PlayOffRound getRound(int round);
         MatchPlayTournament getTournament();
+    }
+
+    public void displayWinner(String name) {
+        TextView textView = (TextView) getView().findViewById(R.id.winnerID);
+        textView.setVisibility(View.VISIBLE);
+        textView.setText(name);
     }
 
     private class RoundArrayAdapter extends ArrayAdapter<Match> {
@@ -137,7 +146,11 @@ public class PlayOffRoundFragment extends Fragment {
             }
 
             final Match match = getItem(position);
+            mMatch = getItem(position);
+            mButton = (Button) view.findViewById(R.id.addResultsButton);
             ((TextView) view.findViewById(R.id.matchName)).setText("Match " + (position+1));
+
+
             if(match.getPlayers() != null) {
                 if(match.getPlayers().size()>0) {
                     if (match.getPlayers().size() == 1)
@@ -157,6 +170,29 @@ public class PlayOffRoundFragment extends Fragment {
                         ((TextView) view.findViewById(R.id.matchplayer2hcp))
                                 .setText("Handicap: " + match.getPlayers().get(1).getHandicap());
 
+                        Log.i("results of match is", Boolean.toString(match.getResults().equals("")));
+                        if (!match.getResults().equals("")) {
+                            if(!(match.getResults().contentEquals("np")
+                                    || match.getResults().contentEquals("playoffsnp")
+                                    || match.getResults().contentEquals("ongoing"))) {
+                                mButton.setVisibility(View.GONE);
+                                Log.i("Ég komst inn", "Ég komst inn");
+                                Long winnerSocial = Long.parseLong(match.getResults());
+                                Log.i("Final round", Boolean.toString(mRound.getMatches().size() == 1L));
+                                if(mRound.getMatches().size() == 1L) {
+                                    Log.i("WINNER", Boolean.toString(match.getPlayers().get(0).getSocial() == winnerSocial));
+                                    if(match.getPlayers().get(0).getSocial() == winnerSocial) {
+                                        displayWinner(match.getPlayers().get(0).getName() + " is the winner!!!");
+                                    }
+                                    else {
+                                        displayWinner(match.getPlayers().get(1).getName() + " is the winner!!!");
+                                    }
+
+                                }
+
+                            }
+                        }
+
                         view.findViewById(R.id.addResultsButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -165,7 +201,6 @@ public class PlayOffRoundFragment extends Fragment {
                                 startActivity(intent);
                             }
                         });
-
                     }
 
                 }
