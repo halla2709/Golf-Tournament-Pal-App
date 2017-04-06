@@ -307,7 +307,7 @@ public class BracketsActivity extends AppCompatActivity
                                                         getIntent().getLongExtra(TOURNAMENT_ID, 0L),
                                                         thisBracket.getId(),
                                                         "IAmFromBracket"
-                                                        );
+                                                );
                                         startActivity(intent);
                                     }
                                 }

@@ -231,6 +231,7 @@
     <string name="playertobedeclared">Player Still To Be Declared</string>
     <string name="handicaptobedeclared">Handicap</string>
     <string name="presstodelete">Press any participant to remove</string>
-    <string name="seefriendprofile">Press a friend in the list to open their profile page</string>
+    <string name="seefriendprofile">Select a friend in the list to open their profile page</string>
+    <string name="seetournament3">Select a tournament from the list to see the info</string>
 
 </resources>

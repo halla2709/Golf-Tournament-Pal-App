@@ -40,7 +40,7 @@
             android:text="@string/seefriendprofile"
             android:textColor="@color/secondaryTextColor"
             android:textSize="20sp"
-            android:id="@+id/seefriendprofile"/>
+            android:id="@+id/seefriendprofile3"/>
 
         <RelativeLayout
             android:id="@+id/loadingPanel"
