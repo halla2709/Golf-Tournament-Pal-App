@@ -91,41 +91,41 @@ public class ScoreInputViewActivity extends AppCompatActivity {
 
 
         if(mH1view.getText().length() < 1 || Integer.parseInt(mH1view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH2view.getText().length() < 1 || Integer.parseInt(mH2view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH3view.getText().length() < 1 || Integer.parseInt(mH3view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH4view.getText().length() < 1 || Integer.parseInt(mH4view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH5view.getText().length() < 1 || Integer.parseInt(mH5view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH6view.getText().length() < 1 || Integer.parseInt(mH6view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH7view.getText().length() < 1 || Integer.parseInt(mH7view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH8view.getText().length() < 1 || Integer.parseInt(mH8view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH9view.getText().length() < 1 || Integer.parseInt(mH9view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH10view.getText().length() < 1 || Integer.parseInt(mH10view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH11view.getText().length() < 1 || Integer.parseInt(mH11view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH12view.getText().length() < 1 || Integer.parseInt(mH12view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH13view.getText().length() < 1 || Integer.parseInt(mH13view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH14view.getText().length() < 1 || Integer.parseInt(mH14view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH15view.getText().length() < 1 || Integer.parseInt(mH15view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH16view.getText().length() < 1 || Integer.parseInt(mH16view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH17view.getText().length() < 1 || Integer.parseInt(mH17view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }else if(mH18view.getText().length() < 1 || Integer.parseInt(mH18view.getText().toString()) < 1){
-            Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+            makeToast();
         }
         else {
             mH1 = Integer.parseInt(((EditText) findViewById(R.id.h1)).getText().toString());
@@ -146,12 +146,17 @@ public class ScoreInputViewActivity extends AppCompatActivity {
             mH16 = Integer.parseInt(((EditText) findViewById(R.id.h16)).getText().toString());
             mH17 = Integer.parseInt(((EditText) findViewById(R.id.h17)).getText().toString());
             mH18 = Integer.parseInt(((EditText) findViewById(R.id.h18)).getText().toString());
-            ScoreInputViewActivity.setRoundTask task = new ScoreInputViewActivity.setRoundTask();
-            task.execute();
+
+            if(new Networker().checkConnectivity(getApplicationContext())) {
+                ScoreInputViewActivity.setRoundTask task = new ScoreInputViewActivity.setRoundTask();
+                task.execute();
+            }
         }
     }
 
-
+    private void makeToast() {
+        Toast.makeText(ScoreInputViewActivity.this, "Please make sure to fill out all scores correctly!", Toast.LENGTH_SHORT).show();
+    }
 
 
     @Override

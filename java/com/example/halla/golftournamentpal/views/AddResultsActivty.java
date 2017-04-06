@@ -109,15 +109,19 @@ public class AddResultsActivty extends AppCompatActivity {
                         // Player1Won
                         mResultText = mResults.getText().toString();
                         mWinner = mMatch.getPlayers().get(0).getSocial();
-                        SaveResultTask task = new SaveResultTask();
-                        task.execute();
+                        if(new Networker().checkConnectivity(getApplicationContext())) {
+                            SaveResultTask task = new SaveResultTask();
+                            task.execute();
+                        }
 
                     } else if (mPlayer2Won.isChecked()) {
                         // Player2won
                         mResultText = mResults.getText().toString();
                         mWinner = mMatch.getPlayers().get(1).getSocial();
-                        SaveResultTask task = new SaveResultTask();
-                        task.execute();
+                        if(new Networker().checkConnectivity(getApplicationContext())) {
+                            SaveResultTask task = new SaveResultTask();
+                            task.execute();
+                        }
 
                     } else {
                         //No one has been marked as winner

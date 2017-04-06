@@ -79,8 +79,10 @@ public class MyTournamentsActivity extends AppCompatActivity
 
         mNoTournamentView  = (TextView) findViewById(R.id.noTournaments);
 
-        MyTournamentsActivity.FetchMyTournamentsTask task = new MyTournamentsActivity.FetchMyTournamentsTask();
-        task.execute();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            MyTournamentsActivity.FetchMyTournamentsTask task = new MyTournamentsActivity.FetchMyTournamentsTask();
+            task.execute();
+        }
 
     }
 
@@ -135,8 +137,10 @@ public class MyTournamentsActivity extends AppCompatActivity
     @Override
     public void openTournament(Long id) {
         mTournamentID = id;
-        FetchOneTournamentTask task = new FetchOneTournamentTask();
-        task.execute();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            FetchOneTournamentTask task = new FetchOneTournamentTask();
+            task.execute();
+        }
     }
 
     private class FetchOneTournamentTask extends AsyncTask<Void, Void, Tournament> {

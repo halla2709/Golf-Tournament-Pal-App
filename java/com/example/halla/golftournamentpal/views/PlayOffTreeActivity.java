@@ -101,7 +101,8 @@ public class PlayOffTreeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent i = MatchPlayInfoActivity.newIntent(PlayOffTreeActivity.this, getTournament());
+            startActivity(i);
         }
     }
 

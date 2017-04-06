@@ -67,19 +67,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         mNewUser = new User(Long.parseLong(mNewUserSSN.getText().toString()), mNewUserPW1.getText().toString());
 
-        // Make a task and execute
-        RegisterTask task = new RegisterTask();
-        task.execute();
-        try {
-            task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            // Make a task and execute
+            RegisterTask task = new RegisterTask();
+            task.execute();
         }
-
-        Intent i = LogInActivity.newIntent(RegisterActivity.this);
-        startActivity(i);
     }
 
 
@@ -104,7 +96,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Golfer golfer) {
-
+            super.onPostExecute(golfer);
+            Intent i = LogInActivity.newIntent(RegisterActivity.this);
+            startActivity(i);
         }
     }
 

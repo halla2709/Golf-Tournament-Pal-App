@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
+import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.ScoreboardTournament;
@@ -58,39 +59,40 @@ public class ScoreboardCreatorActivity extends AppCompatActivity {
         }
     }
 
-
     // Add participant to Scoreplay Tournament
     public void addParticipants(View view){
-        // Button Listener
-        // Getting values from input
-        mCreateButton = (Button) findViewById(R.id.nextStepScoreboard);
-        mTourName   = (EditText) findViewById(R.id.tournamentNameSB);
-        mCourseName = (EditText) findViewById(R.id.courseNameSB);
-        mDatePicker = (DatePicker) findViewById(R.id.datePickerScoreboard);
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            // Button Listener
+            // Getting values from input
+            mCreateButton = (Button) findViewById(R.id.nextStepScoreboard);
+            mTourName = (EditText) findViewById(R.id.tournamentNameSB);
+            mCourseName = (EditText) findViewById(R.id.courseNameSB);
+            mDatePicker = (DatePicker) findViewById(R.id.datePickerScoreboard);
 
-        int day = mDatePicker.getDayOfMonth();
-        int month = mDatePicker.getMonth() + 1;
-        int year = mDatePicker.getYear();
+            int day = mDatePicker.getDayOfMonth();
+            int month = mDatePicker.getMonth() + 1;
+            int year = mDatePicker.getYear();
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(year+1900, month, day);
-        Date tournamentDate = cal.getTime();
-        String tournamentDateString = "" + day + " " + month + " " + year;
+            Calendar cal = Calendar.getInstance();
+            cal.set(year + 1900, month, day);
+            Date tournamentDate = cal.getTime();
+            String tournamentDateString = "" + day + " " + month + " " + year;
 
-        // Testing!
-        Log.v("EditText", mTourName.getText().toString());
-        Log.v("EditText", mCourseName.getText().toString());
-        Log.v("EditText", mCourseName.getText().toString());
-        Log.v("EditText", mCourseName.getText().toString());
-        Log.d("Dagur", "value = " + day);
-        Log.d("Rounds", ""+mNumberOfRounds.getValue());
+            // Testing!
+            Log.v("EditText", mTourName.getText().toString());
+            Log.v("EditText", mCourseName.getText().toString());
+            Log.v("EditText", mCourseName.getText().toString());
+            Log.v("EditText", mCourseName.getText().toString());
+            Log.d("Dagur", "value = " + day);
+            Log.d("Rounds", "" + mNumberOfRounds.getValue());
 
-        ScoreboardTournament tour = new ScoreboardTournament(0L, mCourseName.getText().toString(),
-                mTourName.getText().toString(), null, tournamentDate,
-                null, mNumberOfRounds.getValue(), null);
+            ScoreboardTournament tour = new ScoreboardTournament(0L, mCourseName.getText().toString(),
+                    mTourName.getText().toString(), null, tournamentDate,
+                    null, mNumberOfRounds.getValue(), null);
 
-        Intent i = ParticipantAdderMainScoreboardActivity.newIntent(ScoreboardCreatorActivity.this, tour, tournamentDateString, mNumberOfRounds.getValue());
-        startActivity(i);
+            Intent i = ParticipantAdderMainScoreboardActivity.newIntent(ScoreboardCreatorActivity.this, tour, tournamentDateString, mNumberOfRounds.getValue());
+            startActivity(i);
+        }
     }
 }
 

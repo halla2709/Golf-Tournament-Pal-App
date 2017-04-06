@@ -102,17 +102,19 @@ public class MyProfileActivity extends AppCompatActivity
         mSocialLong = Long.parseLong(mGolferSocial.getText().toString());
 
         // Make a task and execute
-        MyProfileActivity.updateHandicapTask task = new MyProfileActivity.updateHandicapTask();
-        task.execute();
-        try {
-            task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            MyProfileActivity.updateHandicapTask task = new MyProfileActivity.updateHandicapTask();
+            task.execute();
+            try {
+                task.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            mSessionManager.setSessionHandicap(mUpdatedHandicap);
+            Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
         }
-        mSessionManager.setSessionHandicap(mUpdatedHandicap);
-        Toast.makeText(MyProfileActivity.this, "Handicap updated", Toast.LENGTH_SHORT).show();
 
         //Hide SoftInputKeyboard
         View views = this.getCurrentFocus();

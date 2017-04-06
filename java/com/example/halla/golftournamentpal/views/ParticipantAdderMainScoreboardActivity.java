@@ -84,8 +84,10 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity
     }
 
     public void gotonext (View view){
-        SaveTournamentTask task = new SaveTournamentTask();
-        task.execute();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            SaveTournamentTask task = new SaveTournamentTask();
+            task.execute();
+        }
     }
 
     public void addparticipant (View view){
@@ -135,14 +137,16 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        GetFriendsTask task = new GetFriendsTask();
-        task.execute();
-        try {
-            task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            GetFriendsTask task = new GetFriendsTask();
+            task.execute();
+            try {
+                task.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
 
         newTournament = new ScoreboardTournament(0L, tcourse, tname, null, tdate, null, tnumofrounds, null);
@@ -200,6 +204,9 @@ public class ParticipantAdderMainScoreboardActivity extends AppCompatActivity
 
     @Override
     public List<Golfer> getFriends() {
+        if(!new Networker().checkConnectivity(getApplicationContext())) {
+            return friends;
+        }
         if(friends == null) {
             GetFriendsTask task = new GetFriendsTask();
             task.execute();

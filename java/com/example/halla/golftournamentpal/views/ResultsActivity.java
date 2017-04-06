@@ -80,9 +80,11 @@ public class ResultsActivity extends AppCompatActivity
             }
         });
 
-        // Fetch tournaments from database
-        FetchTournamentsTask task = new FetchTournamentsTask();
-        task.execute();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            // Fetch tournaments from database
+            FetchTournamentsTask task = new FetchTournamentsTask();
+            task.execute();
+        }
 
         // Check if user is logged in
         mSessionManager = new SessionManager(getApplicationContext());
@@ -139,9 +141,11 @@ public class ResultsActivity extends AppCompatActivity
 
     @Override
     public void openTournament(Long id) {
-        mTournamentID = id;
-        FetchOneTournamentTask task = new FetchOneTournamentTask();
-        task.execute();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            mTournamentID = id;
+            FetchOneTournamentTask task = new FetchOneTournamentTask();
+            task.execute();
+        }
     }
 
     private class FetchOneTournamentTask extends AsyncTask<Void, Void, Tournament> {

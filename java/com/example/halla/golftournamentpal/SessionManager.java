@@ -45,14 +45,16 @@ public class SessionManager {
         mUserSocial = userSocial;
         mUserPassword = userPassword;
 
-        LogInTask task = new LogInTask();
-        task.execute();
-        try {
-            task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(new Networker().checkConnectivity(mContext)) {
+            LogInTask task = new LogInTask();
+            task.execute();
+            try {
+                task.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
 
         if(mGolfer != null){

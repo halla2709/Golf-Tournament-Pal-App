@@ -31,6 +31,17 @@
             android:textColor="@color/mainTextColor"
             android:textSize="30sp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/seefriendprofile"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="20sp"
+            android:id="@+id/seefriendprofile"/>
+
         <RelativeLayout
             android:id="@+id/loadingPanel"
             android:layout_width="match_parent"

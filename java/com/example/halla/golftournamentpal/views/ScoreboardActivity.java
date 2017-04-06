@@ -83,8 +83,10 @@ public class ScoreboardActivity extends AppCompatActivity
         }
 
         mTournamentId = getIntent().getLongExtra(TOURNAMENT_ID, 0);
-        ScoreboardInfoTask task = new ScoreboardInfoTask();
-        task.execute();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            ScoreboardInfoTask task = new ScoreboardInfoTask();
+            task.execute();
+        }
     }
 
 

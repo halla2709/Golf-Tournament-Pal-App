@@ -130,14 +130,16 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
         }
         boolean tarebrackets = getIntent().getBooleanExtra(ARE_BRACKETS, false);
 
-        GetFriendsTask task = new GetFriendsTask();
-        task.execute();
-        try {
-            task.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            GetFriendsTask task = new GetFriendsTask();
+            task.execute();
+            try {
+                task.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
 
         newTournament = new MatchPlayTournament(0L, tcourse, tname, null, tdate, tarebrackets, null, null);
@@ -175,8 +177,10 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
      * When the next button is clicked the data is sent to the server in a new thread.
      */
     public void gotonext (View view){
-        SaveTournamentTask task = new SaveTournamentTask();
-        task.execute();
+        if(new Networker().checkConnectivity(getApplicationContext())) {
+            SaveTournamentTask task = new SaveTournamentTask();
+            task.execute();
+        }
     }
 
     /**
@@ -211,6 +215,9 @@ public class ParticipantAdderMainMatchPlayActivity extends AppCompatActivity
 
     @Override
     public List<Golfer> getFriends() {
+        if(!new Networker().checkConnectivity(getApplicationContext())) {
+            return friends;
+        }
         if(friends == null) {
             GetFriendsTask task = new GetFriendsTask();
             task.execute();

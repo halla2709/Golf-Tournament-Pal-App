@@ -14,6 +14,7 @@ import android.widget.NumberPicker;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.halla.golftournamentpal.Networker;
 import com.example.halla.golftournamentpal.R;
 import com.example.halla.golftournamentpal.SessionManager;
 import com.example.halla.golftournamentpal.models.MatchPlayTournament;
@@ -89,40 +90,43 @@ public class MatchPlayCreatorActivity extends AppCompatActivity {
     // Button listener
     public void addParticipant(View view){
 
-        // Getting values from input
-        mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
-        mTourName   = (EditText) findViewById(R.id.tournamentNameMP);
-        mCourseName = (EditText) findViewById(R.id.courseNameMP);
-        mDatePicker = (DatePicker) findViewById(R.id.datePickerMatchPlay);
+        if(new Networker().checkConnectivity(getApplicationContext())) {
 
-        int mBracketPartNum = 0;
-        int mBracketPartExitNum = 0;
+            // Getting values from input
+            mCreateButton = (Button) findViewById(R.id.nextStepMatchPlay);
+            mTourName = (EditText) findViewById(R.id.tournamentNameMP);
+            mCourseName = (EditText) findViewById(R.id.courseNameMP);
+            mDatePicker = (DatePicker) findViewById(R.id.datePickerMatchPlay);
 
-        int day = mDatePicker.getDayOfMonth();
-        int month = mDatePicker.getMonth() + 1;
-        int year = mDatePicker.getYear();
+            int mBracketPartNum = 0;
+            int mBracketPartExitNum = 0;
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(year+1900, month, day);
-        Date tournamentDate = cal.getTime();
-        String tournamentDateString = "" + day + " " + month + " " + year;
+            int day = mDatePicker.getDayOfMonth();
+            int month = mDatePicker.getMonth() + 1;
+            int year = mDatePicker.getYear();
 
-        if(areBrackets.isChecked()) {
-            mBracketPartNum = mBracketPart.getValue();
-            mBracketPartExitNum = mBracketPartExit.getValue();
+            Calendar cal = Calendar.getInstance();
+            cal.set(year + 1900, month, day);
+            Date tournamentDate = cal.getTime();
+            String tournamentDateString = "" + day + " " + month + " " + year;
+
+            if (areBrackets.isChecked()) {
+                mBracketPartNum = mBracketPart.getValue();
+                mBracketPartExitNum = mBracketPartExit.getValue();
+            }
+
+            // Create a tournament based on the info given
+            MatchPlayTournament tour = new MatchPlayTournament(0L, mCourseName.getText().toString(),
+                    mTourName.getText().toString(),
+                    null,
+                    tournamentDate,
+                    areBrackets.isChecked(),
+                    null, null);
+
+            // Start the next activity with the information
+            Intent i = ParticipantAdderMainMatchPlayActivity.newIntent(MatchPlayCreatorActivity.this,
+                    tour, mBracketPartNum, mBracketPartExitNum, tournamentDateString);
+            startActivity(i);
         }
-
-        // Create a tournament based on the info given
-        MatchPlayTournament tour = new MatchPlayTournament(0L, mCourseName.getText().toString(),
-                mTourName.getText().toString(),
-                null,
-                tournamentDate,
-                areBrackets.isChecked(),
-                null, null);
-
-        // Start the next activity with the information
-        Intent i = ParticipantAdderMainMatchPlayActivity.newIntent(MatchPlayCreatorActivity.this,
-                tour, mBracketPartNum, mBracketPartExitNum, tournamentDateString);
-        startActivity(i);
     }
 }
