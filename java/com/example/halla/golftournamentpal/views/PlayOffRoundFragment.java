@@ -171,10 +171,10 @@ public class PlayOffRoundFragment extends Fragment {
                                 .setText("Handicap: " + match.getPlayers().get(1).getHandicap());
 
                         Log.i("results of match is", Boolean.toString(match.getResults().equals("")));
+                        Log.i("string in results is", match.getResults());
                         if (!match.getResults().equals("")) {
                             if(!(match.getResults().contentEquals("np")
-                                    || match.getResults().contentEquals("playoffsnp")
-                                    || match.getResults().contentEquals("ongoing"))) {
+                                    || match.getResults().contentEquals("playoffsnp"))) {
                                 mButton.setVisibility(View.GONE);
                                 Log.i("Ég komst inn", "Ég komst inn");
                                 Long winnerSocial = Long.parseLong(match.getResults());

@@ -10,7 +10,7 @@
     <string name="login">Login</string>
     <string name="search">Search</string>
     <string name="myprofile">My Profile</string>
-    <string name="gkremail">gkr@gkr.is</string>
+    <string name="gkremail">gr@gr.is</string>
     <string name="golfclub">Golfklúbbur Reykjavíkur</string>
 
     <!-- Login Activity -->
@@ -35,7 +35,7 @@
     <string name="resultsbutton">Tournaments</string>
     <string name="username">Username</string>
     <string name="loggedinas">Welcome USERNAME,</string>
-    <string name="chooseaction">Please select what you want to do:</string>
+    <string name="chooseaction">please select what you want to view or find more actions in the menu on the left:</string>
 
     <!--- Home activity -->
     <string name="tournament">Create a tournament</string>
