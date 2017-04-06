@@ -43,6 +43,7 @@ public class ScoreboardActivity extends AppCompatActivity
     private SessionManager mSessionManager;
     private static final int FONT_SIZE = 18;
     private static final String TOURNAMENT_ID = "id";
+    private static final String TOURNAMENT = "ScoreboardTournament";
     private Long mTournamentId;
     private static ScoreboardTournament mTournament;
     private List<Scorecard> mScorecards = new ArrayList<>();
@@ -50,6 +51,7 @@ public class ScoreboardActivity extends AppCompatActivity
     public static Intent newIntent(Context packageContext, ScoreboardTournament tournament) {
         Intent i = new Intent(packageContext, ScoreboardActivity.class);
         i.putExtra(TOURNAMENT_ID, tournament.getId());
+        i.putExtra(TOURNAMENT, tournament);
         return i;
     }
 
@@ -93,7 +95,8 @@ public class ScoreboardActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent i = ScoreboardInfoActivity.newIntent(ScoreboardActivity.this, getTournament());
+            startActivity(i);
         }
     }
 
@@ -129,6 +132,10 @@ public class ScoreboardActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public ScoreboardTournament getTournament(){
+        return  getIntent().getParcelableExtra(TOURNAMENT);
     }
 
     public HashMap<Long, Integer> sortHashMap(ScoreboardTournament tournament){
