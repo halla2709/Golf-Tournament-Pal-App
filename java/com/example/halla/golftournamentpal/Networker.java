@@ -39,8 +39,8 @@ public class Networker {
     //String BASE_URL ="http://192.168.0.109:8080"; //Heima hjá Höllu
     //String BASE_URL ="http://192.168.1.43:8080"; //Heima hjá Hafrúnu
     //String BASE_URL = "http://192.168.1.2:8080"; //Heima hjá Unni
-    String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
-    // String BASE_URL = https://golftournamentpal.herokuapp.com //HEROKU JEIJ
+    //String BASE_URL = "http://10.0.2.2:8080"; //To use with the emulator
+    String BASE_URL = "https://golftournamentpal.herokuapp.com"; //HEROKU JEIJ
     String TAG = "networker";
 
 
